@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Commands">
+      <UniqueIdentifier>{160dd3af-1825-4b46-ba88-487b0ac68321}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utilis">
+      <UniqueIdentifier>{c541643a-c55f-4cb7-8cae-8c9665284463}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="User Headers">
+      <UniqueIdentifier>{94fa00d9-3402-46fe-829e-8638b8e49569}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="User Source">
+      <UniqueIdentifier>{c615d928-6051-4a0f-b25b-be8ef37012eb}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="OOP_MODA.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MyString.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Order.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="System.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemsFilter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Command.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LoggedUser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CommandFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RefundRequest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Cart.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RegisterCommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Client.cpp">
+      <Filter>User Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Business.cpp">
+      <Filter>User Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Administrator.cpp">
+      <Filter>User Source</Filter>
+    </ClCompile>
+    <ClCompile Include="User.cpp">
+      <Filter>User Source</Filter>
+    </ClCompile>
+    <ClCompile Include="UserManager.cpp">
+      <Filter>User Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Validations.cpp">
+      <Filter>Utilis</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Item.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Order.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="System.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemsFilter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RefundRequest.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Cart.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Command.h">
+      <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="RegisterCommand.h">
+      <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="MyVector.hpp">
+      <Filter>Utilis</Filter>
+    </ClInclude>
+    <ClInclude Include="MyPair.hpp">
+      <Filter>Utilis</Filter>
+    </ClInclude>
+    <ClInclude Include="MyString.h">
+      <Filter>Utilis</Filter>
+    </ClInclude>
+    <ClInclude Include="Client.h">
+      <Filter>User Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Business.h">
+      <Filter>User Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Administrator.h">
+      <Filter>User Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="LoggedUser.h">
+      <Filter>User Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="UserManager.h">
+      <Filter>User Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="User.h">
+      <Filter>User Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="HeterogeneousContainer.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Validations.h">
+      <Filter>Utilis</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
