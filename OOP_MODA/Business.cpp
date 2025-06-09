@@ -4,10 +4,8 @@
 
 Business& Business::getInstance()
 {
-    if (!obj) {
-        obj = new Business();
-    }
-    return *obj;
+    static Business instance;
+    return instance;
 }
 
 void Business::viewProfile() const
@@ -71,7 +69,7 @@ void Business::approveOrder(size_t index)
 void Business::rejectOrder(size_t index, const MyString& description)
 {
     //validira se index
-    orders[index].getClient().recieveRefund(orders[index].getTotalPrice());
+    orders[index].getClient()->recieveRefund(orders[index].getTotalPrice());
     std::cout << "Order is rejected. Reason: " << description << std::endl;
 }
 
@@ -113,6 +111,11 @@ void Business::rejectRefund(size_t index, const MyString& reason)
 bool Business::processRefundRequest(const Order& order) const
 {
     return false;
+}
+
+void Business::addOrder(const Order& order)
+{
+    orders.push_back(order);
 }
 
 void Business::list_Orders() const

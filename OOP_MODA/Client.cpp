@@ -3,7 +3,7 @@
 #include "Cart.h"
 
 Client::Client(const MyString& name, const MyString& password, const MyString& EGN, Role role,
-    double wallet, unsigned points, Cart& cart) : User(name, password, EGN, role), wallet(wallet), points(points), cart(cart) { }
+    double wallet, unsigned points, Cart cart) : User(name, password, EGN, role), wallet(wallet), points(points), cart(cart) { }
 
 double Client::getWallet() const
 {
@@ -139,7 +139,6 @@ bool Client::requestRefund(const Business& business)
     if (approved)
     {
         wallet += lastOrder->getTotalPrice();
-        //to4ki?
         orders.pop_back();
         lastOrder = orders.empty() ? nullptr : &orders.back();
         return true;
@@ -163,8 +162,11 @@ void Client::checkout()
 
 void Client::confirmOrder(size_t index)
 {
-    //validira se indeksa
-    if (orders[index].statusToString() != "Shipped")
+    if (index >= orders.getSize())
+    {
+        throw std::invalid_argument("Invalid argument");
+    }
+    else if (orders[index].statusToString() != "Shipped")
     {
         throw std::logic_error("This order is not shipped yet.");
     }

@@ -9,13 +9,13 @@ class Order;
 class Cart
 {
 	MyVector<MyPair<Item,unsigned>> items;
-	Client& client;
+	Client* client;  //observer pointer -> no rule of five
 	double totalPrice = 0.0;
 
 public:
 	Cart() = default;
-	Cart(Client& client);
-	Cart(const MyVector<MyPair<Item, unsigned>>& items, Client& client, double totalPrice);
+	Cart(Client* client);
+	Cart(const MyVector<MyPair<Item, unsigned>>& items, Client* client, double totalPrice);
 
 	void addToCart(unsigned ID, unsigned quantity);
 	void removeFromCart(const MyString& name, unsigned quantity);

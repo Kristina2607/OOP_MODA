@@ -66,9 +66,6 @@
     <ClCompile Include="User.cpp">
       <Filter>User Source</Filter>
     </ClCompile>
-    <ClCompile Include="Validations.cpp">
-      <Filter>Utilis</Filter>
-    </ClCompile>
     <ClCompile Include="Check.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -89,6 +86,21 @@
     </ClCompile>
     <ClCompile Include="Transactions.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ListProducts.cpp">
+      <Filter>Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="ViewProduct.cpp">
+      <Filter>Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="ViewProfile.cpp">
+      <Filter>Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="CheckBalance.cpp">
+      <Filter>Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="ConfirmOrder.cpp">
+      <Filter>Commands</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -137,9 +149,6 @@
     <ClInclude Include="HeterogeneousContainer.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Validations.h">
-      <Filter>Utilis</Filter>
-    </ClInclude>
     <ClInclude Include="Check.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -160,6 +169,21 @@
     </ClInclude>
     <ClInclude Include="Transactions.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ListProducts.h">
+      <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="ViewProfile.h">
+      <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="ViewProduct.h">
+      <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="ConfirmOrder.h">
+      <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="CheckBalance.h">
+      <Filter>Commands</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

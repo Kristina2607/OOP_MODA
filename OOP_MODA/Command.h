@@ -20,10 +20,6 @@ public:
 };
 
 
-class ViewProfile : public Command
-{
-	virtual void execute() override;
-};
 
 
 

@@ -1,7 +1,9 @@
+#pragma once
+
 enum class Role
 {
-	Any ,
-	Admin ,
+	Any,
+	Admin,
 	Business,
 	Client
 };

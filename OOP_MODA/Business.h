@@ -10,14 +10,12 @@ class Order;
 class Business :public User
 {
 private:
-	static Business* obj;
-
 	MyVector<Item> items;
 	MyVector<RefundRequest> refundRequests;
 	MyVector<Order> orders;
 	double totalRevenue;
 
-	Business();
+	Business() = default;
 
 public:
 	static Business& getInstance();
@@ -38,6 +36,7 @@ public:
 	void rejectRefund(size_t index, const MyString& reason);
 	bool processRefundRequest(const Order& order) const;
 
+	void addOrder(const Order& order);
 	void list_Orders() const;
 	void listPendingOrders() const;
 	void listBestSeliingProducts() const;

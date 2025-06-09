@@ -3,7 +3,7 @@
 
 unsigned Order::NextOrderID = 1;
 
-Order::Order(MyVector<MyPair<Item, unsigned>> items, Client& client, double totalPrice, unsigned points, Status status)
+Order::Order(MyVector<MyPair<Item, unsigned>> items, Client* client, double totalPrice, unsigned points, Status status)
     : ID(NextOrderID++), items(items), client(client), totalPrice(totalPrice), points(points), status(status) {}
 
 double Order::getTotalPrice() const
@@ -21,7 +21,7 @@ unsigned Order::getID() const
     return ID;
 }
 
-Client& Order::getClient() const
+Client* Order::getClient() const
 {
     return client;
 }
@@ -59,7 +59,7 @@ bool Order::getIsRefunded() const
 
 void Order::printOrder() const
 {
-    std::cout << client.getName() << " - ";
+    std::cout << client->getName() << " - ";
     for (size_t i = 0; i < items.getSize(); i++)
     {
         if (i != items.getSize() - 1)

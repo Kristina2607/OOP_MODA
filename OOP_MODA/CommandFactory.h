@@ -5,9 +5,12 @@
 
 class CommandFactory
 {
-	System& system;
+	CommandFactory() = default;
 
 public:
-	CommandFactory(System& system);
+	static CommandFactory& getInstance();
+	CommandFactory(const CommandFactory& other) = delete;
+	CommandFactory& operator=(const CommandFactory& other) = delete;
+
 	Command* getCommand(const MyString& text);
 };

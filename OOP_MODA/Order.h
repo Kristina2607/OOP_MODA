@@ -19,7 +19,7 @@ private:
 	unsigned ID = 0;
 
 	MyVector<MyPair<Item, unsigned>> items;
-	Client& client;
+	Client* client;
 	double totalPrice = 0;
 	unsigned points = 0;
 	Status status;
@@ -29,12 +29,12 @@ private:
 
 public:
 	Order() = default;
-	Order (MyVector<MyPair<Item, unsigned>> items, Client& client, double totalPrice, unsigned points, Status status);
+	Order (MyVector<MyPair<Item, unsigned>> items, Client* client, double totalPrice, unsigned points, Status status);
 
 	double getTotalPrice() const;
 	unsigned getPoints() const;
 	unsigned getID() const;
-	Client& getClient() const;
+	Client* getClient() const;
 
 	void setStatus(Status newStatus);
 	const char* statusToString() const;

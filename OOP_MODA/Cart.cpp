@@ -2,9 +2,9 @@
 #include "Order.h"
 #include "Client.h"
 
-Cart::Cart(Client& client) : client(client) {}
+Cart::Cart(Client* client) : client(client) {}
 
-Cart::Cart(const MyVector<MyPair<Item, unsigned>>& items, Client& client, double totalPrice) : client(client), totalPrice(totalPrice)
+Cart::Cart(const MyVector<MyPair<Item, unsigned>>& items, Client* client, double totalPrice) : client(client), totalPrice(totalPrice)
 {
 	for (size_t i = 0; i < items.getSize(); i++)
 	{
@@ -74,7 +74,7 @@ void Cart::clear_cart()
 void Cart::applyDiscount()
 {
 	double maxAllowedDiscount = totalPrice * 0.5;
-	double currentDiscount = client.getPoints() * 0.01;
+	double currentDiscount = client->getPoints() * 0.01;
 	if (currentDiscount>maxAllowedDiscount)
 	{
 		std::cout << "The total price remains the same." << std::endl;
@@ -85,7 +85,7 @@ void Cart::applyDiscount()
 
 void Cart::removeDiscount()
 {
-	totalPrice += client.getPoints() * 0.01;
+	totalPrice += client->getPoints() * 0.01;
 	std::cout << "The discount is removed." << std::endl;
 }
 
@@ -96,7 +96,7 @@ double Cart::getTotalPrice() const
 
 double Cart::getDiscountedPrice() const
 {
-	double currentDiscount = 0.01 * client.getPoints();
+	double currentDiscount = 0.01 * client->getPoints();
 	double maxAllowedeDiscount = 0.5 * totalPrice;
 	if (currentDiscount > maxAllowedeDiscount)
 	{
@@ -112,7 +112,7 @@ const MyVector<MyPair<Item, unsigned>>& Cart::getItems() const
 
 Order Cart::toOrder()
 {
-	return Order(items, client, totalPrice, client.getPoints(), Status::Pending);
+	return Order(items, client, totalPrice, client->getPoints(), Status::Pending);
 }
 
 MyVector<MyPair<Item, unsigned>>&& Cart::moveItems()

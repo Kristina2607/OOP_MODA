@@ -19,5 +19,8 @@ void Administrator::customer_insignts(const Client& client) const
 
 void Administrator::view_transactions() const
 {
-
+	for (size_t i = 0; i < transactions.getSize(); i++)
+	{
+		transactions[i].printTransactions();
+	}
 }

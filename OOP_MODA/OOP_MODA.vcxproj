@@ -131,11 +131,14 @@
     <ClCompile Include="Business.cpp" />
     <ClCompile Include="Cart.cpp" />
     <ClCompile Include="Check.cpp" />
+    <ClCompile Include="CheckBalance.cpp" />
     <ClCompile Include="Client.cpp" />
     <ClCompile Include="Command.cpp" />
     <ClCompile Include="CommandFactory.cpp" />
+    <ClCompile Include="ConfirmOrder.cpp" />
     <ClCompile Include="HelpCommand.cpp" />
     <ClCompile Include="Item.cpp" />
+    <ClCompile Include="ListProducts.cpp" />
     <ClCompile Include="LoginCommand.cpp" />
     <ClCompile Include="MyString.cpp" />
     <ClCompile Include="OOP_MODA.cpp" />
@@ -146,19 +149,23 @@
     <ClCompile Include="System.cpp" />
     <ClCompile Include="Transactions.cpp" />
     <ClCompile Include="User.cpp" />
-    <ClCompile Include="Validations.cpp" />
+    <ClCompile Include="ViewProduct.cpp" />
+    <ClCompile Include="ViewProfile.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Administrator.h" />
     <ClInclude Include="Business.h" />
     <ClInclude Include="Cart.h" />
     <ClInclude Include="Check.h" />
+    <ClInclude Include="CheckBalance.h" />
     <ClInclude Include="Client.h" />
     <ClInclude Include="Command.h" />
     <ClInclude Include="CommandFactory.h" />
+    <ClInclude Include="ConfirmOrder.h" />
     <ClInclude Include="HelpCommand.h" />
     <ClInclude Include="HeterogeneousContainer.hpp" />
     <ClInclude Include="Item.h" />
+    <ClInclude Include="ListProducts.h" />
     <ClInclude Include="LoginCommand.h" />
     <ClInclude Include="MyPair.hpp" />
     <ClInclude Include="MyString.h" />
@@ -171,7 +178,8 @@
     <ClInclude Include="Transactions.h" />
     <ClInclude Include="User.h" />
     <ClInclude Include="Role.h" />
-    <ClInclude Include="Validations.h" />
+    <ClInclude Include="ViewProduct.h" />
+    <ClInclude Include="ViewProfile.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

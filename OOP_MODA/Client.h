@@ -2,11 +2,11 @@
 #include "User.h"
 #include "RefundRequest.h"
 #include "Check.h"
+#include "Cart.h"
 #include "MyString.h"
 #include "MyVector.hpp"
 #include "Business.h"
 
-class Cart;
 class Order;
 
 class Client :public User
@@ -14,13 +14,13 @@ class Client :public User
 private:
 	unsigned points = 0;
 	double wallet = 0.0;
-	Cart& cart;
+	Cart cart;
 	MyVector<Order> orders;
 	Order* lastOrder = nullptr;
 
 public:
 	Client() = default;
-	Client(const MyString& name, const MyString& password, const MyString& EGN, Role role, double wallet, unsigned points, Cart& cart);
+	Client(const MyString& name, const MyString& password, const MyString& EGN, Role role, double wallet, unsigned points, Cart cart);
 
 	double getWallet() const;
 	unsigned getPoints() const;
