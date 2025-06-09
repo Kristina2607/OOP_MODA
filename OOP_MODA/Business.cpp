@@ -1,6 +1,16 @@
 #include "Business.h"
+#include "Order.h"
+#include "Client.h"
 
-void Business::view_profile() const
+Business& Business::getInstance()
+{
+    if (!obj) {
+        obj = new Business();
+    }
+    return *obj;
+}
+
+void Business::viewProfile() const
 {
     std::cout << "Business profile" << std::endl;
 }
@@ -10,16 +20,17 @@ void Business::help() const
     std::cout << "You are allowed to:" << std::endl;
     std::cout << "> add item." << std::endl;
     std::cout << "> remove item." << std::endl;
+    std::cout << "> view_revenue" << std:: endl;
+    std::cout << "> approve_order" << std:: endl;
+    std::cout << "> reject_order" << std::endl;
+    std::cout << "> list_refunds" << std::endl;
+    std::cout << "> approve_refunds" << std::endl;
+    std::cout << "> reject_refunds" << std::endl;
 }
 
 User* Business::clone() const
 {
-    return new Business(*this);
-}
-
-MyString Business::getRole() const
-{
-    return "Business profile";
+    throw std::logic_error("Cannot clone business");
 }
 
 void Business::removeItem(const MyString& name)
@@ -29,19 +40,20 @@ void Business::removeItem(const MyString& name)
         if (items[i].getName() == name)
         {
             std::swap(items[i], items[items.getSize()]);
+            std::cout << name << " is removed successffully." << std::endl;
         }
     }
-    std::cout << "Invalid index." << std::endl;
+    std::cout << "Invalid name." << std::endl;
 }
 
 void Business::addItem(const MyString& name, double price, unsigned quantity, const MyString& description)
 {
     Item newItem = Item(name, description, price, 0, quantity, 1);
     items.push_back(newItem);
-    std::cout << name << "is added successffully."<< std::endl;
+    std::cout << name << " is added successffully."<< std::endl;
 }
 
-void Business::view_revenue() const
+void Business::viewRevenue() const
 {
     double revenue = 0;
     for (size_t i = 0; i < orders.getSize(); i++)
@@ -50,13 +62,13 @@ void Business::view_revenue() const
     }
 }
 
-void Business::approve_order(size_t index)
+void Business::approveOrder(size_t index)
 {
     //validira se indekx
     orders[index].setStatus(Status::Shipped);
 }
 
-void Business::reject_order(size_t index, const MyString& description)
+void Business::rejectOrder(size_t index, const MyString& description)
 {
     //validira se index
     orders[index].getClient().recieveRefund(orders[index].getTotalPrice());
@@ -74,14 +86,19 @@ void Business::listRefunds() const
     }
 }
 
+void Business::addRefund(const RefundRequest& newRequest)
+{
+    refundRequests.push_back(newRequest);
+}
+
 void Business::approveRefund(size_t index)
 {
     RefundRequest& request = refundRequests[index];
     request.approve();
 
-    request.getClient().recieveRefund(request.getOrder().getTotalPrice());
+    request.getClient()->recieveRefund(request.getOrder()->getTotalPrice());
     refundRequests.erase(index);
-    std::cout << "Refund is approved. The sum is returned to "<<request.getClient().getName();
+    std::cout << "Refund is approved. The sum is returned to "<<request.getClient()->getName();
 }
 
 void Business::rejectRefund(size_t index, const MyString& reason)
@@ -93,12 +110,12 @@ void Business::rejectRefund(size_t index, const MyString& reason)
     std::cout << "Refund is rejected. Reason: " << reason << std::endl;
 }
 
-bool Business::processRefundRequest(const Order& order)
+bool Business::processRefundRequest(const Order& order) const
 {
     return false;
 }
 
-void Business::list_orders() const
+void Business::list_Orders() const
 {
     for (size_t i = 0; i < orders.getSize(); i++)
     {
@@ -107,7 +124,7 @@ void Business::list_orders() const
     }
 }
 
-void Business::list_pending_orders() const
+void Business::listPendingOrders() const
 {
     for (size_t i = 0; i < orders.getSize(); i++)
     {
@@ -117,4 +134,9 @@ void Business::list_pending_orders() const
             orders[i].printOrder();
         }
     }
+}
+
+void Business::listBestSeliingProducts() const
+{
+    //FilterByRating::filter(items);
 }

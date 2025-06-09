@@ -1,8 +1,9 @@
 #pragma once
 #include "MyVector.hpp"
 #include "Item.h"
-#include "Client.h"
 #include "MyPair.hpp"
+
+class Client;
 
 enum class Status
 {

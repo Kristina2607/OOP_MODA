@@ -1,4 +1,5 @@
 #include "Order.h"
+#include "Client.h"
 
 unsigned Order::NextOrderID = 1;
 

@@ -1,8 +1,10 @@
 #pragma once
 #include "Item.h"
-#include "Client.h"
 #include "MyVector.hpp"
 #include "MyPair.hpp"
+
+class Client;
+class Order;
 
 class Cart
 {

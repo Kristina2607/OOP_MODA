@@ -1,10 +1,10 @@
 #pragma once
 #include "Command.h"
 
-class RegisterCommand : public Command
+class HelpCommand :public Command
 {
 public:
-	RegisterCommand(System& system);
+	HelpCommand(System& system);
 	virtual void execute() override;
 };
 

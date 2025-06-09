@@ -25,6 +25,9 @@
     <Filter Include="User Source">
       <UniqueIdentifier>{c615d928-6051-4a0f-b25b-be8ef37012eb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="NewFilter1">
+      <UniqueIdentifier>{5b768680-0105-4ed8-b9bc-5bb84b3744f7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="OOP_MODA.cpp">
@@ -45,22 +48,10 @@
     <ClCompile Include="ItemsFilter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Command.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="LoggedUser.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CommandFactory.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="RefundRequest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Cart.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="RegisterCommand.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Client.cpp">
@@ -75,11 +66,29 @@
     <ClCompile Include="User.cpp">
       <Filter>User Source</Filter>
     </ClCompile>
-    <ClCompile Include="UserManager.cpp">
-      <Filter>User Source</Filter>
-    </ClCompile>
     <ClCompile Include="Validations.cpp">
       <Filter>Utilis</Filter>
+    </ClCompile>
+    <ClCompile Include="Check.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RegisterCommand.cpp">
+      <Filter>Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="CommandFactory.cpp">
+      <Filter>Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="LoginCommand.cpp">
+      <Filter>Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Command.cpp">
+      <Filter>Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="HelpCommand.cpp">
+      <Filter>Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Transactions.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -87,9 +96,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Order.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="System.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ItemsFilter.h">
@@ -125,12 +131,6 @@
     <ClInclude Include="Administrator.h">
       <Filter>User Headers</Filter>
     </ClInclude>
-    <ClInclude Include="LoggedUser.h">
-      <Filter>User Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="UserManager.h">
-      <Filter>User Headers</Filter>
-    </ClInclude>
     <ClInclude Include="User.h">
       <Filter>User Headers</Filter>
     </ClInclude>
@@ -139,6 +139,27 @@
     </ClInclude>
     <ClInclude Include="Validations.h">
       <Filter>Utilis</Filter>
+    </ClInclude>
+    <ClInclude Include="Check.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Role.h">
+      <Filter>User Source</Filter>
+    </ClInclude>
+    <ClInclude Include="CommandFactory.h">
+      <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="System.h">
+      <Filter>NewFilter1</Filter>
+    </ClInclude>
+    <ClInclude Include="LoginCommand.h">
+      <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="HelpCommand.h">
+      <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Transactions.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

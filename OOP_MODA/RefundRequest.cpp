@@ -1,11 +1,13 @@
 #include "RefundRequest.h"
+#include "Order.h"
+#include "Client.h"
 
 unsigned RefundRequest::nextID = 1;
 
-RefundRequest::RefundRequest(const MyString& reason, const Order& order, Client& client)
+RefundRequest::RefundRequest(const MyString& reason, const Order* order, Client* client)
 	: ID(nextID++), reason(reason), order(order), client(client) {}
 
-const Order& RefundRequest::getOrder() const
+const Order* RefundRequest::getOrder() const
 {
 	return order;
 }
@@ -15,7 +17,7 @@ unsigned RefundRequest::getID() const
 	return ID;
 }
 
-Client& RefundRequest::getClient() const
+Client* RefundRequest::getClient() const
 {
 	return client;
 }
@@ -52,5 +54,5 @@ void RefundRequest::process()
 
 void RefundRequest::printRefundRequest() const
 {
-	std::cout << ID << "|" << client.getName() << "|" << order.getTotalPrice() << "|" << "Reason: " << reason;
+	std::cout << ID << "|" << client->getName() << "|" << order->getTotalPrice() << "|" << "Reason: " << reason;
 }

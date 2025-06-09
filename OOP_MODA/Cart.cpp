@@ -1,6 +1,8 @@
 #include "Cart.h"
+#include "Order.h"
+#include "Client.h"
 
-Cart::Cart(Client& client) :client(client) {}
+Cart::Cart(Client& client) : client(client) {}
 
 Cart::Cart(const MyVector<MyPair<Item, unsigned>>& items, Client& client, double totalPrice) : client(client), totalPrice(totalPrice)
 {

@@ -1,3 +1,4 @@
 #include "Command.h"
 
-Command::Command(UserManager& userManager): userManager(userManager) {}
+Command::Command(System& system): system(system) {}
+

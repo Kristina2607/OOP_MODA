@@ -1,9 +1,10 @@
 #pragma once
 #include "MyString.h"
+#include "User.h"
 
 class Client;
 class Business;
-class Administrator;
+class Administrator; 
 
 class LoggedUser
 {

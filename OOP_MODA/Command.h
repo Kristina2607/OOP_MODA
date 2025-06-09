@@ -1,32 +1,24 @@
 #pragma once
 #include "MyString.h"
-#include "UserManager.h"
+#include "System.h"
 
 class Command
 {
 protected:
-	UserManager& userManager;
+	System& system;
 
 public:
-	Command(UserManager& userManager);
+	Command(System& system);
 	virtual ~Command() = default;
 	virtual void execute() = 0;
 };
 
 class LogoutCommand : public Command
 {
+public:
 	virtual void execute() override;
 };
 
-class LoginCommand : public Command
-{
-	virtual void execute() override;
-};
-
-class HelpMenu :public Command
-{
-	virtual void execute() override;
-};
 
 class ViewProfile : public Command
 {

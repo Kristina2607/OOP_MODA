@@ -1,6 +1,9 @@
 #include "Client.h"
+#include "Order.h"
+#include "Cart.h"
 
-Client::Client(double wallet, unsigned points, Cart cart) :wallet(wallet), points(points), cart(cart) { }
+Client::Client(const MyString& name, const MyString& password, const MyString& EGN, Role role,
+    double wallet, unsigned points, Cart& cart) : User(name, password, EGN, role), wallet(wallet), points(points), cart(cart) { }
 
 double Client::getWallet() const
 {
@@ -12,7 +15,27 @@ unsigned Client::getPoints() const
     return points;
 }
 
-void Client::view_profile() const
+MyString Client::getEGN() const
+{
+    return EGN;
+}
+
+unsigned Client::getOrdersCount() const
+{
+    return orders.getSize();
+}
+
+unsigned Client::getTotalSpent() const
+{
+    unsigned totalSpent = 0;
+    for (size_t i = 0; i < orders.getSize(); i++)
+    {
+        totalSpent += orders[i].getTotalPrice();
+    }
+    return totalSpent;
+}
+
+void Client::viewProfile() const
 {
     std::cout << "Client" << std::endl;
     std::cout <<"Name: " << this->name << std::endl;
@@ -23,26 +46,27 @@ void Client::view_profile() const
 void Client::help() const
 {
     std::cout << "You are allowed to:" << std::endl;
-    std::cout << "~view_profile." << std::endl;
-    std::cout << "~check_balance." << std::endl;
-    std::cout << "~request_refund." << std::endl;
-    std::cout << "~apply_discount" << std::endl;
-    std::cout << "~remove_discount." << std::endl;
+    std::cout << "> view_profile" << std::endl;
+    std::cout << "> check_balance" << std::endl;
+    std::cout << "> request_refund" << std::endl;
+
+    std::cout << "> apply_discount" << std::endl;
+    std::cout << "> remove_discount" << std::endl;
+
+    std::cout << "> filter_by_rating" << std::endl;
+    std::cout << "> filter_by_price (desc)" << std::endl;
+    std::cout << "> filter_by_price (asc)" << std::endl;
+    std::cout << "> filter_by_alphabetical_order" << std::endl;
+
+    std::cout << "> add_to_cart" << std::endl;
+    std::cout << "> remove_from_cart" << std::endl;
+    std::cout << "> view_cart" << std::endl;
+    std::cout << "> checkout" << std::endl;
 }
 
 User* Client::clone() const
 {
     return new Client (*this);
-}
-
-MyString Client::getRole() const
-{
-    return "Client";
-}
-
-bool Client::hasPermission(const MyString& action) const
-{
-    return User::hasPermission(action);
 }
 
 void Client::addToCart(unsigned ID, unsigned quantity)
@@ -81,12 +105,20 @@ void Client::checkBalance() const
     std::cout << "Loyalty points: " << points << std::endl;
 }
 
+void Client::redeemCheck(const Check& check)
+{
+    if (this->EGN == check.getEGN())
+    {
+        wallet += check.getSum();
+    }
+}
+
 void Client::recieveRefund(double refund)
 {
     wallet += refund;
 }
 
-void Client::refunded_orders() const
+void Client::refundedOrders() const
 {
     for (size_t i = 0; i < orders.getSize(); i++)
     {
@@ -97,7 +129,7 @@ void Client::refunded_orders() const
     }
 }
 
-bool Client::request_refund(const Business& business)
+bool Client::requestRefund(const Business& business)
 {
     if (!lastOrder)
     {

@@ -1,31 +1,31 @@
 #pragma once
 #include "MyString.h"
-#include "LoggedUser.h"
+#include "Role.h"
 
 class User
 {
 private:
 	MyString password;
-
 protected:
 	MyString name;
 	MyString EGN;
 	bool isLoggedIn;
+	Role role;
 
 public:
 	User();
-	User(const MyString& name, const MyString& password, const MyString& EGN);
+	User(const MyString& name, const MyString& password, const MyString& EGN, Role role);
 
    MyString getName() const;
    bool getLoggedInStatus() const;
+   bool checkPassword(const MyString& password) const;
 
    virtual void logout();
-   virtual void view_profile() const = 0;
+   virtual void viewProfile() const = 0;
    virtual void help() const = 0;
 
    virtual User* clone() const = 0;
-   virtual MyString getRole() const = 0;
-   virtual bool hasPermission(const MyString& action) const;
+   Role getRole() const;
 
    virtual ~User() = default;
 };
