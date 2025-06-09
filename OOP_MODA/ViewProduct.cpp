@@ -7,5 +7,5 @@ void ViewProduct::execute()
 	unsigned ID;
 	std::cout << "Enter the index of the product: ";
 	std::cin >> ID;
-	system.view_product(ID);
+	system.viewProduct(ID);
 }

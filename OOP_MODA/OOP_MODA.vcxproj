@@ -127,37 +127,54 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AddItem.cpp" />
+    <ClCompile Include="AddToCart.cpp" />
     <ClCompile Include="Administrator.cpp" />
+    <ClCompile Include="ApplyDiscount.cpp" />
     <ClCompile Include="Business.cpp" />
     <ClCompile Include="Cart.cpp" />
     <ClCompile Include="Check.cpp" />
     <ClCompile Include="CheckBalance.cpp" />
+    <ClCompile Include="Checkout.cpp" />
     <ClCompile Include="Client.cpp" />
     <ClCompile Include="Command.cpp" />
     <ClCompile Include="CommandFactory.cpp" />
     <ClCompile Include="ConfirmOrder.cpp" />
     <ClCompile Include="HelpCommand.cpp" />
     <ClCompile Include="Item.cpp" />
+    <ClCompile Include="ListOrders.cpp" />
+    <ClCompile Include="ListPendingOrders.cpp" />
     <ClCompile Include="ListProducts.cpp" />
     <ClCompile Include="LoginCommand.cpp" />
     <ClCompile Include="MyString.cpp" />
     <ClCompile Include="OOP_MODA.cpp" />
     <ClCompile Include="ItemsFilter.cpp" />
     <ClCompile Include="Order.cpp" />
+    <ClCompile Include="Redeem.cpp" />
+    <ClCompile Include="RefundedOrders.cpp" />
     <ClCompile Include="RefundRequest.cpp" />
     <ClCompile Include="RegisterCommand.cpp" />
+    <ClCompile Include="RemoveDiscount.cpp" />
+    <ClCompile Include="RemoveFromCart.cpp" />
+    <ClCompile Include="RemoveItem.cpp" />
     <ClCompile Include="System.cpp" />
     <ClCompile Include="Transactions.cpp" />
     <ClCompile Include="User.cpp" />
+    <ClCompile Include="ViewCart.cpp" />
     <ClCompile Include="ViewProduct.cpp" />
     <ClCompile Include="ViewProfile.cpp" />
+    <ClCompile Include="ViewRevenue.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AddItem.h" />
+    <ClInclude Include="AddToCart.h" />
     <ClInclude Include="Administrator.h" />
+    <ClInclude Include="ApplyDiscount.h" />
     <ClInclude Include="Business.h" />
     <ClInclude Include="Cart.h" />
     <ClInclude Include="Check.h" />
     <ClInclude Include="CheckBalance.h" />
+    <ClInclude Include="Checkout.h" />
     <ClInclude Include="Client.h" />
     <ClInclude Include="Command.h" />
     <ClInclude Include="CommandFactory.h" />
@@ -165,6 +182,8 @@
     <ClInclude Include="HelpCommand.h" />
     <ClInclude Include="HeterogeneousContainer.hpp" />
     <ClInclude Include="Item.h" />
+    <ClInclude Include="ListOrders.h" />
+    <ClInclude Include="ListPendingOrders.h" />
     <ClInclude Include="ListProducts.h" />
     <ClInclude Include="LoginCommand.h" />
     <ClInclude Include="MyPair.hpp" />
@@ -172,14 +191,21 @@
     <ClInclude Include="MyVector.hpp" />
     <ClInclude Include="ItemsFilter.h" />
     <ClInclude Include="Order.h" />
+    <ClInclude Include="Redeem.h" />
+    <ClInclude Include="RefundedOrders.h" />
     <ClInclude Include="RefundRequest.h" />
     <ClInclude Include="RegisterCommand.h" />
+    <ClInclude Include="RemoveDiscount.h" />
+    <ClInclude Include="RemoveFromCart.h" />
+    <ClInclude Include="RemoveItem.h" />
     <ClInclude Include="System.h" />
     <ClInclude Include="Transactions.h" />
     <ClInclude Include="User.h" />
     <ClInclude Include="Role.h" />
+    <ClInclude Include="ViewCart.h" />
     <ClInclude Include="ViewProduct.h" />
     <ClInclude Include="ViewProfile.h" />
+    <ClInclude Include="ViewRevenue.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

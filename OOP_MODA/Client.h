@@ -16,7 +16,7 @@ private:
 	double wallet = 0.0;
 	Cart cart;
 	MyVector<Order> orders;
-	Order* lastOrder = nullptr;
+	MyVector<Check> recievedChecks;
 
 public:
 	Client() = default;
@@ -45,11 +45,13 @@ public:
 
 	void recieveRefund(double refund);
 	void refundedOrders() const;
-	bool requestRefund(const Business& business);
+	void requestRefund(Business* business, const MyString& reason) const;
 
 	void checkBalance() const;
-	void redeemCheck(const Check& check);
 	void checkout();
+
+	void redeemCheck(const MyString& check);
+	void recieveCheck(const Check& check);
 
 	void rateOrder(unsigned ProductID, unsigned rating);
 	void confirmOrder(size_t index);

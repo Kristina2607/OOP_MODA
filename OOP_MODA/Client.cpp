@@ -46,12 +46,22 @@ void Client::viewProfile() const
 void Client::help() const
 {
     std::cout << "You are allowed to:" << std::endl;
-    std::cout << "> view_profile" << std::endl;
+   
     std::cout << "> check_balance" << std::endl;
     std::cout << "> request_refund" << std::endl;
+    std::cout << "> redeem" << std::endl;
 
+    std::cout << "> list_products" << std::endl;
+    std::cout << "> list_orders" << std::endl;
+    std::cout << "> order_history" << std::endl;
+    std::cout << "> refunded_orders" << std::endl;
+
+    std::cout << "> view_product " << std::endl;
     std::cout << "> apply_discount" << std::endl;
     std::cout << "> remove_discount" << std::endl;
+    std::cout << "> confirm_order" << std::endl;
+    std::cout << "> rate" << std::endl;
+    std::cout << "> request_refund" << std::endl;
 
     std::cout << "> filter_by_rating" << std::endl;
     std::cout << "> filter_by_price (desc)" << std::endl;
@@ -105,12 +115,33 @@ void Client::checkBalance() const
     std::cout << "Loyalty points: " << points << std::endl;
 }
 
-void Client::redeemCheck(const Check& check)
+void Client::redeemCheck(const MyString& code)
 {
-    if (this->EGN == check.getEGN())
+    Check targetCheck;
+
+    for (size_t i = 0;i<recievedChecks.getSize();i++)
     {
-        wallet += check.getSum();
+        if (recievedChecks[i].isValidCode(code) && !recievedChecks[i].getIsRedeemed()) {
+            targetCheck = recievedChecks[i];
+            break;
+        }
     }
+    throw std::runtime_error("No valid check found with this code!");
+
+    targetCheck.redeem();
+    wallet += targetCheck.getSum();
+
+    std::cout << "Successfully redeemed check for " << targetCheck.getSum()
+        << " BGN. New balance: " << wallet << " BGN\n";
+}
+
+void Client::recieveCheck(const Check& check)
+{
+    if (check.getEGN() != this->getEGN())
+    {
+        throw std::runtime_error("Check recipient EGN doesn't match!");
+    }
+    recievedChecks.push_back(check);
 }
 
 void Client::recieveRefund(double refund)
@@ -129,21 +160,22 @@ void Client::refundedOrders() const
     }
 }
 
-bool Client::requestRefund(const Business& business)
+void Client::requestRefund(Business* business, const MyString& reason) const
 {
-    if (!lastOrder)
+    if (orders.empty())
     {
-        throw std::logic_error("You can return only your last order. ");
+        throw std::logic_error("There are no orders. ");
     }
-    bool approved = business.processRefundRequest(*lastOrder);
-    if (approved)
+    const Order& lastOrder = orders.back();
+    if (lastOrder.statusToString() != "Delivered") 
     {
-        wallet += lastOrder->getTotalPrice();
-        orders.pop_back();
-        lastOrder = orders.empty() ? nullptr : &orders.back();
-        return true;
+        throw std::logic_error("This order is not delivered yet.");
     }
-    return false;
+
+    RefundRequest* request = new RefundRequest(reason, &lastOrder, const_cast<Client*>(this));
+    business->recieveRefundRequest(request);
+    std::cout << "Refund request submitted for last order (" << lastOrder.getTotalPrice() << 
+        " BGN). All loyalty points have been removed." << std::endl;
 }
 
 void Client::checkout()

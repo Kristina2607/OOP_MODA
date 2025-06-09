@@ -13,7 +13,25 @@ MyString Check::getEGN() const
 	return clientEGN;
 }
 
+bool Check::getIsRedeemed() const
+{
+	return isRedeemed;
+}
+
+bool Check::isValidCode(const MyString& code)
+{
+	if (this->code == code)
+	{
+		return true;
+	}
+	return false;
+}
+
 void Check::redeem()
 {
+	if (isRedeemed)
+	{
+		throw std::runtime_error("Check already redeemed!");
+	}
 	isRedeemed = true;
 }

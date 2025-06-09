@@ -15,6 +15,9 @@ public:
 
 	unsigned getSum() const;
 	MyString getEGN() const;
+	bool getIsRedeemed() const;
+
+	bool isValidCode(const MyString& code);
 	void redeem();
 };
 

@@ -31,13 +31,12 @@ public:
 	void addItem(const MyString& name, double price, unsigned quantity, const MyString& description);
 
 	void listRefunds() const;
-	void addRefund(const RefundRequest& newRequest);
+	void recieveRefundRequest(RefundRequest* newRequest);
 	void approveRefund(size_t index);
 	void rejectRefund(size_t index, const MyString& reason);
-	bool processRefundRequest(const Order& order) const;
 
 	void addOrder(const Order& order);
-	void list_Orders() const;
+	void listOrders() const;
 	void listPendingOrders() const;
 	void listBestSeliingProducts() const;
 	void viewRevenue() const;

@@ -41,7 +41,7 @@ void Business::removeItem(const MyString& name)
             std::cout << name << " is removed successffully." << std::endl;
         }
     }
-    std::cout << "Invalid name." << std::endl;
+    throw std::invalid_argument("Invalid name");
 }
 
 void Business::addItem(const MyString& name, double price, unsigned quantity, const MyString& description)
@@ -62,13 +62,19 @@ void Business::viewRevenue() const
 
 void Business::approveOrder(size_t index)
 {
-    //validira se indekx
+    if (index >= orders.getSize())
+    {
+        throw std::invalid_argument("Invalid index.");
+    }
     orders[index].setStatus(Status::Shipped);
 }
 
 void Business::rejectOrder(size_t index, const MyString& description)
 {
-    //validira se index
+    if (index >= orders.getSize())
+    {
+        throw std::invalid_argument("Invalid index.");
+    }
     orders[index].getClient()->recieveRefund(orders[index].getTotalPrice());
     std::cout << "Order is rejected. Reason: " << description << std::endl;
 }
@@ -84,13 +90,17 @@ void Business::listRefunds() const
     }
 }
 
-void Business::addRefund(const RefundRequest& newRequest)
+void Business::recieveRefundRequest(RefundRequest* newRequest)
 {
-    refundRequests.push_back(newRequest);
+    refundRequests.push_back(*newRequest);
 }
 
 void Business::approveRefund(size_t index)
 {
+    if (index >= refundRequests.getSize())
+    {
+        throw std::invalid_argument("Invalid index.");
+    }
     RefundRequest& request = refundRequests[index];
     request.approve();
 
@@ -101,6 +111,10 @@ void Business::approveRefund(size_t index)
 
 void Business::rejectRefund(size_t index, const MyString& reason)
 {
+    if (index >= refundRequests.getSize())
+    {
+        throw std::invalid_argument("Invalid index.");
+    }
     RefundRequest& request = refundRequests[index];
     request.reject();
 
@@ -108,17 +122,12 @@ void Business::rejectRefund(size_t index, const MyString& reason)
     std::cout << "Refund is rejected. Reason: " << reason << std::endl;
 }
 
-bool Business::processRefundRequest(const Order& order) const
-{
-    return false;
-}
-
 void Business::addOrder(const Order& order)
 {
     orders.push_back(order);
 }
 
-void Business::list_Orders() const
+void Business::listOrders() const
 {
     for (size_t i = 0; i < orders.getSize(); i++)
     {
@@ -141,5 +150,5 @@ void Business::listPendingOrders() const
 
 void Business::listBestSeliingProducts() const
 {
-    //FilterByRating::filter(items);
+   
 }

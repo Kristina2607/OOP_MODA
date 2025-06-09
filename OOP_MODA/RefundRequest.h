@@ -11,7 +11,7 @@ private:
 	unsigned ID = 0;
 
 	const Order* order;
-	Client* client;
+    Client* client;
 	MyString reason;
 
 	bool isProcessed = false;

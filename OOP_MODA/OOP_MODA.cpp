@@ -9,16 +9,17 @@
 
 int main()
 {
-	Business& business1 = Business::getInstance();
+	Order order;
+	/*Business& business1 = Business::getInstance();
 
 	Item item1("palto", "kojeno", 23, 3, 5, 1);
 	Item item2;
 
-	
+	Client client;
+	client.help();
 
-	business1.addItem("palto", 23, 2, "kojeno");
 	business1.viewRevenue();
-	business1.removeItem("palto");
+	*/
 
 	
 	return 0;

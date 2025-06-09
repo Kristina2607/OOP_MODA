@@ -1,10 +1,10 @@
 #pragma once
 #include "Command.h"
 
-class ConfirmOrder:public Command
+class ListPendingOrders:public Command
 {
 public:
-	ConfirmOrder(System& system);
+	ListPendingOrders(System& system);
 	virtual void execute() override;
 };
 

@@ -1,6 +1,8 @@
 #pragma once
 #include <utility>
 
+class Order;
+
 template <typename T>
 class MyVector {
 	static constexpr size_t INITIAL_CAPACITY = 8;
@@ -112,7 +114,7 @@ MyVector<T>::MyVector()
 {
 	size = 0;
 	capacity = INITIAL_CAPACITY;
-	data = new T[capacity];
+	this->data = new T[capacity];
 }
 
 template<typename T>

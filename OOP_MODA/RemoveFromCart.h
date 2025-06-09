@@ -1,10 +1,10 @@
 #pragma once
 #include "Command.h"
 
-class ConfirmOrder:public Command
+class RemoveFromCart:public Command
 {
 public:
-	ConfirmOrder(System& system);
+	RemoveFromCart(System& system);
 	virtual void execute() override;
 };
 
