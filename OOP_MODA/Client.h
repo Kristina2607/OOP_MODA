@@ -45,10 +45,10 @@ public:
 
 	void recieveRefund(double refund);
 	void refundedOrders() const;
-	void requestRefund(Business* business, const MyString& reason) const;
+	RefundRequest* requestRefund(const MyString& reason);
 
 	void checkBalance() const;
-	void checkout();
+	Order checkout();
 
 	void redeemCheck(const MyString& check);
 	void recieveCheck(const Check& check);

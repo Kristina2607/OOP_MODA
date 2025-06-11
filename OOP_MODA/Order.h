@@ -35,6 +35,7 @@ public:
 	unsigned getPoints() const;
 	unsigned getID() const;
 	Client* getClient() const;
+	MyVector<MyPair<Item, unsigned>> getItems() const;
 
 	void setStatus(Status newStatus);
 	const char* statusToString() const;

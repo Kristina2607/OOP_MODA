@@ -26,6 +26,11 @@ Client* Order::getClient() const
     return client;
 }
 
+MyVector<MyPair<Item, unsigned>> Order::getItems() const
+{
+    return items;
+}
+
 void Order::setStatus(Status newStatus)
 {
     status = newStatus;

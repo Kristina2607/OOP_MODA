@@ -16,11 +16,17 @@
 #include "CheckBalance.h"
 #include "viewCart.h"
 #include "RefundedOrders.h"
+#include "RequestRefund.h"
 
+//Business
 #include "ListOrders.h"
 #include "ListPendingOrders.h"
 #include "AddItem.h"
 #include "RemoveItem.h"
+
+//Administrator
+#include "CustomerInsignts.h"
+#include "SendCheck.h"
 
 CommandFactory& CommandFactory::getInstance()
 {
@@ -94,6 +100,10 @@ Command* CommandFactory::getCommand(const MyString& text)
 	{
 		return new RefundedOrders(System::getInstance());
 	}
+	else if (text == "request_refund")
+	{
+		return new RequestRefund(System::getInstance());
+	}
 
 
 	//Business:
@@ -115,8 +125,15 @@ Command* CommandFactory::getCommand(const MyString& text)
 	}
 	
 
-
 	//Administrator:
+	else if (text == "customers_insights")
+	{
+		return new CustomerInsignts(System::getInstance());
+	}
+	else if (text == "send_checks")
+	{
+		return new SendCheck(System::getInstance());
+	}
 
 	else
 	{

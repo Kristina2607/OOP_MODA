@@ -131,6 +131,7 @@
     <ClCompile Include="AddToCart.cpp" />
     <ClCompile Include="Administrator.cpp" />
     <ClCompile Include="ApplyDiscount.cpp" />
+    <ClCompile Include="ApproveRefund.cpp" />
     <ClCompile Include="Business.cpp" />
     <ClCompile Include="Cart.cpp" />
     <ClCompile Include="Check.cpp" />
@@ -140,8 +141,10 @@
     <ClCompile Include="Command.cpp" />
     <ClCompile Include="CommandFactory.cpp" />
     <ClCompile Include="ConfirmOrder.cpp" />
+    <ClCompile Include="CustomerInsignts.cpp" />
     <ClCompile Include="HelpCommand.cpp" />
     <ClCompile Include="Item.cpp" />
+    <ClCompile Include="ListBestSellingProducts.cpp" />
     <ClCompile Include="ListOrders.cpp" />
     <ClCompile Include="ListPendingOrders.cpp" />
     <ClCompile Include="ListProducts.cpp" />
@@ -157,6 +160,8 @@
     <ClCompile Include="RemoveDiscount.cpp" />
     <ClCompile Include="RemoveFromCart.cpp" />
     <ClCompile Include="RemoveItem.cpp" />
+    <ClCompile Include="RequestRefund.cpp" />
+    <ClCompile Include="SendCheck.cpp" />
     <ClCompile Include="System.cpp" />
     <ClCompile Include="Transactions.cpp" />
     <ClCompile Include="User.cpp" />
@@ -170,6 +175,7 @@
     <ClInclude Include="AddToCart.h" />
     <ClInclude Include="Administrator.h" />
     <ClInclude Include="ApplyDiscount.h" />
+    <ClInclude Include="ApproveRefund.h" />
     <ClInclude Include="Business.h" />
     <ClInclude Include="Cart.h" />
     <ClInclude Include="Check.h" />
@@ -179,9 +185,11 @@
     <ClInclude Include="Command.h" />
     <ClInclude Include="CommandFactory.h" />
     <ClInclude Include="ConfirmOrder.h" />
+    <ClInclude Include="CustomerInsignts.h" />
     <ClInclude Include="HelpCommand.h" />
     <ClInclude Include="HeterogeneousContainer.hpp" />
     <ClInclude Include="Item.h" />
+    <ClInclude Include="ListBestSellingProducts.h" />
     <ClInclude Include="ListOrders.h" />
     <ClInclude Include="ListPendingOrders.h" />
     <ClInclude Include="ListProducts.h" />
@@ -198,6 +206,8 @@
     <ClInclude Include="RemoveDiscount.h" />
     <ClInclude Include="RemoveFromCart.h" />
     <ClInclude Include="RemoveItem.h" />
+    <ClInclude Include="RequestRefund.h" />
+    <ClInclude Include="SendCheck.h" />
     <ClInclude Include="System.h" />
     <ClInclude Include="Transactions.h" />
     <ClInclude Include="User.h" />

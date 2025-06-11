@@ -1,9 +1,32 @@
 #include "Administrator.h"
 
-Administrator::Administrator(const MyString& name, const MyString& password, const MyString& EGN, Role role)
-	: User (name, password, EGN, role) {}
+Administrator& Administrator::getInstance()
+{
+	static Administrator instance;
+	return instance;
+}
 
-void Administrator::send_checks(unsigned sum, const MyString& code, const MyString& clientEGN)
+void Administrator::viewProfile() const
+{
+	std::cout << "Admin profile" << std::endl;
+	std::cout << "Name: " << this->name << std::endl;
+	std::cout << "EGN: " << this->EGN << std::endl;
+}
+
+void Administrator::help() const
+{
+	std::cout << "You are allowed to:" << std::endl;
+	std::cout << "> send_checks" << std::endl;
+	std::cout << "> customer_insights" << std::endl;
+	std::cout << "> view_transactions" << std::endl;
+}
+
+User* Administrator::clone() const
+{
+	throw std::logic_error("Cannot clone business");
+}
+
+void Administrator::sendChecks(unsigned sum, const MyString& code, const MyString& clientEGN)
 {
 	if (sum <= 0)
 	{
@@ -25,7 +48,7 @@ void Administrator::send_checks(unsigned sum, const MyString& code, const MyStri
 	std::cout << "Check for " << sum << " BGN sent to client with EGN: " << clientEGN << std::endl;
 }
 
-void Administrator::customer_insignts(const Client& client) const
+void Administrator::customerInsights() const
 {
 	std::cout << "Customer insights: " << std::endl;
 	for (size_t i = 0; i < clients.getSize(); i++)
@@ -35,7 +58,7 @@ void Administrator::customer_insignts(const Client& client) const
 	}
 }
 
-void Administrator::view_transactions() const
+void Administrator::viewTransactions() const
 {
 	for (size_t i = 0; i < transactions.getSize(); i++)
 	{

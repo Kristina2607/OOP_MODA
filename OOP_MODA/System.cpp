@@ -10,6 +10,67 @@ System& System::getInstance()
 	return instance;
 }
 
+Business* System::getBusiness() const
+{
+	if (!business)
+	{
+		throw std::logic_error("Business profile not initialized");
+	}
+	return business;
+}
+
+Administrator* System::getAdministrator() const
+{
+	if (!admin)
+	{
+		throw std::logic_error("Administrator profile not initialized.");
+	}
+	return admin;
+}
+
+void System::sendCheck(unsigned sum, const MyString& code, const MyString& clientEGN) const
+{
+	if (!loggedUser)
+	{
+		throw std::logic_error("No user logged in.");
+	}
+	if (loggedUser->getRole() != Role::Admin)
+	{
+		throw std::logic_error("You cannot do this action");
+	}
+
+	Administrator* admin = dynamic_cast<Administrator*>(loggedUser);
+	if (admin)
+	{
+		admin->sendChecks(sum, code, clientEGN);
+	}
+}
+
+void System::customerInsights() const
+{
+	if (!loggedUser)
+	{
+		throw std::logic_error("No user logged in.");
+	}
+	if (loggedUser->getRole() != Role::Admin)
+	{
+		throw std::logic_error("You cannot do this action");
+	}
+
+	Administrator* admin = dynamic_cast<Administrator*>(loggedUser);
+	if (admin)
+	{
+		admin->customerInsights();
+	}
+}
+
+System::~System()
+{
+	delete business;
+	delete admin;
+	delete loggedUser;
+}
+
 void System::run()
 {
 	CommandFactory& commandFactory = CommandFactory::getInstance();
@@ -142,7 +203,8 @@ void System::checkout() const
 	Client* client = dynamic_cast<Client*>(loggedUser);
 	if (client)
 	{
-		client->checkout();
+		Order newOrder=client->checkout();
+		business->recieveOrderRequest(newOrder);
 	}
 }
 
@@ -290,6 +352,25 @@ void System::refundedOrders() const
 	}
 }
 
+void System::requestRefund(Business* business, const MyString& reason) const
+{
+	if (!loggedUser)
+	{
+		throw std::logic_error("No user logged in.");
+	}
+	if (loggedUser->getRole() != Role::Client)
+	{
+		throw std::logic_error("You cannot do this action");
+	}
+
+	Client* client = dynamic_cast<Client*>(loggedUser);
+	if (client)
+	{
+		RefundRequest* request=client->requestRefund(reason);
+		business->recieveRefundRequest(request);
+	}
+}
+
 void System::addItem(const MyString& name, double price, unsigned quantity, const MyString& description) const
 {
 	if (!loggedUser)
@@ -378,6 +459,42 @@ void System::viewRevenue() const
 	if (business)
 	{
 		business->viewRevenue();
+	}
+}
+
+void System::approveRefund() const
+{
+	if (!loggedUser)
+	{
+		throw std::logic_error("No user logged in.");
+	}
+	if (loggedUser->getRole() != Role::Business)
+	{
+		throw std::logic_error("You cannot do this action");
+	}
+
+	Business* business = dynamic_cast<Business*>(loggedUser);
+	if (business)
+	{
+		business->viewRevenue();
+	}
+}
+
+void System::listBestSellingProducts() const
+{
+	if (!loggedUser)
+	{
+		throw std::logic_error("No user logged in.");
+	}
+	if (loggedUser->getRole() != Role::Business)
+	{
+		throw std::logic_error("You cannot do this action");
+	}
+
+	Business* business = dynamic_cast<Business*>(loggedUser);
+	if (business)
+	{
+		business->listBestSeliingProducts();
 	}
 }
 

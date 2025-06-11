@@ -11,16 +11,24 @@ Business& Business::getInstance()
 void Business::viewProfile() const
 {
     std::cout << "Business profile" << std::endl;
+    std::cout << "Name: " << this->name << std::endl;
+    std::cout << "EGN: " << this->EGN << std::endl;
 }
 
 void Business::help() const
 {
     std::cout << "You are allowed to:" << std::endl;
+
     std::cout << "> add item." << std::endl;
     std::cout << "> remove item." << std::endl;
     std::cout << "> view_revenue" << std:: endl;
     std::cout << "> approve_order" << std:: endl;
     std::cout << "> reject_order" << std::endl;
+
+    std::cout << "> list_orders" << std::endl;
+    std::cout << "> list_best_selling_products" << std::endl;
+    std::cout << "> list_pending_orders" << std::endl;
+
     std::cout << "> list_refunds" << std::endl;
     std::cout << "> approve_refunds" << std::endl;
     std::cout << "> reject_refunds" << std::endl;
@@ -67,6 +75,7 @@ void Business::approveOrder(size_t index)
         throw std::invalid_argument("Invalid index.");
     }
     orders[index].setStatus(Status::Shipped);
+    std::cout << "Order #" << index <<" is approved and shipped. "<< std::endl;
 }
 
 void Business::rejectOrder(size_t index, const MyString& description)
@@ -122,7 +131,7 @@ void Business::rejectRefund(size_t index, const MyString& reason)
     std::cout << "Refund is rejected. Reason: " << reason << std::endl;
 }
 
-void Business::addOrder(const Order& order)
+void Business::recieveOrderRequest(const Order& order)
 {
     orders.push_back(order);
 }
@@ -150,5 +159,36 @@ void Business::listPendingOrders() const
 
 void Business::listBestSeliingProducts() const
 {
-   
+    MyVector <MyPair<const Item*, unsigned>> temp;
+    for (size_t i = 0; i < items.getSize(); i++)
+    {
+        unsigned initialQuantity = items[i].getInitialQuantity();
+        unsigned currentQuantity = items[i].getCurrentQuantity();
+        unsigned soldQuantity = initialQuantity - currentQuantity;
+        if (soldQuantity > 0)  
+        {
+           MyPair<const Item*, unsigned> pair(&items[i], soldQuantity);
+            temp.push_back(pair);
+        }
+    }
+    for (size_t i = 0; i < temp.getSize(); i++)
+    {
+        size_t minIndex = i;
+        for (size_t j = i + 1; j < temp.getSize(); j++)
+        {
+            if (temp[i].second > temp[j].second)
+            {
+                minIndex = j;
+            }
+        }
+        if (minIndex != i)
+        {
+            std::swap(temp[minIndex], temp[i]);
+        }
+    }
+    for (size_t i = 0; i < 3 && i < temp.getSize(); i++)
+    {
+        std::cout << i + 1 << ". " << temp[i].first->getName()
+            << " - " << temp[i].second << " sales" << std::endl;
+    }
 }

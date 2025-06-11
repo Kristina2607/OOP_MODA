@@ -28,6 +28,15 @@
     <Filter Include="NewFilter1">
       <UniqueIdentifier>{5b768680-0105-4ed8-b9bc-5bb84b3744f7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Commands\Admin Commands">
+      <UniqueIdentifier>{21938be6-e634-4b03-bf5a-58bc41bee2b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Commands\ClientCommands">
+      <UniqueIdentifier>{00b2d12a-d41c-4a74-a42d-eef4c330d3dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Commands\Business Commands">
+      <UniqueIdentifier>{934741a8-77bc-4b04-ad7f-9da7dcdbbc5b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Item.cpp">
@@ -78,47 +87,11 @@
     <ClCompile Include="Transactions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ListProducts.cpp">
-      <Filter>Commands</Filter>
-    </ClCompile>
-    <ClCompile Include="ViewProduct.cpp">
-      <Filter>Commands</Filter>
-    </ClCompile>
     <ClCompile Include="ViewProfile.cpp">
-      <Filter>Commands</Filter>
-    </ClCompile>
-    <ClCompile Include="CheckBalance.cpp">
-      <Filter>Commands</Filter>
-    </ClCompile>
-    <ClCompile Include="ConfirmOrder.cpp">
-      <Filter>Commands</Filter>
-    </ClCompile>
-    <ClCompile Include="ViewRevenue.cpp">
       <Filter>Commands</Filter>
     </ClCompile>
     <ClCompile Include="MyString.cpp">
       <Filter>Utilis</Filter>
-    </ClCompile>
-    <ClCompile Include="ListPendingOrders.cpp">
-      <Filter>Commands</Filter>
-    </ClCompile>
-    <ClCompile Include="Redeem.cpp">
-      <Filter>Commands</Filter>
-    </ClCompile>
-    <ClCompile Include="RemoveItem.cpp">
-      <Filter>Commands</Filter>
-    </ClCompile>
-    <ClCompile Include="ListOrders.cpp">
-      <Filter>Commands</Filter>
-    </ClCompile>
-    <ClCompile Include="RemoveDiscount.cpp">
-      <Filter>Commands</Filter>
-    </ClCompile>
-    <ClCompile Include="ApplyDiscount.cpp">
-      <Filter>Commands</Filter>
-    </ClCompile>
-    <ClCompile Include="AddItem.cpp">
-      <Filter>Commands</Filter>
     </ClCompile>
     <ClCompile Include="System.cpp">
       <Filter>NewFilter1</Filter>
@@ -126,20 +99,71 @@
     <ClCompile Include="OOP_MODA.cpp">
       <Filter>NewFilter1</Filter>
     </ClCompile>
-    <ClCompile Include="AddToCart.cpp">
-      <Filter>Commands</Filter>
+    <ClCompile Include="SendCheck.cpp">
+      <Filter>Commands\Admin Commands</Filter>
     </ClCompile>
-    <ClCompile Include="RemoveFromCart.cpp">
-      <Filter>Commands</Filter>
+    <ClCompile Include="CustomerInsignts.cpp">
+      <Filter>Commands\Admin Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="AddToCart.cpp">
+      <Filter>Commands\ClientCommands</Filter>
+    </ClCompile>
+    <ClCompile Include="ApplyDiscount.cpp">
+      <Filter>Commands\ClientCommands</Filter>
+    </ClCompile>
+    <ClCompile Include="CheckBalance.cpp">
+      <Filter>Commands\ClientCommands</Filter>
     </ClCompile>
     <ClCompile Include="Checkout.cpp">
-      <Filter>Commands</Filter>
+      <Filter>Commands\ClientCommands</Filter>
+    </ClCompile>
+    <ClCompile Include="ConfirmOrder.cpp">
+      <Filter>Commands\ClientCommands</Filter>
+    </ClCompile>
+    <ClCompile Include="Redeem.cpp">
+      <Filter>Commands\ClientCommands</Filter>
+    </ClCompile>
+    <ClCompile Include="RemoveFromCart.cpp">
+      <Filter>Commands\ClientCommands</Filter>
+    </ClCompile>
+    <ClCompile Include="RemoveDiscount.cpp">
+      <Filter>Commands\ClientCommands</Filter>
+    </ClCompile>
+    <ClCompile Include="RequestRefund.cpp">
+      <Filter>Commands\ClientCommands</Filter>
+    </ClCompile>
+    <ClCompile Include="ViewProduct.cpp">
+      <Filter>Commands\ClientCommands</Filter>
     </ClCompile>
     <ClCompile Include="ViewCart.cpp">
+      <Filter>Commands\ClientCommands</Filter>
+    </ClCompile>
+    <ClCompile Include="ApproveRefund.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ListBestSellingProducts.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AddItem.cpp">
+      <Filter>Commands\Business Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="ListOrders.cpp">
+      <Filter>Commands\Business Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="ListPendingOrders.cpp">
+      <Filter>Commands\Business Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="ListProducts.cpp">
+      <Filter>Commands\Business Commands</Filter>
+    </ClCompile>
     <ClCompile Include="RefundedOrders.cpp">
-      <Filter>Commands</Filter>
+      <Filter>Commands\Business Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="RemoveItem.cpp">
+      <Filter>Commands\Business Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="ViewRevenue.cpp">
+      <Filter>Commands\Business Commands</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -185,9 +209,6 @@
     <ClInclude Include="User.h">
       <Filter>User Headers</Filter>
     </ClInclude>
-    <ClInclude Include="HeterogeneousContainer.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Check.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -206,62 +227,80 @@
     <ClInclude Include="Transactions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ListProducts.h">
-      <Filter>Commands</Filter>
-    </ClInclude>
     <ClInclude Include="ViewProfile.h">
-      <Filter>Commands</Filter>
-    </ClInclude>
-    <ClInclude Include="ViewProduct.h">
-      <Filter>Commands</Filter>
-    </ClInclude>
-    <ClInclude Include="ConfirmOrder.h">
-      <Filter>Commands</Filter>
-    </ClInclude>
-    <ClInclude Include="CheckBalance.h">
       <Filter>Commands</Filter>
     </ClInclude>
     <ClInclude Include="Role.h">
       <Filter>User Headers</Filter>
     </ClInclude>
-    <ClInclude Include="ListPendingOrders.h">
-      <Filter>Commands</Filter>
+    <ClInclude Include="SendCheck.h">
+      <Filter>Commands\Admin Commands</Filter>
     </ClInclude>
-    <ClInclude Include="ViewRevenue.h">
-      <Filter>Commands</Filter>
+    <ClInclude Include="CustomerInsignts.h">
+      <Filter>Commands\Admin Commands</Filter>
     </ClInclude>
-    <ClInclude Include="ListOrders.h">
-      <Filter>Commands</Filter>
-    </ClInclude>
-    <ClInclude Include="AddItem.h">
-      <Filter>Commands</Filter>
-    </ClInclude>
-    <ClInclude Include="Redeem.h">
-      <Filter>Commands</Filter>
-    </ClInclude>
-    <ClInclude Include="RemoveItem.h">
-      <Filter>Commands</Filter>
-    </ClInclude>
-    <ClInclude Include="RemoveDiscount.h">
-      <Filter>Commands</Filter>
-    </ClInclude>
-    <ClInclude Include="ApplyDiscount.h">
-      <Filter>Commands</Filter>
+    <ClInclude Include="HeterogeneousContainer.hpp">
+      <Filter>Utilis</Filter>
     </ClInclude>
     <ClInclude Include="AddToCart.h">
-      <Filter>Commands</Filter>
+      <Filter>Commands\ClientCommands</Filter>
     </ClInclude>
-    <ClInclude Include="RemoveFromCart.h">
-      <Filter>Commands</Filter>
+    <ClInclude Include="ApplyDiscount.h">
+      <Filter>Commands\ClientCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="CheckBalance.h">
+      <Filter>Commands\ClientCommands</Filter>
     </ClInclude>
     <ClInclude Include="Checkout.h">
-      <Filter>Commands</Filter>
+      <Filter>Commands\ClientCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="ConfirmOrder.h">
+      <Filter>Commands\ClientCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="Redeem.h">
+      <Filter>Commands\ClientCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="RemoveDiscount.h">
+      <Filter>Commands\ClientCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="RemoveFromCart.h">
+      <Filter>Commands\ClientCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="RequestRefund.h">
+      <Filter>Commands\ClientCommands</Filter>
     </ClInclude>
     <ClInclude Include="ViewCart.h">
+      <Filter>Commands\ClientCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="ApproveRefund.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ListBestSellingProducts.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ViewProduct.h">
+      <Filter>Commands\ClientCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="AddItem.h">
+      <Filter>Commands\Business Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="ListOrders.h">
+      <Filter>Commands\Business Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="ListPendingOrders.h">
+      <Filter>Commands\Business Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="ListProducts.h">
+      <Filter>Commands\Business Commands</Filter>
+    </ClInclude>
     <ClInclude Include="RefundedOrders.h">
-      <Filter>Commands</Filter>
+      <Filter>Commands\Business Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="RemoveItem.h">
+      <Filter>Commands\Business Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="ViewRevenue.h">
+      <Filter>Commands\Business Commands</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

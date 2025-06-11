@@ -160,7 +160,7 @@ void Client::refundedOrders() const
     }
 }
 
-void Client::requestRefund(Business* business, const MyString& reason) const
+RefundRequest* Client::requestRefund(const MyString& reason) 
 {
     if (orders.empty())
     {
@@ -173,12 +173,14 @@ void Client::requestRefund(Business* business, const MyString& reason) const
     }
 
     RefundRequest* request = new RefundRequest(reason, &lastOrder, const_cast<Client*>(this));
-    business->recieveRefundRequest(request);
+    this->points = 0;
     std::cout << "Refund request submitted for last order (" << lastOrder.getTotalPrice() << 
         " BGN). All loyalty points have been removed." << std::endl;
+
+    return request;
 }
 
-void Client::checkout()
+Order Client::checkout()
 {
     double totalPrice = cart.getTotalPrice();
     if (wallet < totalPrice)
@@ -188,8 +190,11 @@ void Client::checkout()
     wallet -= totalPrice;
     Order newOrder = cart.toOrder();
     orders.push_back(newOrder);
-    std::cout << "Your order is placed successfully! Now is waiting for confirmation." << std::endl;
     cart.clear_cart();
+
+    std::cout << "Your order is placed successfully! Now is waiting for confirmation." << std::endl;
+   
+    return newOrder;
 }
 
 void Client::confirmOrder(size_t index)

@@ -24,7 +24,6 @@ public:
 	
 	virtual void viewProfile() const override;
 	virtual void help() const override;
-
 	virtual User* clone() const override;
 
 	void removeItem(const MyString& name);
@@ -35,7 +34,7 @@ public:
 	void approveRefund(size_t index);
 	void rejectRefund(size_t index, const MyString& reason);
 
-	void addOrder(const Order& order);
+	void recieveOrderRequest(const Order& order);
 	void listOrders() const;
 	void listPendingOrders() const;
 	void listBestSeliingProducts() const;

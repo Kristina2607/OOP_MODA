@@ -14,12 +14,19 @@ private:
 	MyVector<Transactions> transactions;
 	MyVector<Client> clients;
 
-public:
-	Administrator() = default;
-	Administrator(const MyString& name, const MyString& password, const MyString& EGN, Role role);
+	Administrator()=default;
 
-	void send_checks(unsigned sum, const MyString& code, const MyString& clientEGN);
-	void customer_insignts(const Client& client) const;
-	void view_transactions() const;
+public:
+	static Administrator& getInstance();
+	Administrator(const Administrator& other) = delete;
+	Administrator& operator=(const Administrator& other) = delete;
+
+	virtual void viewProfile() const override;
+	virtual void help() const override;
+	virtual User* clone() const override;
+
+	void sendChecks(unsigned sum, const MyString& code, const MyString& clientEGN);
+	void customerInsights() const;
+	void viewTransactions() const;
 };
 
