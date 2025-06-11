@@ -1,5 +1,6 @@
 #pragma once
 #include "User.h"
+#include "ItemsManager.h"
 #include "RefundRequest.h"
 #include "Check.h"
 #include "Cart.h"
@@ -17,6 +18,7 @@ private:
 	Cart cart;
 	MyVector<Order> orders;
 	MyVector<Check> recievedChecks;
+	ItemsManager catalog;
 
 public:
 	Client() = default;
@@ -37,8 +39,8 @@ public:
 	void addToCart(unsigned ID, unsigned quantity);
 	void removeFromCart(const MyString& name, unsigned quantity);
 
-	void view_cart() const;
-	void clear_cart();
+	void viewCart() const;
+	void clearCart();
 
 	void applyDiscount();
 	void removeDiscount();
@@ -48,7 +50,7 @@ public:
 	RefundRequest* requestRefund(const MyString& reason);
 
 	void checkBalance() const;
-	Order checkout();
+	Order& checkout();
 
 	void redeemCheck(const MyString& check);
 	void recieveCheck(const Check& check);
@@ -56,7 +58,11 @@ public:
 	void rateOrder(unsigned ProductID, unsigned rating);
 	void confirmOrder(size_t index);
 
-	void list_orders() const;
-	void order_history() const;
+	void listOrders() const;
+	void orderHistory() const;
+
+	void listProducts() const;
+	void viewProduct(unsigned ID) const;
+
 };
 

@@ -89,12 +89,12 @@ void Client::removeFromCart(const MyString& name, unsigned quantity)
     cart.removeFromCart(name, quantity);
 }
 
-void Client::view_cart() const
+void Client::viewCart() const
 {
     cart.view_cart();
 }
 
-void Client::clear_cart()
+void Client::clearCart()
 {
     cart.clear_cart();
 }
@@ -180,7 +180,7 @@ RefundRequest* Client::requestRefund(const MyString& reason)
     return request;
 }
 
-Order Client::checkout()
+Order& Client::checkout()
 {
     double totalPrice = cart.getTotalPrice();
     if (wallet < totalPrice)
@@ -213,7 +213,7 @@ void Client::confirmOrder(size_t index)
     std::cout << "Order confirmed as received. You earned " << earnedPoints << " points." << std::endl;
 }
 
-void Client::list_orders() const
+void Client::listOrders() const
 {
     for (size_t i = 0; i < orders.getSize(); i++)
     {
@@ -224,7 +224,7 @@ void Client::list_orders() const
     }
 }
 
-void Client::order_history() const
+void Client::orderHistory() const
 {
     for (size_t i = 0; i < orders.getSize(); i++)
     {
@@ -233,4 +233,14 @@ void Client::order_history() const
             orders[i].printOrder();
         }
     }
+}
+
+void Client::listProducts() const
+{
+    catalog.listProducts();
+}
+
+void Client::viewProduct(unsigned ID) const
+{
+    catalog.viewProduct(ID);
 }

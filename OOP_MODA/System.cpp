@@ -106,26 +106,6 @@ void System::run()
 	}
 }
 
-void System::listProducts() const
-{
-	for (size_t i = 0; i < items.getSize(); i++)
-	{
-		items[i].printItem();
-	}
-}
-
-void System::viewProduct(unsigned ID) const
-{
-	for (size_t i = 0; i < items.getSize(); i++)
-	{
-		if (items[i].getId() == ID)
-		{
-			items[i].printItem();
-		}
-	}
-	throw std::invalid_argument("Invalid index.");
-}
-
 void System::login(const MyString& name, const MyString& pass) 
 {
 	for (size_t i = 0; i < users.getSize(); i++)
@@ -189,7 +169,7 @@ void System::confirmOrder(size_t orderIndex) const
 	}
 }
 
-void System::checkout() const
+void System::listProducts() const
 {
 	if (!loggedUser)
 	{
@@ -203,7 +183,43 @@ void System::checkout() const
 	Client* client = dynamic_cast<Client*>(loggedUser);
 	if (client)
 	{
-		Order newOrder=client->checkout();
+		client->listProducts();
+	}
+}
+
+void System::viewProduct(unsigned ID) const
+{
+	if (!loggedUser)
+	{
+		throw std::logic_error("No user logged in.");
+	}
+	if (loggedUser->getRole() != Role::Client)
+	{
+		throw std::logic_error("You cannot do this action");
+	}
+
+	Client* client = dynamic_cast<Client*>(loggedUser);
+	if (client)
+	{
+		client->viewProduct(ID);
+	}
+}
+
+void System::checkout() 
+{
+	if (!loggedUser)
+	{
+		throw std::logic_error("No user logged in.");
+	}
+	if (loggedUser->getRole() != Role::Client)
+	{
+		throw std::logic_error("You cannot do this action");
+	}
+
+	Client* client = dynamic_cast<Client*>(loggedUser);
+	if (client)
+	{
+		Order& newOrder = client->checkout();
 		business->recieveOrderRequest(newOrder);
 	}
 }
@@ -330,7 +346,7 @@ void System::viewCart() const
 	Client* client = dynamic_cast<Client*>(loggedUser);
 	if (client)
 	{
-		client->view_cart();
+		client->viewCart();
 	}
 }
 

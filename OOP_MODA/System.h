@@ -30,9 +30,6 @@ public:
 
 	void run();
 
-	void listProducts() const;
-	void viewProduct(unsigned ID) const;
-
 	void login(const MyString& name, const MyString& pass);
 	void registerUser (User* newUser);
 	void logout();
@@ -42,7 +39,7 @@ public:
 
 	//Client commands:
 	void confirmOrder(size_t orderIndex) const;
-	void checkout() const;
+	void checkout();
 	void redeem(const MyString& code) const;
 	void checkBalance() const;
 	void applyDiscount() const;
@@ -67,7 +64,5 @@ public:
 	//Administartor commands:
 	void sendCheck(unsigned sum, const MyString& code, const MyString& clientEGN) const;
 	void customerInsights() const;
-
-	~System();
 };
 

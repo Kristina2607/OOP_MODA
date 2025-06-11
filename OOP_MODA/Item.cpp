@@ -53,5 +53,5 @@ unsigned Item::getRating() const
 
 void Item::printItem() const
 {
-	std::cout << ID << " | "<< name << " | " << price << "BGN | " << rating << " stars |" << quantity << " quantity" << std::endl;
+	std::cout << ID << " | "<< name << " | " << price << "BGN | " << rating << " stars |" << currentQuantity << " quantity" << std::endl;
 }

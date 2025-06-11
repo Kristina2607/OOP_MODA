@@ -144,6 +144,7 @@
     <ClCompile Include="CustomerInsignts.cpp" />
     <ClCompile Include="HelpCommand.cpp" />
     <ClCompile Include="Item.cpp" />
+    <ClCompile Include="ItemsManager.cpp" />
     <ClCompile Include="ListBestSellingProducts.cpp" />
     <ClCompile Include="ListOrders.cpp" />
     <ClCompile Include="ListPendingOrders.cpp" />
@@ -189,6 +190,7 @@
     <ClInclude Include="HelpCommand.h" />
     <ClInclude Include="HeterogeneousContainer.hpp" />
     <ClInclude Include="Item.h" />
+    <ClInclude Include="ItemsManager.h" />
     <ClInclude Include="ListBestSellingProducts.h" />
     <ClInclude Include="ListOrders.h" />
     <ClInclude Include="ListPendingOrders.h" />

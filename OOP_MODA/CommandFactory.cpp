@@ -23,6 +23,7 @@
 #include "ListPendingOrders.h"
 #include "AddItem.h"
 #include "RemoveItem.h"
+#include "ListBestSellingProducts.h"
 
 //Administrator
 #include "CustomerInsignts.h"
@@ -122,6 +123,10 @@ Command* CommandFactory::getCommand(const MyString& text)
 	else if (text == "remove_item")
 	{
 		return new RemoveItem(System::getInstance());
+	}
+	else if (text == "list_best_selling_products")
+	{
+		return new ListBestSellingProducts(System::getInstance());
 	}
 	
 

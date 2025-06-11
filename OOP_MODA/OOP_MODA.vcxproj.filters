@@ -153,9 +153,6 @@
     <ClCompile Include="ListPendingOrders.cpp">
       <Filter>Commands\Business Commands</Filter>
     </ClCompile>
-    <ClCompile Include="ListProducts.cpp">
-      <Filter>Commands\Business Commands</Filter>
-    </ClCompile>
     <ClCompile Include="RefundedOrders.cpp">
       <Filter>Commands\Business Commands</Filter>
     </ClCompile>
@@ -164,6 +161,12 @@
     </ClCompile>
     <ClCompile Include="ViewRevenue.cpp">
       <Filter>Commands\Business Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="ListProducts.cpp">
+      <Filter>Commands\ClientCommands</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemsManager.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -290,9 +293,6 @@
     <ClInclude Include="ListPendingOrders.h">
       <Filter>Commands\Business Commands</Filter>
     </ClInclude>
-    <ClInclude Include="ListProducts.h">
-      <Filter>Commands\Business Commands</Filter>
-    </ClInclude>
     <ClInclude Include="RefundedOrders.h">
       <Filter>Commands\Business Commands</Filter>
     </ClInclude>
@@ -301,6 +301,12 @@
     </ClInclude>
     <ClInclude Include="ViewRevenue.h">
       <Filter>Commands\Business Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="ListProducts.h">
+      <Filter>Commands\ClientCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemsManager.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
