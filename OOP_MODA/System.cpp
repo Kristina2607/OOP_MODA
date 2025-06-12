@@ -106,26 +106,74 @@ void System::run()
 	}
 }
 
-void System::login(const MyString& name, const MyString& pass) 
+void System::login(const MyString& name, const MyString& pass)
 {
 	for (size_t i = 0; i < users.getSize(); i++)
 	{
 		if (users[i]->getName() == name && users[i]->checkPassword(pass))
 		{
+			if (users[i]->getRole() == Role::Admin)
+			{
+				loggedUser = admin;
+				return;
+			}
+			else if (users[i]->getRole() == Role::Business)
+			{
+				loggedUser = business;
+				return;
+			}
 			loggedUser = users[i];
+			std::cout << "Login successful! Welcome, " << users[i]->getName() << std::endl;
 			return;
 		}
 	}
 	throw std::invalid_argument("Invalid username or password!");
 }
 
-void System::registerUser(User* newUser) 
+void System::registerUser(const MyString& name, const MyString& password, const MyString& EGN, Role role)
 {
-	if (!loggedUser)
+	for (size_t i = 0; i < users.getSize(); i++)
 	{
-		throw std::logic_error("No user logged in.");
+		if (users[i]->getName() == name)
+		{
+			throw std::invalid_argument("User with this EGN already exists");
+		}
 	}
-	users.addObject(newUser);
+	User* newUser = nullptr;
+	switch (role)
+	{
+	case Role::Client:
+	{
+		newUser = new Client(name, password, EGN);
+		users.addObject(newUser);
+
+		break;
+	}
+	case Role::Business:
+	{
+		if (business)
+		{
+			throw std::logic_error("Business already exists!");
+		}
+		business = new Business(name, password, EGN);
+		loggedUser = business;
+		break;
+	}
+	case Role::Admin:
+	{
+		if (admin)
+		{
+			throw std::logic_error("Admin already exists!");
+		}
+		admin = new Administrator(name, password, EGN);
+		loggedUser = admin;
+		break;
+	}
+	default:
+		throw std::invalid_argument("Invalid role");
+	}
+
+	std::cout << "Registration successful!" << std::endl;
 }
 
 void System::logout()
@@ -151,7 +199,7 @@ void System::viewProfile() const
 	loggedUser->viewProfile();
 }
 
-void System::confirmOrder(size_t orderIndex) const
+void System::confirmOrder(size_t orderIndex)
 {
 	if (!loggedUser)
 	{
@@ -205,7 +253,7 @@ void System::viewProduct(unsigned ID) const
 	}
 }
 
-void System::checkout() 
+void System::checkout()
 {
 	if (!loggedUser)
 	{
@@ -224,7 +272,7 @@ void System::checkout()
 	}
 }
 
-void System::redeem(const MyString& code) const
+void System::redeem(const MyString& code)
 {
 	if (!loggedUser)
 	{
@@ -260,7 +308,7 @@ void System::checkBalance() const
 	}
 }
 
-void System::applyDiscount() const
+void System::applyDiscount()
 {
 	if (!loggedUser)
 	{
@@ -278,7 +326,7 @@ void System::applyDiscount() const
 	}
 }
 
-void System::removeDiscount() const
+void System::removeDiscount()
 {
 	if (!loggedUser)
 	{
@@ -296,7 +344,7 @@ void System::removeDiscount() const
 	}
 }
 
-void System::addToCart(unsigned ID, unsigned quantity) const
+void System::addToCart(unsigned ID, unsigned quantity)
 {
 	if (!loggedUser)
 	{
@@ -314,7 +362,7 @@ void System::addToCart(unsigned ID, unsigned quantity) const
 	}
 }
 
-void System::removeFromCart(const MyString& name, unsigned quantity) const
+void System::removeFromCart(const MyString& name, unsigned quantity)
 {
 	if (!loggedUser)
 	{
@@ -328,7 +376,7 @@ void System::removeFromCart(const MyString& name, unsigned quantity) const
 	Client* client = dynamic_cast<Client*>(loggedUser);
 	if (client)
 	{
-		client->removeFromCart(name,quantity);
+		client->removeFromCart(name, quantity);
 	}
 }
 
@@ -368,7 +416,7 @@ void System::refundedOrders() const
 	}
 }
 
-void System::requestRefund(Business* business, const MyString& reason) const
+void System::requestRefund(Business* business, const MyString& reason)
 {
 	if (!loggedUser)
 	{
@@ -382,7 +430,7 @@ void System::requestRefund(Business* business, const MyString& reason) const
 	Client* client = dynamic_cast<Client*>(loggedUser);
 	if (client)
 	{
-		RefundRequest* request=client->requestRefund(reason);
+		RefundRequest* request = client->requestRefund(reason);
 		business->recieveRefundRequest(request);
 	}
 }
@@ -401,7 +449,7 @@ void System::addItem(const MyString& name, double price, unsigned quantity, cons
 	Business* business = dynamic_cast<Business*>(loggedUser);
 	if (business)
 	{
-		business->addItem(name, price,quantity, description);
+		business->addItem(name, price, quantity, description);
 	}
 }
 
@@ -478,7 +526,7 @@ void System::viewRevenue() const
 	}
 }
 
-void System::approveRefund(size_t index) const
+void System::approveRefund(size_t index)
 {
 	if (!loggedUser)
 	{
@@ -493,6 +541,24 @@ void System::approveRefund(size_t index) const
 	if (business)
 	{
 		business->approveRefund(index);
+	}
+}
+
+void System::rejectRefund(size_t index, const MyString& reason)
+{
+	if (!loggedUser)
+	{
+		throw std::logic_error("No user logged in.");
+	}
+	if (loggedUser->getRole() != Role::Business)
+	{
+		throw std::logic_error("You cannot do this action");
+	}
+
+	Business* business = dynamic_cast<Business*>(loggedUser);
+	if (business)
+	{
+		business->rejectRefund(index, reason);
 	}
 }
 

@@ -6,6 +6,7 @@
 #include "User.h"
 #include "Role.h"
 #include "Client.h"
+#include "MyString.h"
 
 class Administrator : public User
 {
@@ -14,12 +15,9 @@ private:
 	MyVector<Transactions> transactions;
 	MyVector<Client> clients;
 
-	Administrator()=default;
 
 public:
-	static Administrator& getInstance();
-	Administrator(const Administrator& other) = delete;
-	Administrator& operator=(const Administrator& other) = delete;
+	Administrator(MyString name, MyString password, MyString EGN);
 
 	virtual void viewProfile() const override;
 	virtual void help() const override;

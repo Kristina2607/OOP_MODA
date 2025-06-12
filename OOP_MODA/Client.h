@@ -21,7 +21,8 @@ private:
 
 public:
 	Client() = default;
-	Client(const MyString& name, const MyString& password, const MyString& EGN, Role role, double wallet, unsigned points, Cart cart);
+	Client(const MyString& name, const MyString& password, const MyString& EGN);
+	Client(const MyString& name, const MyString& password, const MyString& EGN, double wallet, unsigned points, Cart cart);
 
 	double getWallet() const;
 	unsigned getPoints() const;
@@ -37,6 +38,7 @@ public:
 	virtual User* clone() const override;
 
 	void addToCart(unsigned ID, unsigned quantity);
+	void addMoney(unsigned sum);
 	void removeFromCart(const MyString& name, unsigned quantity);
 
 	void viewCart() const;

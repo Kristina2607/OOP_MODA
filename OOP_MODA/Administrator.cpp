@@ -1,10 +1,8 @@
 #include "Administrator.h"
 
-Administrator& Administrator::getInstance()
-{
-	static Administrator instance;
-	return instance;
-}
+Administrator::Administrator(MyString name, MyString password, MyString EGN)
+	: User(name, password, EGN, Role::Admin)
+{}
 
 void Administrator::viewProfile() const
 {

@@ -1,9 +1,13 @@
 #include "Client.h"
 #include "Order.h"
 #include "Cart.h"
+#include "Role.h"
 
-Client::Client(const MyString& name, const MyString& password, const MyString& EGN, Role role,
-    double wallet, unsigned points, Cart cart) : User(name, password, EGN, role), wallet(wallet), points(points), cart(cart) { }
+Client::Client(const MyString& name, const MyString& password, const MyString& EGN)
+    :User(name, password, EGN, Role::Client) {}
+
+Client::Client(const MyString& name, const MyString& password, const MyString& EGN,
+    double wallet, unsigned points, Cart cart) : User(name, password, EGN, Role::Client), wallet(wallet), points(points), cart(cart) { }
 
 double Client::getWallet() const
 {
@@ -82,6 +86,11 @@ User* Client::clone() const
 void Client::addToCart(unsigned ID, unsigned quantity)
 {
     cart.addToCart(ID, quantity);
+}
+
+void Client::addMoney(unsigned sum)
+{
+    wallet += sum;
 }
 
 void Client::removeFromCart(const MyString& name, unsigned quantity)
@@ -189,6 +198,11 @@ Order& Client::checkout()
     std::cout << "Your order is placed successfully! Now is waiting for confirmation." << std::endl;
    
     return newOrder;
+}
+
+void Client::rateOrder(unsigned ProductID, unsigned rating)
+{
+
 }
 
 void Client::confirmOrder(size_t index)

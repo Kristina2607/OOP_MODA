@@ -1,10 +1,9 @@
 #pragma once
 #include "Command.h"
-
-class ApproveRefund:public Command
+class RejectRefund : public Command
 {
 public:
-	ApproveRefund(System& system);
+	RejectRefund(System& system);
 	virtual void execute() override;
 };
 

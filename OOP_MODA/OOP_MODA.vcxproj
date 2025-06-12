@@ -159,6 +159,7 @@
     <ClCompile Include="RefundedOrders.cpp" />
     <ClCompile Include="RefundRequest.cpp" />
     <ClCompile Include="RegisterCommand.cpp" />
+    <ClCompile Include="RejectRefund.cpp" />
     <ClCompile Include="RemoveDiscount.cpp" />
     <ClCompile Include="RemoveFromCart.cpp" />
     <ClCompile Include="RemoveItem.cpp" />
@@ -207,6 +208,7 @@
     <ClInclude Include="RefundedOrders.h" />
     <ClInclude Include="RefundRequest.h" />
     <ClInclude Include="RegisterCommand.h" />
+    <ClInclude Include="RejectRefund.h" />
     <ClInclude Include="RemoveDiscount.h" />
     <ClInclude Include="RemoveFromCart.h" />
     <ClInclude Include="RemoveItem.h" />

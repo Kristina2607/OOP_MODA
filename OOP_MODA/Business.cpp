@@ -1,11 +1,11 @@
 #include "Business.h"
 #include "Order.h"
 #include "Client.h"
+#include "Role.h"
 
-Business& Business::getInstance()
+Business::Business(MyString name, MyString password, MyString EGN)
+    : User(name, password, EGN, Role::Business)
 {
-    static Business instance;
-    return instance;
 }
 
 void Business::viewProfile() const

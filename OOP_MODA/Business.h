@@ -15,12 +15,9 @@ private:
 	MyVector<Order> orders;
 	double totalRevenue;
 
-	Business() = default;
 
 public:
-	static Business& getInstance();
-	Business(const Business& other) = delete;
-	Business& operator=(const Business& other) = delete;
+	Business(MyString name, MyString password, MyString EGN);
 	
 	virtual void viewProfile() const override;
 	virtual void help() const override;

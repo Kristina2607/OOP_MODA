@@ -24,6 +24,8 @@
 #include "AddItem.h"
 #include "RemoveItem.h"
 #include "ListBestSellingProducts.h"
+#include "ApproveRefund.h"
+#include "RejectRefund.h"
 
 //Administrator
 #include "CustomerInsignts.h"
@@ -127,6 +129,14 @@ Command* CommandFactory::getCommand(const MyString& text)
 	else if (text == "list_best_selling_products")
 	{
 		return new ListBestSellingProducts(System::getInstance());
+	}
+	else if (text == "approve_refund")
+	{
+		return new ApproveRefund(System::getInstance());
+	}
+	else if (text == "reject_refund")
+	{
+		return new RejectRefund(System::getInstance());
 	}
 	
 
