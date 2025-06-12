@@ -6,6 +6,5 @@ void ApproveRefund::execute()
 {
 	size_t index;
 	std::cin >> index;
-	system.approveRefund();
-
+	system.approveRefund(index);
 }

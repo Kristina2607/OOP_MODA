@@ -58,7 +58,7 @@ public:
 	void listPendingOrders() const;
 	void listOrders() const;
 	void viewRevenue() const;
-	void approveRefund() const;
+	void approveRefund(size_t index) const;
 	void listBestSellingProducts() const;
 
 	//Administartor commands:

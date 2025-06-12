@@ -40,11 +40,13 @@ bool RefundRequest::getIsApproved() const
 void RefundRequest::approve()
 {
 	isApproved = true;
+	isProcessed = true;
 }
 
 void RefundRequest::reject()
 {
 	isApproved = false;
+	isProcessed = true;
 }
 
 void RefundRequest::process()

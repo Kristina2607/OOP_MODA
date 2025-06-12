@@ -7,8 +7,7 @@
 #include "MyString.h"
 #include "MyVector.hpp"
 #include "Business.h"
-
-class Order;
+#include "OrderManager.h"
 
 class Client :public User
 {
@@ -16,7 +15,7 @@ private:
 	unsigned points = 0;
 	double wallet = 0.0;
 	Cart cart;
-	MyVector<Order> orders;
+	OrderManager orders;
 	MyVector<Check> recievedChecks;
 	ItemsManager catalog;
 
@@ -27,6 +26,7 @@ public:
 	double getWallet() const;
 	unsigned getPoints() const;
 	MyString getEGN() const;
+	OrderManager getOrderManger() const;
 
 	unsigned getOrdersCount()const;
 	unsigned getTotalSpent() const;

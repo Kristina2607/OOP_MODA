@@ -478,7 +478,7 @@ void System::viewRevenue() const
 	}
 }
 
-void System::approveRefund() const
+void System::approveRefund(size_t index) const
 {
 	if (!loggedUser)
 	{
@@ -492,7 +492,7 @@ void System::approveRefund() const
 	Business* business = dynamic_cast<Business*>(loggedUser);
 	if (business)
 	{
-		business->viewRevenue();
+		business->approveRefund(index);
 	}
 }
 

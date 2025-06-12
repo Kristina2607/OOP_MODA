@@ -35,7 +35,10 @@ public:
 	unsigned getPoints() const;
 	unsigned getID() const;
 	Client* getClient() const;
+
 	MyVector<MyPair<Item, unsigned>> getItems() const;
+	const Item& getProduct(size_t index) const;
+	unsigned getProductsCount() const;
 
 	void setStatus(Status newStatus);
 	const char* statusToString() const;

@@ -113,6 +113,17 @@ void Business::approveRefund(size_t index)
     RefundRequest& request = refundRequests[index];
     request.approve();
 
+    /*const Order* order = request.getOrder();
+    for (size_t i = 0; i < orders->getProductsCount(); i++)
+    {
+        Item& product = orders->getProduct(i);
+        unsigned quantity = order->getProductQuantity(i);
+        product.increaseQuantity(quantity);
+    }
+
+    Client* client = request.getClient();
+    client->getOrderManager().removeOrder(order->getID());*/
+
     request.getClient()->recieveRefund(request.getOrder()->getTotalPrice());
     refundRequests.erase(index);
     std::cout << "Refund is approved. The sum is returned to "<<request.getClient()->getName();

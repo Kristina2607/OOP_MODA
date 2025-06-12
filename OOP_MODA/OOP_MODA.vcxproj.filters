@@ -168,6 +168,9 @@
     <ClCompile Include="ItemsManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="OrderManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Item.h">
@@ -306,6 +309,9 @@
       <Filter>Commands\ClientCommands</Filter>
     </ClInclude>
     <ClInclude Include="ItemsManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OrderManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

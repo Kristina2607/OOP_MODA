@@ -154,6 +154,7 @@
     <ClCompile Include="OOP_MODA.cpp" />
     <ClCompile Include="ItemsFilter.cpp" />
     <ClCompile Include="Order.cpp" />
+    <ClCompile Include="OrderManager.cpp" />
     <ClCompile Include="Redeem.cpp" />
     <ClCompile Include="RefundedOrders.cpp" />
     <ClCompile Include="RefundRequest.cpp" />
@@ -201,6 +202,7 @@
     <ClInclude Include="MyVector.hpp" />
     <ClInclude Include="ItemsFilter.h" />
     <ClInclude Include="Order.h" />
+    <ClInclude Include="OrderManager.h" />
     <ClInclude Include="Redeem.h" />
     <ClInclude Include="RefundedOrders.h" />
     <ClInclude Include="RefundRequest.h" />

@@ -20,19 +20,19 @@ MyString Client::getEGN() const
     return EGN;
 }
 
+OrderManager Client::getOrderManger() const
+{
+    return orders;
+}
+
 unsigned Client::getOrdersCount() const
 {
-    return orders.getSize();
+    return orders.getCounter();
 }
 
 unsigned Client::getTotalSpent() const
 {
-    unsigned totalSpent = 0;
-    for (size_t i = 0; i < orders.getSize(); i++)
-    {
-        totalSpent += orders[i].getTotalPrice();
-    }
-    return totalSpent;
+    return orders.getTotalSpent();
 }
 
 void Client::viewProfile() const
@@ -151,22 +151,16 @@ void Client::recieveRefund(double refund)
 
 void Client::refundedOrders() const
 {
-    for (size_t i = 0; i < orders.getSize(); i++)
-    {
-        if (orders[i].getIsRefunded() == 1)
-        {
-            orders[i].printOrder();
-        }
-    }
+    orders.refundedOrders();
 }
 
 RefundRequest* Client::requestRefund(const MyString& reason) 
 {
-    if (orders.empty())
+    if (orders.isEmpty())
     {
         throw std::logic_error("There are no orders. ");
     }
-    const Order& lastOrder = orders.back();
+    const Order& lastOrder = orders.getLastOrder();
     if (lastOrder.statusToString() != "Delivered") 
     {
         throw std::logic_error("This order is not delivered yet.");
@@ -189,7 +183,7 @@ Order& Client::checkout()
     }
     wallet -= totalPrice;
     Order newOrder = cart.toOrder();
-    orders.push_back(newOrder);
+    orders.addOrder(newOrder);
     cart.clear_cart();
 
     std::cout << "Your order is placed successfully! Now is waiting for confirmation." << std::endl;
@@ -199,38 +193,38 @@ Order& Client::checkout()
 
 void Client::confirmOrder(size_t index)
 {
-    if (index >= orders.getSize())
+    if (index >= orders.getCounter())
     {
         throw std::invalid_argument("Invalid argument");
     }
-    else if (orders[index].statusToString() != "Shipped")
+    else if (orders.getOrder(index).statusToString() != "Shipped")
     {
         throw std::logic_error("This order is not shipped yet.");
     }
-    orders[index].setStatus(Status::Delivered);
-    unsigned earnedPoints = orders[index].getTotalPrice() * 5;
+    orders.getOrder(index).setStatus(Status::Delivered);
+    unsigned earnedPoints = orders.getOrder(index).getTotalPrice() * 5;
     points += earnedPoints;
     std::cout << "Order confirmed as received. You earned " << earnedPoints << " points." << std::endl;
 }
 
 void Client::listOrders() const
 {
-    for (size_t i = 0; i < orders.getSize(); i++)
+    for (size_t i = 0; i < orders.getCounter(); i++)
     {
-        if (orders[i].statusToString() == "Shipped")
+        if (orders.getOrder(i).statusToString() == "Shipped")
         {
-            orders[i].printOrder();
+            orders.getOrder(i).printOrder();
         }
     }
 }
 
 void Client::orderHistory() const
 {
-    for (size_t i = 0; i < orders.getSize(); i++)
+    for (size_t i = 0; i < orders.getCounter(); i++)
     {
-        if (orders[i].statusToString() == "Delivered")
+        if (orders.getOrder(i).statusToString() == "Delivered")
         {
-            orders[i].printOrder();
+            orders.getOrder(i).printOrder();
         }
     }
 }

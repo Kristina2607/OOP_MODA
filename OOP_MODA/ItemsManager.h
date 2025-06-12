@@ -6,7 +6,7 @@
 class ItemsManager
 {
 private:
-	MyVector<MyPair<Item, unsigned>> items;
+	MyVector<Item> items;
 
 public:
 	void viewProduct(unsigned ID) const;

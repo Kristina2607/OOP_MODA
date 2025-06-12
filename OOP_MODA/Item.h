@@ -31,6 +31,7 @@ public:
 
 	unsigned getInitialQuantity() const;
 	unsigned getCurrentQuantity() const;
+	void increaseQuantity(unsigned amount);
 
 	unsigned getTotalSales() const;
 	void addSales(unsigned quantity);

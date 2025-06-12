@@ -31,6 +31,11 @@ unsigned Item::getCurrentQuantity() const
 	return currentQuantity;
 }
 
+void Item::increaseQuantity(unsigned amount)
+{
+	currentQuantity += amount;
+}
+
 unsigned Item::getTotalSales() const
 {
 	return totalSales;

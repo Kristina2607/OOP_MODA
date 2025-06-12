@@ -31,6 +31,21 @@ MyVector<MyPair<Item, unsigned>> Order::getItems() const
     return items;
 }
 
+const Item& Order::getProduct(size_t index) const
+{
+    return items[index].first;
+}
+
+unsigned Order::getProductsCount() const
+{
+    unsigned counter = 0;
+    for (size_t i = 0; i < items.getSize(); i++)
+    {
+        counter++;
+    }
+    return counter;
+}
+
 void Order::setStatus(Status newStatus)
 {
     status = newStatus;
