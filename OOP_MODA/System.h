@@ -4,17 +4,17 @@
 #include "HeterogeneousContainer.hpp"
 #include "Item.h"
 #include "User.h"
+#include "Client.h"
 #include "Administrator.h"
 #include "Business.h"
 
 class System
 {
 private:
-	HeterogeneousContainer<User> users;
+	MyVector<Client> clients;
 	MyVector<Item> items;
-
-	Administrator* admin = nullptr;
-	Business* business = nullptr;
+	Administrator* admin;
+	Business* business;
 	User* loggedUser = nullptr;
 	
 	System() = default;
@@ -50,11 +50,11 @@ public:
 	void viewProduct(unsigned ID) const;
 	void listProducts() const;
 	void refundedOrders() const;
-	void requestRefund(Business* business, const MyString& reason);
+	void requestRefund(const MyString& reason);
 
 	//Business commands:
-	void addItem(const MyString& name, double price, unsigned quantity, const MyString& description) const;
-	void removeItem(const MyString& name) const;
+	void addItem(const MyString& name, double price, unsigned quantity, const MyString& description);
+	void removeItem(const MyString& name);
 	void listPendingOrders() const;
 	void listOrders() const;
 	void viewRevenue() const;
@@ -63,7 +63,7 @@ public:
 	void listBestSellingProducts() const;
 
 	//Administartor commands:
-	void sendCheck(unsigned sum, const MyString& code, const MyString& clientEGN) const;
+	void sendCheck(unsigned sum, const MyString& code, const MyString& clientEGN);
 	void customerInsights() const;
 };
 

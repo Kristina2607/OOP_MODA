@@ -3,6 +3,8 @@
 #include "RegisterCommand.h"
 #include "HelpCommand.h"
 #include "ViewProfile.h"
+#include "InvalidCommand.h"
+#include "LogoutCommand.h"
 
 //Client
 #include "ListProducts.h"
@@ -56,6 +58,10 @@ Command* CommandFactory::getCommand(const MyString& text)
 	else if (text == "view_profile")
 	{
 		return new ViewProfile(System::getInstance());
+	}
+	else if (text == "logout")
+	{
+		return new LogoutCommand(System::getInstance());
 	}
 
 	//Client:
@@ -152,6 +158,6 @@ Command* CommandFactory::getCommand(const MyString& text)
 
 	else
 	{
-		return nullptr;
+		return new InvalidCommand(System::getInstance());
 	}
 }

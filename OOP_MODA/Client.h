@@ -20,7 +20,7 @@ private:
 	ItemsManager catalog;
 
 public:
-	Client() = default;
+	Client();
 	Client(const MyString& name, const MyString& password, const MyString& EGN);
 	Client(const MyString& name, const MyString& password, const MyString& EGN, double wallet, unsigned points, Cart cart);
 
@@ -38,7 +38,6 @@ public:
 	virtual User* clone() const override;
 
 	void addToCart(unsigned ID, unsigned quantity);
-	void addMoney(unsigned sum);
 	void removeFromCart(const MyString& name, unsigned quantity);
 
 	void viewCart() const;

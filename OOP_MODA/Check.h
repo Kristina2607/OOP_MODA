@@ -4,13 +4,14 @@
 class Check
 {
 private:
+
 	MyString code;
 	unsigned sum;
 	MyString clientEGN;
 	bool isRedeemed;
 
 public:
-	Check()=default;
+	Check() = default;
 	Check(const MyString& code, unsigned sum, const MyString& clientEGN, bool isRedeemed);
 
 	unsigned getSum() const;

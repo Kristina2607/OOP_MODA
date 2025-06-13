@@ -13,11 +13,6 @@ public:
 	virtual void execute() = 0;
 };
 
-class LogoutCommand : public Command
-{
-public:
-	virtual void execute() override;
-};
 
 
 

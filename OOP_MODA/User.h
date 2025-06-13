@@ -13,12 +13,13 @@ protected:
 	Role role;
 
 public:
-	User();
+	User(Role role);
 	User(const MyString& name, const MyString& password, const MyString& EGN, Role role);
 
    MyString getName() const;
    bool getLoggedInStatus() const;
    bool checkPassword(const MyString& password) const;
+   bool checkLogData(const MyString& name, const MyString& password);
 
    virtual void logout();
    virtual void viewProfile() const = 0;

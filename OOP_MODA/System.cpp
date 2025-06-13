@@ -28,7 +28,7 @@ Administrator* System::getAdministrator() const
 	return admin;
 }
 
-void System::sendCheck(unsigned sum, const MyString& code, const MyString& clientEGN) const
+void System::sendCheck(unsigned sum, const MyString& code, const MyString& clientEGN)
 {
 	if (!loggedUser)
 	{
@@ -108,22 +108,25 @@ void System::run()
 
 void System::login(const MyString& name, const MyString& pass)
 {
-	for (size_t i = 0; i < users.getSize(); i++)
+	if (admin && admin->checkLogData(name, pass))
 	{
-		if (users[i]->getName() == name && users[i]->checkPassword(pass))
+		loggedUser = admin;
+		std::cout << "Login successful! Welcome, " << admin->getName() << std::endl;
+		return;
+	}
+	else if (business && business->checkLogData(name, pass))
+	{
+		loggedUser = business;
+		std::cout << "Login successful! Welcome, " << business->getName() << std::endl;
+		return;
+	}
+
+	for (size_t i = 0; i < clients.getSize(); i++)
+	{
+		if (clients[i].checkLogData(name, pass))
 		{
-			if (users[i]->getRole() == Role::Admin)
-			{
-				loggedUser = admin;
-				return;
-			}
-			else if (users[i]->getRole() == Role::Business)
-			{
-				loggedUser = business;
-				return;
-			}
-			loggedUser = users[i];
-			std::cout << "Login successful! Welcome, " << users[i]->getName() << std::endl;
+			loggedUser = &clients[i];
+			std::cout << "Login successful! Welcome, " << clients[i].getName() << std::endl;
 			return;
 		}
 	}
@@ -132,21 +135,28 @@ void System::login(const MyString& name, const MyString& pass)
 
 void System::registerUser(const MyString& name, const MyString& password, const MyString& EGN, Role role)
 {
-	for (size_t i = 0; i < users.getSize(); i++)
+	if (admin && name == admin->getName())
 	{
-		if (users[i]->getName() == name)
+		throw std::invalid_argument("Admin with this name already exists");
+	}
+	else if (business && name == business->getName())
+	{
+		throw std::invalid_argument("Business with this name already exists");
+	}
+	for (size_t i = 0; i < clients.getSize(); i++)
+	{
+		if (clients[i].getName() == name)
 		{
-			throw std::invalid_argument("User with this EGN already exists");
+			throw std::invalid_argument("User with this name already exists");
 		}
 	}
-	User* newUser = nullptr;
 	switch (role)
 	{
 	case Role::Client:
 	{
-		newUser = new Client(name, password, EGN);
-		users.addObject(newUser);
-
+		Client client = Client(name, password, EGN);
+		clients.push_back(client);
+		loggedUser = &client;
 		break;
 	}
 	case Role::Business:
@@ -179,6 +189,7 @@ void System::registerUser(const MyString& name, const MyString& password, const 
 void System::logout()
 {
 	loggedUser = nullptr;
+	std::cout << "You are logged out.";
 }
 
 void System::help() const
@@ -416,7 +427,7 @@ void System::refundedOrders() const
 	}
 }
 
-void System::requestRefund(Business* business, const MyString& reason)
+void System::requestRefund(const MyString& reason)
 {
 	if (!loggedUser)
 	{
@@ -435,7 +446,7 @@ void System::requestRefund(Business* business, const MyString& reason)
 	}
 }
 
-void System::addItem(const MyString& name, double price, unsigned quantity, const MyString& description) const
+void System::addItem(const MyString& name, double price, unsigned quantity, const MyString& description)
 {
 	if (!loggedUser)
 	{
@@ -453,7 +464,7 @@ void System::addItem(const MyString& name, double price, unsigned quantity, cons
 	}
 }
 
-void System::removeItem(const MyString& name) const
+void System::removeItem(const MyString& name)
 {
 	if (!loggedUser)
 	{

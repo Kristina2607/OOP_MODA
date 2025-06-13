@@ -3,6 +3,9 @@
 #include "Cart.h"
 #include "Role.h"
 
+Client::Client() : User(Role::Client)
+{}
+
 Client::Client(const MyString& name, const MyString& password, const MyString& EGN)
     :User(name, password, EGN, Role::Client) {}
 
@@ -49,6 +52,7 @@ void Client::viewProfile() const
 
 void Client::help() const
 {
+    std::cout<<std::endl;
     std::cout << "You are allowed to:" << std::endl;
    
     std::cout << "> check_balance" << std::endl;
@@ -86,11 +90,6 @@ User* Client::clone() const
 void Client::addToCart(unsigned ID, unsigned quantity)
 {
     cart.addToCart(ID, quantity);
-}
-
-void Client::addMoney(unsigned sum)
-{
-    wallet += sum;
 }
 
 void Client::removeFromCart(const MyString& name, unsigned quantity)

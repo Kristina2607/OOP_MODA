@@ -8,5 +8,5 @@ void RequestRefund::execute()
 	char buffer[1024];
 	std::cin.getline(buffer, sizeof(buffer));
 	MyString reason(buffer);
-	system.requestRefund(system.getBusiness(),reason);
+	system.requestRefund(reason);
 }

@@ -1,5 +1,6 @@
 #include "RegisterCommand.h"
 #include "Role.h"
+#include"Validations.h"
 
 RegisterCommand::RegisterCommand(System& system) :Command(system) {}
 
@@ -16,7 +17,10 @@ void RegisterCommand::execute()
 	MyString EGN;
 	std::cout << "EGN: ";
 	std::cin >> EGN;
-
+	if (!Validations::isValidEGN(EGN))
+	{
+		throw std::invalid_argument("Invalid EGN.");
+	}
 	std::cout << "Select role (1.Administrator, 2.Business, 3.Client): ";
 
 	MyString roleInput;

@@ -143,6 +143,7 @@
     <ClCompile Include="ConfirmOrder.cpp" />
     <ClCompile Include="CustomerInsignts.cpp" />
     <ClCompile Include="HelpCommand.cpp" />
+    <ClCompile Include="InvalidCommand.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="ItemsManager.cpp" />
     <ClCompile Include="ListBestSellingProducts.cpp" />
@@ -150,6 +151,7 @@
     <ClCompile Include="ListPendingOrders.cpp" />
     <ClCompile Include="ListProducts.cpp" />
     <ClCompile Include="LoginCommand.cpp" />
+    <ClCompile Include="LogoutCommand.cpp" />
     <ClCompile Include="MyString.cpp" />
     <ClCompile Include="OOP_MODA.cpp" />
     <ClCompile Include="ItemsFilter.cpp" />
@@ -165,9 +167,11 @@
     <ClCompile Include="RemoveItem.cpp" />
     <ClCompile Include="RequestRefund.cpp" />
     <ClCompile Include="SendCheck.cpp" />
+    <ClCompile Include="SerializeFunctions.cpp" />
     <ClCompile Include="System.cpp" />
     <ClCompile Include="Transactions.cpp" />
     <ClCompile Include="User.cpp" />
+    <ClCompile Include="Validations.cpp" />
     <ClCompile Include="ViewCart.cpp" />
     <ClCompile Include="ViewProduct.cpp" />
     <ClCompile Include="ViewProfile.cpp" />
@@ -191,6 +195,7 @@
     <ClInclude Include="CustomerInsignts.h" />
     <ClInclude Include="HelpCommand.h" />
     <ClInclude Include="HeterogeneousContainer.hpp" />
+    <ClInclude Include="InvalidCommand.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="ItemsManager.h" />
     <ClInclude Include="ListBestSellingProducts.h" />
@@ -198,6 +203,7 @@
     <ClInclude Include="ListPendingOrders.h" />
     <ClInclude Include="ListProducts.h" />
     <ClInclude Include="LoginCommand.h" />
+    <ClInclude Include="LogoutCommand.h" />
     <ClInclude Include="MyPair.hpp" />
     <ClInclude Include="MyString.h" />
     <ClInclude Include="MyVector.hpp" />
@@ -214,10 +220,12 @@
     <ClInclude Include="RemoveItem.h" />
     <ClInclude Include="RequestRefund.h" />
     <ClInclude Include="SendCheck.h" />
+    <ClInclude Include="SerializeFunctions.h" />
     <ClInclude Include="System.h" />
     <ClInclude Include="Transactions.h" />
     <ClInclude Include="User.h" />
     <ClInclude Include="Role.h" />
+    <ClInclude Include="Validations.h" />
     <ClInclude Include="ViewCart.h" />
     <ClInclude Include="ViewProduct.h" />
     <ClInclude Include="ViewProfile.h" />

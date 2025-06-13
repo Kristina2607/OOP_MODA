@@ -138,12 +138,6 @@
     <ClCompile Include="ViewCart.cpp">
       <Filter>Commands\ClientCommands</Filter>
     </ClCompile>
-    <ClCompile Include="ApproveRefund.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ListBestSellingProducts.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="AddItem.cpp">
       <Filter>Commands\Business Commands</Filter>
     </ClCompile>
@@ -172,6 +166,24 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="RejectRefund.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ApproveRefund.cpp">
+      <Filter>Commands\Business Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="InvalidCommand.cpp">
+      <Filter>Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="ListBestSellingProducts.cpp">
+      <Filter>Commands\Business Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="LogoutCommand.cpp">
+      <Filter>Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Validations.cpp">
+      <Filter>Utilis</Filter>
+    </ClCompile>
+    <ClCompile Include="SerializeFunctions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -248,9 +260,6 @@
     <ClInclude Include="CustomerInsignts.h">
       <Filter>Commands\Admin Commands</Filter>
     </ClInclude>
-    <ClInclude Include="HeterogeneousContainer.hpp">
-      <Filter>Utilis</Filter>
-    </ClInclude>
     <ClInclude Include="AddToCart.h">
       <Filter>Commands\ClientCommands</Filter>
     </ClInclude>
@@ -280,12 +289,6 @@
     </ClInclude>
     <ClInclude Include="ViewCart.h">
       <Filter>Commands\ClientCommands</Filter>
-    </ClInclude>
-    <ClInclude Include="ApproveRefund.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ListBestSellingProducts.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ViewProduct.h">
       <Filter>Commands\ClientCommands</Filter>
@@ -317,7 +320,28 @@
     <ClInclude Include="OrderManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="HeterogeneousContainer.hpp">
+      <Filter>Utilis</Filter>
+    </ClInclude>
+    <ClInclude Include="ListBestSellingProducts.h">
+      <Filter>Commands\Business Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="ApproveRefund.h">
+      <Filter>Commands\Business Commands</Filter>
+    </ClInclude>
     <ClInclude Include="RejectRefund.h">
+      <Filter>Commands\Business Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="InvalidCommand.h">
+      <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="LogoutCommand.h">
+      <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Validations.h">
+      <Filter>Utilis</Filter>
+    </ClInclude>
+    <ClInclude Include="SerializeFunctions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

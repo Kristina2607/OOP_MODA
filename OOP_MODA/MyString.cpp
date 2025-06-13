@@ -64,7 +64,7 @@ MyString::MyString(const char* str)
 
 	size = strlen(str);
 	capacity = getMaxResizeCapacity(size);
-	data = new char[capacity] {};
+	data = new char[capacity + 1] {};
 	strcpy(data, str);
 }
 
