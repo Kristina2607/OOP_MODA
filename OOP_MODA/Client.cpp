@@ -27,14 +27,19 @@ MyString Client::getEGN() const
     return EGN;
 }
 
-OrderManager Client::getOrderManger() const
+OrderManager& Client::getOrderManager() 
+{
+    return orders;
+}
+
+const OrderManager& Client::getOrderManager() const
 {
     return orders;
 }
 
 unsigned Client::getOrdersCount() const
 {
-    return orders.getCounter();
+    return orders.getSize();
 }
 
 unsigned Client::getTotalSpent() const
@@ -206,7 +211,7 @@ void Client::rateOrder(unsigned ProductID, unsigned rating)
 
 void Client::confirmOrder(size_t index)
 {
-    if (index >= orders.getCounter())
+    if (index >= orders.getSize())
     {
         throw std::invalid_argument("Invalid argument");
     }
@@ -222,7 +227,7 @@ void Client::confirmOrder(size_t index)
 
 void Client::listOrders() const
 {
-    for (size_t i = 0; i < orders.getCounter(); i++)
+    for (size_t i = 0; i < orders.getSize(); i++)
     {
         if (orders.getOrder(i).statusToString() == "Shipped")
         {
@@ -233,7 +238,7 @@ void Client::listOrders() const
 
 void Client::orderHistory() const
 {
-    for (size_t i = 0; i < orders.getCounter(); i++)
+    for (size_t i = 0; i < orders.getSize(); i++)
     {
         if (orders.getOrder(i).statusToString() == "Delivered")
         {
@@ -250,4 +255,45 @@ void Client::listProducts() const
 void Client::viewProduct(unsigned ID) const
 {
     catalog.viewProduct(ID);
+}
+
+void Client::serialize(std::ofstream& ofs) const
+{
+    User::serialize(ofs);
+    ofs.write((const char*)(&points), sizeof(unsigned));
+    ofs.write((const char*)(&wallet), sizeof(double));
+
+    cart.serialize(ofs);
+    orders.serialize(ofs);
+
+    size_t checksCount = recievedChecks.getSize();
+    ofs.write((const char*)(&checksCount), sizeof(checksCount));
+    for (size_t i = 0; i < checksCount; i++)
+    {
+        recievedChecks[i].serialize(ofs);
+    }
+   
+    catalog.serialize(ofs);
+}
+
+void Client::deserialize(std::ifstream& ifs)
+{
+    User::deserialize(ifs);
+    ifs.read((char*)(&points), sizeof(unsigned));
+    ifs.read((char*)(&wallet), sizeof(double));
+
+    cart.deserialize(ifs, this);
+    orders.deserialize(ifs);
+
+    size_t checksCount;
+    ifs.read((char*)(&checksCount), sizeof(checksCount));
+    recievedChecks.clear();
+    for (size_t i = 0; i < checksCount; i++)
+    {
+        Check check;
+        check.deserialize(ifs);
+        recievedChecks.push_back(check);
+    }
+    
+    catalog.deserialize(ifs);
 }

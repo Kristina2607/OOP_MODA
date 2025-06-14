@@ -4,19 +4,22 @@
 #include "RefundRequest.h"
 #include "MyVector.hpp"
 #include "ItemsFilter.h"
+#include "ItemsManager.h"
+#include "OrderManager.h"
 
 class Order;
 
 class Business :public User
 {
 private:
-	MyVector<Item> items;
 	MyVector<RefundRequest> refundRequests;
-	MyVector<Order> orders;
+	ItemsManager items;
+	OrderManager orders;
 	double totalRevenue;
 
 
 public:
+	Business(std::ifstream& ifs, const MyVector<Client>& clients);
 	Business(MyString name, MyString password, MyString EGN);
 	
 	virtual void viewProfile() const override;
@@ -39,5 +42,8 @@ public:
 
 	void approveOrder(size_t index);
 	void rejectOrder(size_t index, const MyString& description);
+
+	virtual void serialize(std::ofstream& ofs) const override;
+	virtual void deserialize(std::ifstream& ifs) override;
 };
 

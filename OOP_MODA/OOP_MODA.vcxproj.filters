@@ -165,9 +165,6 @@
     <ClCompile Include="OrderManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="RejectRefund.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="ApproveRefund.cpp">
       <Filter>Commands\Business Commands</Filter>
     </ClCompile>
@@ -183,7 +180,22 @@
     <ClCompile Include="Validations.cpp">
       <Filter>Utilis</Filter>
     </ClCompile>
-    <ClCompile Include="SerializeFunctions.cpp">
+    <ClCompile Include="RejectRefund.cpp">
+      <Filter>Commands\Business Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="SaveCommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RejectOrder.cpp">
+      <Filter>Commands\Business Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="ListRefunds.cpp">
+      <Filter>Commands\Business Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="ApproveOrder.cpp">
+      <Filter>Commands\Business Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="ListOrdersClient.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -341,7 +353,19 @@
     <ClInclude Include="Validations.h">
       <Filter>Utilis</Filter>
     </ClInclude>
-    <ClInclude Include="SerializeFunctions.h">
+    <ClInclude Include="SaveCommand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RejectOrder.h">
+      <Filter>Commands\Business Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="ListRefunds.h">
+      <Filter>Commands\Business Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="ApproveOrder.h">
+      <Filter>Commands\Business Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="ListOrdersClient.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -32,5 +32,8 @@ public:
 	void process();
 
 	void printRefundRequest() const;
+
+	void serialize(std::ofstream& ofs) const;
+	void deserialize(std::ifstream& ifs);
 };
 

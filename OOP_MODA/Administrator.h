@@ -26,5 +26,8 @@ public:
 	void sendChecks(unsigned sum, const MyString& code, const MyString& clientEGN);
 	void customerInsights() const;
 	void viewTransactions() const;
+
+	//virtual void serialize(std::ofstream& ofs) const override;
+	//virtual void deserialize(std::ifstream& ifs) override;
 };
 

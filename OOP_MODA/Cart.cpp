@@ -130,5 +130,38 @@ void Cart::updateTotalPrice()
 	}
 }
 
+void Cart::serialize(std::ofstream& ofs) const
+{
+	ofs.write((const char*)(&totalPrice), sizeof(totalPrice));
+	size_t itemsCount = items.getSize();
+	ofs.write((const char*)(&itemsCount), sizeof(itemsCount));
+   
+	for (size_t i = 0; i < itemsCount; i++)
+	{
+		items[i].first.serialize(ofs); 
+		unsigned quantity = items[i].second;
+		ofs.write((const char*)(&quantity), sizeof(quantity));
+	}
+}
+
+void Cart::deserialize(std::ifstream& ifs, Client* client)
+{
+	ifs.read((char*)(&totalPrice), sizeof(totalPrice));
+	size_t itemsCount = 0;
+	ifs.read((char*)(&itemsCount), sizeof(itemsCount));
+
+	items.clear();
+	for (size_t i = 0; i < itemsCount; i++)
+	{
+		Item item;
+		item.deserialize(ifs);
+		unsigned quantity;
+		ifs.read((char*)(&quantity), sizeof(quantity));
+
+		items.push_back(MyPair<Item, unsigned>(item, quantity));
+	}
+	this->client = client;
+}
+
 
 

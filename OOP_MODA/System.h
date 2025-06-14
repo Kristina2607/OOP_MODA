@@ -17,8 +17,8 @@ private:
 	Business* business;
 	User* loggedUser = nullptr;
 	
-	System() = default;
-
+	System()=default;
+	
 public:
 	static System& getInstance();
 	Business* getBusiness() const;
@@ -37,8 +37,15 @@ public:
 	void help() const;
 	void viewProfile() const;
 
+	void saveSystem(std::ofstream& ofs);
+	void loadSystem(std::ifstream& ifs);
+
+	Client& findClientByEgn(const MyString& EGN);
+	const Client& findClientByEgn(const MyString& EGN) const;
+
 	//Client commands:
 	void confirmOrder(size_t orderIndex);
+	void listOrdersClient() const;
 	void checkout();
 	void redeem(const MyString& code);
 	void checkBalance() const;
@@ -56,11 +63,15 @@ public:
 	void addItem(const MyString& name, double price, unsigned quantity, const MyString& description);
 	void removeItem(const MyString& name);
 	void listPendingOrders() const;
+	void listBestSellingProducts() const;
 	void listOrders() const;
+	void approveOrder(size_t index);
+	void rejectOrder(size_t index, const MyString& reason);
+	void listRefunds() const;
 	void viewRevenue() const;
 	void approveRefund(size_t index);
 	void rejectRefund(size_t index, const MyString& reason);
-	void listBestSellingProducts() const;
+
 
 	//Administartor commands:
 	void sendCheck(unsigned sum, const MyString& code, const MyString& clientEGN);

@@ -5,6 +5,7 @@
 #include "ViewProfile.h"
 #include "InvalidCommand.h"
 #include "LogoutCommand.h"
+#include "SaveCommand.h"
 
 //Client
 #include "ListProducts.h"
@@ -16,9 +17,10 @@
 #include "RemoveDiscount.h"
 #include "Checkout.h"
 #include "CheckBalance.h"
-#include "viewCart.h"
+#include "ViewCart.h"
 #include "RefundedOrders.h"
 #include "RequestRefund.h"
+#include "ConfirmOrder.h"
 
 //Business
 #include "ListOrders.h"
@@ -28,6 +30,10 @@
 #include "ListBestSellingProducts.h"
 #include "ApproveRefund.h"
 #include "RejectRefund.h"
+#include "ViewRevenue.h"
+#include "RejectOrder.h"
+#include "ApproveOrder.h"
+#include "ListRefunds.h"
 
 //Administrator
 #include "CustomerInsignts.h"
@@ -62,6 +68,14 @@ Command* CommandFactory::getCommand(const MyString& text)
 	else if (text == "logout")
 	{
 		return new LogoutCommand(System::getInstance());
+	}
+	else if (text == "save")
+	{
+		return new SaveCommand(System::getInstance());
+	}
+	else if (text == "load")
+	{
+		return new SaveCommand(System::getInstance());
 	}
 
 	//Client:
@@ -113,6 +127,10 @@ Command* CommandFactory::getCommand(const MyString& text)
 	{
 		return new RequestRefund(System::getInstance());
 	}
+	else if (text == "confirm_order")
+	{
+		return new ConfirmOrder(System::getInstance());
+	}
 
 
 	//Business:
@@ -136,6 +154,10 @@ Command* CommandFactory::getCommand(const MyString& text)
 	{
 		return new ListBestSellingProducts(System::getInstance());
 	}
+	else if (text == "list_refunds")
+	{
+		return new ListRefunds(System::getInstance());
+	}
 	else if (text == "approve_refund")
 	{
 		return new ApproveRefund(System::getInstance());
@@ -143,6 +165,18 @@ Command* CommandFactory::getCommand(const MyString& text)
 	else if (text == "reject_refund")
 	{
 		return new RejectRefund(System::getInstance());
+	}
+	else if (text == "view_revenue")
+	{
+		return new ViewRevenue(System::getInstance());
+	}
+	else if (text == "reject_order")
+	{
+		return new RejectOrder(System::getInstance());
+    }
+	else if (text == "approve_order")
+	{
+		return new ApproveOrder(System::getInstance());
 	}
 	
 

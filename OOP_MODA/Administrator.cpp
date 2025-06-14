@@ -63,3 +63,4 @@ void Administrator::viewTransactions() const
 		transactions[i].printTransactions();
 	}
 }
+

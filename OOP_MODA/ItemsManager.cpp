@@ -18,3 +18,49 @@ void ItemsManager::listProducts() const
 			items[i].printItem();
 	}
 }
+
+size_t ItemsManager::getSize() const
+{
+	return items.getSize();
+}
+
+void ItemsManager::addItem(const Item& obj)
+{
+	items.push_back(obj);
+}
+
+void ItemsManager::erase(size_t index)
+{
+	items.erase(index);
+}
+
+Item& ItemsManager::getItem(size_t index)
+{
+	return items[index];
+}
+
+const Item& ItemsManager::getItem(size_t index) const
+{
+	return items[index];
+}
+
+const Item& ItemsManager::getLastItem() const
+{
+	return items.back();
+}
+
+void ItemsManager::serialize(std::ofstream& ofs) const
+{
+	for (size_t i = 0; i < items.getSize(); i++)
+	{
+		items[i].serialize(ofs);
+	}
+}
+
+void ItemsManager::deserialize(std::ifstream& ifs)
+{
+	for (size_t i = 0; i < items.getSize(); i++)
+	{
+		items[i].deserialize(ifs);
+	}
+}

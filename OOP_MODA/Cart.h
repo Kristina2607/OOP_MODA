@@ -2,13 +2,14 @@
 #include "Item.h"
 #include "MyVector.hpp"
 #include "MyPair.hpp"
+#include <fstream>
 
 class Client;
 class Order;
 
 class Cart
 {
-	MyVector<MyPair<Item,unsigned>> items;
+	MyVector<MyPair<Item, unsigned>> items;
 	Client* client;  //observer pointer -> no rule of five
 	double totalPrice = 0.0;
 
@@ -33,4 +34,7 @@ public:
 	Order toOrder();
 	MyVector<MyPair<Item, unsigned>>&& moveItems();
 	void updateTotalPrice();
+
+	void serialize(std::ofstream& ofs) const;
+	void deserialize(std::ifstream& ifs, Client* client);
 };

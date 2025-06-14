@@ -19,7 +19,10 @@ private:
 	unsigned ID = 0;
 
 	MyVector<MyPair<Item, unsigned>> items;
+
 	Client* client;
+	MyString clientEGN;
+
 	double totalPrice = 0;
 	unsigned points = 0;
 	Status status;
@@ -34,7 +37,10 @@ public:
 	double getTotalPrice() const;
 	unsigned getPoints() const;
 	unsigned getID() const;
+
 	Client* getClient() const;
+	const MyString& getClientEgn() const;
+	void setClient(Client* newClient);
 
 	MyVector<MyPair<Item, unsigned>> getItems() const;
 	const Item& getProduct(size_t index) const;
@@ -48,4 +54,7 @@ public:
 	bool getIsRefunded() const;
 
 	void printOrder() const;
+
+	void serialize(std::ofstream& ofs) const;
+	void deserialize(std::ifstream& ifs);
 };

@@ -60,3 +60,30 @@ void Item::printItem() const
 {
 	std::cout << ID << " | "<< name << " | " << price << "BGN | " << rating << " stars |" << currentQuantity << " quantity" << std::endl;
 }
+
+void Item::serialize(std::ofstream& ofs) const
+{
+	ofs.write((const char*)(&ID), sizeof(unsigned));
+	MyString::writeStringToFile(ofs, name);
+	MyString::writeStringToFile(ofs, description);
+	
+	ofs.write((const char*)(&totalSales), sizeof(unsigned));
+	ofs.write((const char*)(&price), sizeof(double));
+	ofs.write((const char*)(&rating), sizeof(double));
+	ofs.write((const char*)(&availability), sizeof(bool));
+	ofs.write((const char*)(&initialQuantity), sizeof(unsigned));
+	ofs.write((const char*)(&currentQuantity), sizeof(unsigned));
+}
+
+void Item::deserialize(std::ifstream& ifs)
+{
+	name = MyString::readStringFromFile(ifs);
+	description = MyString::readStringFromFile(ifs);
+
+	ifs.read((char*)(&totalSales), sizeof(unsigned));
+	ifs.read((char*)(&price), sizeof(double));
+	ifs.read((char*)(&rating), sizeof(double));
+	ifs.read((char*)(&availability), sizeof(bool));
+	ifs.read((char*)(&initialQuantity), sizeof(unsigned));
+	ifs.read((char*)(&currentQuantity), sizeof(unsigned));
+}

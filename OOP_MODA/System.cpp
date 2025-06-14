@@ -4,6 +4,11 @@
 #include "Business.h"
 #include "Administrator.h"
 
+//System::System()
+//{
+//	loadSystem(ifs);
+//}
+
 System& System::getInstance()
 {
 	static System instance;
@@ -82,7 +87,8 @@ void System::run()
 		std::cin >> text;
 
 		Command* command = commandFactory.getCommand(text);
-		if (!command) {
+		if (!command)
+		{
 			std::cout << "No such command exists!";
 		}
 
@@ -100,6 +106,10 @@ void System::run()
 			std::cout << ex.what() << std::endl;
 		}
 		catch (std::logic_error& ex)
+		{
+			std::cout << ex.what() << std::endl;
+		}
+		catch (std::runtime_error& ex)
 		{
 			std::cout << ex.what() << std::endl;
 		}
@@ -210,6 +220,163 @@ void System::viewProfile() const
 	loggedUser->viewProfile();
 }
 
+void System::saveSystem(std::ofstream& ofs)
+{
+	std::ofstream clientsFile("clients.bin", std::ios::binary);
+	if (!clientsFile.is_open())
+	{
+		throw std::runtime_error("Cannot open file for writing");
+	}
+
+	size_t clientsCount = clients.getSize();
+	clientsFile.write((const char*)(&clientsCount), sizeof(clientsCount));
+	for (size_t i = 0; i < clientsCount; i++) 
+	{
+		clients[i].serialize(clientsFile);
+	}
+	clientsFile.close();
+
+	//Administrator
+
+	std::ofstream businessFile("business.bin", std::ios::binary);
+	if (!businessFile.is_open())
+	{
+		throw std::runtime_error("Cannot open file for writing");
+	}
+	business->serialize(businessFile);
+	businessFile.close();
+
+	std::ofstream itemsFile("items.bin", std::ios::binary);
+	if (!itemsFile.is_open())
+	{
+		throw std::runtime_error("Cannot open file for writing");
+	}
+	size_t itemsCount = items.getSize();
+	itemsFile.write((const char*)(&itemsCount), sizeof(itemsCount));
+	for (size_t i = 0; i < itemsCount; i++)
+	{
+		items[i].serialize(itemsFile);
+	}
+	itemsFile.close();
+
+	std::ofstream loggedUserFile("logged_user.bin", std::ios::binary);
+	if (!loggedUserFile.is_open())
+	{
+		throw std::runtime_error("Cannot open file for writing");
+	}
+	MyString loggedUserEGN = loggedUser->getEGN();
+	MyString::writeStringToFile(loggedUserFile, loggedUserEGN);
+	loggedUserFile.close();
+}
+
+void System::loadSystem(std::ifstream& ifs)
+{
+	std::ifstream clientsFile("clients.bin", std::ios::binary);
+	if (clientsFile.is_open()) 
+	{
+		size_t clientsCount;
+		clientsFile.read((char*)(&clientsCount), sizeof(clientsCount));
+		clients.clear();
+		for (size_t i = 0; i < clientsCount; i++)
+		{
+			Client client;
+			client.deserialize(clientsFile);
+			clients.push_back(client);
+		}
+	}
+	clientsFile.close();
+
+	for (size_t i = 0; i < clients.getSize(); ++i)
+	{
+		Client& client = clients[i];
+		OrderManager& orders = client.getOrderManager();
+
+		for (size_t j = 0; j < orders.getSize(); ++j)
+		{
+			Order& order = orders.getOrder(j);
+			order.setClient(&client); // connection: order->client
+		}
+	}
+
+	//Administrator
+
+	std::ifstream businessFile("business.bin", std::ios::binary);
+	if (!businessFile.is_open())
+	{
+		business = new Business(ifs, clients);
+		business->deserialize(businessFile);
+	}
+	businessFile.close();
+
+	std::ifstream itemsFile("items.bin", std::ios::binary);
+	if (itemsFile.is_open()) 
+	{
+		size_t itemsCount;
+		itemsFile.read((char*)(&itemsCount), sizeof(itemsCount));
+		items.clear();
+		for (size_t i = 0; i < itemsCount; i++) 
+		{
+			Item item;
+			item.deserialize(itemsFile);
+			items.push_back(item);
+		}
+	}
+	itemsFile.close();
+
+	std::ifstream loggedUserFile("logged_user.bin", std::ios::binary);
+	if (loggedUserFile.is_open())
+	{
+		bool hasLoggedUser;
+		loggedUserFile.read((char*)(&hasLoggedUser), sizeof(hasLoggedUser));
+		loggedUser = nullptr;
+		if (hasLoggedUser)
+		{
+			MyString loggedUserEGN = MyString::readStringFromFile(loggedUserFile);
+
+			for (size_t i = 0; i < clients.getSize(); i++) 
+			{
+				if (clients[i].getEGN() == loggedUserEGN) 
+				{
+					loggedUser = &clients[i];
+					break;
+				}
+			}
+			if (!loggedUser && admin && admin->getEGN() == loggedUserEGN) 
+			{
+				loggedUser = admin;
+			}
+
+			if (!loggedUser && business && business->getEGN() == loggedUserEGN) 
+			{
+				loggedUser = business;
+			}
+		}
+	}
+
+}
+
+Client& System::findClientByEgn(const MyString& EGN)
+{
+	for (size_t i = 0; i < clients.getSize(); i++)
+	{
+		if (clients[i].getEGN() == EGN)
+		{
+			return clients[i];
+	    }
+	}
+}
+
+const Client& System::findClientByEgn(const MyString& EGN) const
+{
+	for (size_t i = 0; i < clients.getSize(); i++)
+	{
+		if (clients[i].getEGN() == EGN)
+		{
+			return clients[i];
+		}
+	}
+}
+
 void System::confirmOrder(size_t orderIndex)
 {
 	if (!loggedUser)
@@ -225,6 +392,23 @@ void System::confirmOrder(size_t orderIndex)
 	if (client)
 	{
 		client->confirmOrder(orderIndex);
+	}
+}
+
+void System::listOrdersClient() const
+{
+	if (!loggedUser)
+	{
+		throw std::logic_error("No user logged in.");
+	}
+	if (loggedUser->getRole() != Role::Client)
+	{
+		throw std::logic_error("You cannot do this action");
+	}
+	Client* client = dynamic_cast<Client*>(loggedUser);
+	if (client)
+	{
+		client->listOrders();
 	}
 }
 
@@ -502,7 +686,6 @@ void System::listPendingOrders() const
 
 void System::listOrders() const
 {
-
 	if (!loggedUser)
 	{
 		throw std::logic_error("No user logged in.");
@@ -516,6 +699,60 @@ void System::listOrders() const
 	if (business)
 	{
 		business->listOrders();
+	}
+}
+
+void System::approveOrder(size_t index)
+{
+	if (!loggedUser)
+	{
+		throw std::logic_error("No user logged in.");
+	}
+	if (loggedUser->getRole() != Role::Business)
+	{
+		throw std::logic_error("You cannot do this action");
+	}
+
+	Business* business = dynamic_cast<Business*>(loggedUser);
+	if (business)
+	{
+		business->approveOrder(index);
+	}
+}
+
+void System::rejectOrder(size_t index, const MyString& reason)
+{
+	if (!loggedUser)
+	{
+		throw std::logic_error("No user logged in.");
+	}
+	if (loggedUser->getRole() != Role::Business)
+	{
+		throw std::logic_error("You cannot do this action");
+	}
+
+	Business* business = dynamic_cast<Business*>(loggedUser);
+	if (business)
+	{
+		business->rejectOrder(index, reason);
+	}
+}
+
+void System::listRefunds() const
+{
+	if (!loggedUser)
+	{
+		throw std::logic_error("No user logged in.");
+	}
+	if (loggedUser->getRole() != Role::Business)
+	{
+		throw std::logic_error("You cannot do this action");
+	}
+
+	Business* business = dynamic_cast<Business*>(loggedUser);
+	if (business)
+	{
+		business->listRefunds();
 	}
 }
 

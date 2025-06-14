@@ -3,10 +3,21 @@
 #include "Client.h"
 #include "Role.h"
 
-Business::Business(MyString name, MyString password, MyString EGN)
-    : User(name, password, EGN, Role::Business)
+Business::Business(std::ifstream& ifs, const MyVector<Client>& clients)  :User(ifs) 
 {
+    deserialize(ifs);
+    for (size_t i = 0; i < clients.getSize(); i++)
+    {
+        const OrderManager& orderManager = clients[i].getOrderManager();
+        for (size_t j = 0; j < orderManager.getSize(); j++)
+        {
+            orders.addOrder(orderManager.getOrder(j));
+        }
+    }
 }
+
+Business::Business(MyString name, MyString password, MyString EGN)
+    : User(name, password, EGN, Role::Business) {}
 
 void Business::viewProfile() const
 {
@@ -19,8 +30,8 @@ void Business::help() const
 {
     std::cout << "You are allowed to:" << std::endl;
 
-    std::cout << "> add item." << std::endl;
-    std::cout << "> remove item." << std::endl;
+    std::cout << "> add_item" << std::endl;
+    std::cout << "> remove_item." << std::endl;
     std::cout << "> view_revenue" << std:: endl;
     std::cout << "> approve_order" << std:: endl;
     std::cout << "> reject_order" << std::endl;
@@ -43,10 +54,11 @@ void Business::removeItem(const MyString& name)
 {
     for (size_t i = 0; i < items.getSize(); i++)
     {
-        if (items[i].getName() == name)
+        if (items.getItem(i).getName() == name)
         {
-            std::swap(items[i], items[items.getSize()]);
+            items.erase(i);
             std::cout << name << " is removed successffully." << std::endl;
+            return;
         }
     }
     throw std::invalid_argument("Invalid name");
@@ -55,17 +67,13 @@ void Business::removeItem(const MyString& name)
 void Business::addItem(const MyString& name, double price, unsigned quantity, const MyString& description)
 {
     Item newItem = Item(name, description, price, 0, quantity, 1);
-    items.push_back(newItem);
+    items.addItem(newItem);
     std::cout << name << " is added successffully."<< std::endl;
 }
 
 void Business::viewRevenue() const
 {
-    double revenue = 0;
-    for (size_t i = 0; i < orders.getSize(); i++)
-    {
-        revenue += orders[i].getTotalPrice();
-    }
+    std::cout << "Total reveneue:" << orders.getTotalSpent();
 }
 
 void Business::approveOrder(size_t index)
@@ -74,7 +82,7 @@ void Business::approveOrder(size_t index)
     {
         throw std::invalid_argument("Invalid index.");
     }
-    orders[index].setStatus(Status::Shipped);
+    orders.getOrder(index).setStatus(Status::Shipped);
     std::cout << "Order #" << index <<" is approved and shipped. "<< std::endl;
 }
 
@@ -84,8 +92,41 @@ void Business::rejectOrder(size_t index, const MyString& description)
     {
         throw std::invalid_argument("Invalid index.");
     }
-    orders[index].getClient()->recieveRefund(orders[index].getTotalPrice());
+    orders.getOrder(index).getClient()->recieveRefund(orders.getOrder(index).getTotalPrice());
     std::cout << "Order is rejected. Reason: " << description << std::endl;
+}
+
+void Business::serialize(std::ofstream& ofs) const
+{
+    User::serialize(ofs);
+    items.serialize(ofs);
+
+    size_t requestsCount = refundRequests.getSize();
+    ofs.write(reinterpret_cast<const char*>(&requestsCount), sizeof(requestsCount));
+    for (size_t i = 0; i < requestsCount; i++)
+    {
+        refundRequests[i].serialize(ofs);
+    }
+    orders.serialize(ofs);
+
+    ofs.write((const char*)&totalRevenue, sizeof(double));
+}
+
+void Business::deserialize(std::ifstream& ifs)
+{
+    items.deserialize(ifs);
+
+    size_t checksCount;
+    ifs.read(reinterpret_cast<char*>(&checksCount), sizeof(checksCount));
+    refundRequests.clear();
+    for (size_t i = 0; i < checksCount; i++)
+    {
+        RefundRequest request;
+        request.deserialize(ifs);
+        refundRequests.push_back(request);
+    }
+    orders.deserialize(ifs);
+    ifs.read((char*)&totalRevenue, sizeof(double));
 }
 
 void Business::listRefunds() const
@@ -113,18 +154,25 @@ void Business::approveRefund(size_t index)
     RefundRequest& request = refundRequests[index];
     request.approve();
 
-    /*const Order* order = request.getOrder();
-    for (size_t i = 0; i < orders->getProductsCount(); i++)
+    const Order* order = request.getOrder();
+    const MyVector<MyPair<Item, unsigned>>& returnedItems = order->getItems();
+    for (size_t i = 0; i < returnedItems.getSize(); i++)
     {
-        Item& product = orders->getProduct(i);
-        unsigned quantity = order->getProductQuantity(i);
-        product.increaseQuantity(quantity);
+        const MyString& name = returnedItems[i].first.getName();
+        unsigned quantity = returnedItems[i].second;
+
+        for (size_t j = 0; j < items.getSize(); j++)
+        {
+            if (items.getItem(j).getName() == name)
+            {
+                items.getItem(j).increaseQuantity(quantity);
+                break;
+            }
+        }
     }
 
-    Client* client = request.getClient();
-    client->getOrderManager().removeOrder(order->getID());*/
-
     request.getClient()->recieveRefund(request.getOrder()->getTotalPrice());
+    request.getClient()->getOrderManager().removeOrder(order->getID());
     refundRequests.erase(index);
     std::cout << "Refund is approved. The sum is returned to "<<request.getClient()->getName();
 }
@@ -144,7 +192,7 @@ void Business::rejectRefund(size_t index, const MyString& reason)
 
 void Business::recieveOrderRequest(const Order& order)
 {
-    orders.push_back(order);
+    orders.addOrder(order);
 }
 
 void Business::listOrders() const
@@ -152,7 +200,7 @@ void Business::listOrders() const
     for (size_t i = 0; i < orders.getSize(); i++)
     {
         std::cout << (i + 1) << ".";
-        orders[i].printOrder();
+        orders.getOrder(i).printOrder();
     }
 }
 
@@ -160,10 +208,10 @@ void Business::listPendingOrders() const
 {
     for (size_t i = 0; i < orders.getSize(); i++)
     {
-        if (orders[i].statusToString() == "Pending")
+        if (orders.getOrder(i).statusToString() == "Pending")
         {
-            std::cout << (i + 1) << ".";
-            orders[i].printOrder();
+            std::cout << (i + 1) << ". ";
+            orders.getOrder(i).printOrder();
         }
     }
 }
@@ -173,12 +221,12 @@ void Business::listBestSeliingProducts() const
     MyVector <MyPair<const Item*, unsigned>> temp;
     for (size_t i = 0; i < items.getSize(); i++)
     {
-        unsigned initialQuantity = items[i].getInitialQuantity();
-        unsigned currentQuantity = items[i].getCurrentQuantity();
+        unsigned initialQuantity = items.getItem(i).getInitialQuantity();
+        unsigned currentQuantity = items.getItem(i).getCurrentQuantity();
         unsigned soldQuantity = initialQuantity - currentQuantity;
         if (soldQuantity > 0)  
         {
-           MyPair<const Item*, unsigned> pair(&items[i], soldQuantity);
+           MyPair<const Item*, unsigned> pair(&items.getItem(i), soldQuantity);
             temp.push_back(pair);
         }
     }

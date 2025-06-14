@@ -17,7 +17,12 @@ void OrderManager::addOrder(const Order& newOrder)
     orders.push_back(newOrder);
 }
 
-unsigned OrderManager::getCounter() const
+void OrderManager::removeOrder(size_t index)
+{
+    orders.erase(index);
+}
+
+unsigned OrderManager::getSize() const
 {
     return orders.getSize();
 }
@@ -53,7 +58,28 @@ const Order& OrderManager::getLastOrder() const
     return orders.back();
 }
 
+void OrderManager::serialize(std::ofstream& ofs) const
+{
+    for (size_t i = 0; i < orders.getSize(); i++)
+    {
+        orders[i].serialize(ofs);
+    }
+}
+
+void OrderManager::deserialize(std::ifstream& ifs)
+{
+    for (size_t i = 0; i < orders.getSize(); i++)
+    {
+        orders[i].deserialize(ifs);
+    }
+}
+
 Order& OrderManager::getOrder(size_t index) const
+{
+    return getOrder(index);
+}
+
+Order& OrderManager::getOrder(size_t index)
 {
     return getOrder(index);
 }

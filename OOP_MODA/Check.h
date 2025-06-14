@@ -20,5 +20,8 @@ public:
 
 	bool isValidCode(const MyString& code);
 	void redeem();
+
+	void serialize(std::ofstream& ofs) const;
+	void deserialize(std::ifstream& ifs);
 };
 

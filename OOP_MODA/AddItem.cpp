@@ -5,9 +5,12 @@ AddItem::AddItem(System& system) :Command(system){}
 void AddItem::execute()
 {
 	MyString name;
-	MyString description;
 	unsigned quantity;
 	double price;
+
+	char buffer[1024];
+	std::cin.getline(buffer, sizeof(buffer));
+	MyString description(buffer);
 
 	std::cout << "Enter name: ";
 	std::cin >> name;

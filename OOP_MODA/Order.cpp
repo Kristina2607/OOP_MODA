@@ -4,7 +4,7 @@
 unsigned Order::NextOrderID = 1;
 
 Order::Order(MyVector<MyPair<Item, unsigned>> items, Client* client, double totalPrice, unsigned points, Status status)
-    : ID(NextOrderID++), items(items), client(client), totalPrice(totalPrice), points(points), status(status) {}
+    : ID(NextOrderID++), items(items), client(client), totalPrice(totalPrice), points(points), status(status), clientEGN(client->getEGN()) {}
 
 double Order::getTotalPrice() const
 {
@@ -24,6 +24,16 @@ unsigned Order::getID() const
 Client* Order::getClient() const
 {
     return client;
+}
+
+const MyString& Order::getClientEgn() const
+{
+    return clientEGN;
+}
+
+void Order::setClient(Client* newClient)
+{
+   this->client = newClient;
 }
 
 MyVector<MyPair<Item, unsigned>> Order::getItems() const
@@ -90,6 +100,51 @@ void Order::printOrder() const
     }
     std::cout << totalPrice << " BGN";
     std::cout << " - " << statusToString() << std::endl;
+}
+
+void Order::serialize(std::ofstream& ofs) const
+{
+    ofs.write((const char*)(&ID), sizeof(unsigned));
+    ofs.write((const char*)(&points), sizeof(unsigned));
+    ofs.write((const char*)(&totalPrice), sizeof(double));
+    ofs.write((const char*)(&status), sizeof(Status));
+    ofs.write((const char*)(&isRefunded), sizeof(bool));
+    ofs.write((const char*)(&usedDiscount), sizeof(bool));
+    MyString::writeStringToFile(ofs, clientEGN);
+
+    size_t itemsCount = items.getSize();
+    ofs.write((const char*)(&itemsCount), sizeof(itemsCount));
+    for (size_t i = 0; i < itemsCount; i++)
+    {
+        items[i].first.serialize(ofs);
+        unsigned quantity = items[i].second;
+        ofs.write((const char*)(&quantity), sizeof(quantity));
+    }
+}
+
+void Order::deserialize(std::ifstream& ifs)
+{
+    ifs.read((char*)(&ID), sizeof(unsigned));
+    ifs.read((char*)(&points), sizeof(unsigned));
+    ifs.read((char*)(&totalPrice), sizeof(double));
+    ifs.read((char*)(&status), sizeof(Status));
+    ifs.read((char*)(&isRefunded), sizeof(bool));
+    ifs.read((char*)(&usedDiscount), sizeof(bool));
+    clientEGN = MyString::readStringFromFile(ifs);
+
+    size_t itemsCount=0;
+    ifs.read((char*)(&itemsCount), sizeof(itemsCount));
+    items.clear();
+    for (size_t i = 0; i < itemsCount; i++)
+    {
+        Item item;
+        item.deserialize(ifs);
+        unsigned quantity;
+        ifs.read((char*)(&quantity), sizeof(quantity));
+
+        items.push_back(MyPair<Item, unsigned>(item, quantity));
+    }
+    client = nullptr;
 }
 
 

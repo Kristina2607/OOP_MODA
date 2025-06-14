@@ -2,11 +2,21 @@
 
 User::User(Role role): name(""), EGN(0), password(""), isLoggedIn(0), role(role) {}
 
+User::User(std::ifstream& ifs)
+{
+    deserialize(ifs);
+}
+
 User::User(const MyString& name, const MyString& password, const MyString& EGN, Role role) : role(role), name(name), password(password), EGN(EGN), isLoggedIn(false) {}
 
-MyString User::getName() const
+const MyString& User::getName() const
 {
     return name;
+}
+
+const MyString& User::getEGN() const
+{
+    return EGN;
 }
 
 bool User::getLoggedInStatus() const
@@ -33,6 +43,27 @@ void User::logout()
 Role User::getRole() const
 {
     return role;
+}
+
+void User::serialize(std::ofstream& ofs) const
+{
+    Role userRole = this->getRole();
+    ofs.write((const char*)(&userRole), sizeof(Role));
+
+    MyString::writeStringToFile(ofs, name);
+    MyString::writeStringToFile(ofs, password);
+    MyString::writeStringToFile(ofs, EGN);
+
+    ofs.write((const char*)(&isLoggedIn), sizeof(bool));
+}
+
+void User::deserialize(std::ifstream& ifs) {
+   
+    name = MyString::readStringFromFile(ifs);
+    password = MyString::readStringFromFile(ifs);
+    EGN = MyString::readStringFromFile(ifs);
+
+    ifs.read((char*)(&isLoggedIn), sizeof(bool));
 }
 
 

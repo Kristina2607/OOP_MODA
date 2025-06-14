@@ -1,6 +1,7 @@
 #pragma once
 #include "MyString.h"
 #include "Role.h"
+#include <fstream>
 
 class User
 {
@@ -14,9 +15,11 @@ protected:
 
 public:
 	User(Role role);
+	User(std::ifstream& ifs);
 	User(const MyString& name, const MyString& password, const MyString& EGN, Role role);
 
-   MyString getName() const;
+   const MyString& getName() const;
+   const MyString& getEGN() const;
    bool getLoggedInStatus() const;
    bool checkPassword(const MyString& password) const;
    bool checkLogData(const MyString& name, const MyString& password);
@@ -29,4 +32,8 @@ public:
    Role getRole() const;
 
    virtual ~User() = default;
+
+   virtual void serialize(std::ofstream& ofs) const;
+   virtual void deserialize(std::ifstream& ifs);
+
 };

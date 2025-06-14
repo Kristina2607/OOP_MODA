@@ -35,3 +35,19 @@ void Check::redeem()
 	}
 	isRedeemed = true;
 }
+
+void Check::serialize(std::ofstream& ofs) const
+{
+	MyString::writeStringToFile(ofs, code);
+	ofs.write((const char*)&sum, sizeof(unsigned));
+	MyString::writeStringToFile(ofs, clientEGN);
+	ofs.write((const char*)&isRedeemed, sizeof(bool));
+}
+
+void Check::deserialize(std::ifstream& ifs)
+{
+	code = MyString::readStringFromFile(ifs);
+	ifs.read((char*)&sum, sizeof(unsigned));
+	clientEGN = MyString::readStringFromFile(ifs);
+	ifs.read((char*)&isRedeemed, sizeof(bool));
+}

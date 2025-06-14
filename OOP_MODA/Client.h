@@ -15,8 +15,8 @@ private:
 	unsigned points = 0;
 	double wallet = 0.0;
 	Cart cart;
-	OrderManager orders;
 	MyVector<Check> recievedChecks;
+	OrderManager orders;
 	ItemsManager catalog;
 
 public:
@@ -27,9 +27,11 @@ public:
 	double getWallet() const;
 	unsigned getPoints() const;
 	MyString getEGN() const;
-	OrderManager getOrderManger() const;
 
-	unsigned getOrdersCount()const;
+	OrderManager& getOrderManager();
+	const OrderManager& getOrderManager() const;
+
+	unsigned getOrdersCount() const;
 	unsigned getTotalSpent() const;
 
 	virtual void viewProfile() const override;
@@ -65,5 +67,7 @@ public:
 	void listProducts() const;
 	void viewProduct(unsigned ID) const;
 
+	virtual void serialize(std::ofstream& ofs) const override;
+	virtual void deserialize(std::ifstream& ifs) override;
 };
 

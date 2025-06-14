@@ -37,5 +37,8 @@ public:
 	void addSales(unsigned quantity);
 
 	void printItem() const;
+
+	void serialize(std::ofstream& ofs) const;
+	void deserialize(std::ifstream& ifs);
 };
 

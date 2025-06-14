@@ -11,5 +11,16 @@ private:
 public:
 	void viewProduct(unsigned ID) const;
 	void listProducts() const;
+	size_t getSize() const;
+
+	void addItem(const Item& obj);
+	void erase(size_t index);
+
+	Item& getItem(size_t index);
+	const Item& getItem(size_t index) const;
+	const Item& getLastItem() const;
+
+	void serialize(std::ofstream& ofs) const;
+	void deserialize(std::ifstream& ifs);
 };
 

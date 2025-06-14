@@ -58,3 +58,21 @@ void RefundRequest::printRefundRequest() const
 {
 	std::cout << ID << "|" << client->getName() << "|" << order->getTotalPrice() << "|" << "Reason: " << reason;
 }
+
+void RefundRequest::serialize(std::ofstream& ofs) const
+{
+	ofs.write((const char*)& ID, sizeof(unsigned));
+	MyString::writeStringToFile(ofs, reason);
+	ofs.write((const char*)&isProcessed, sizeof(bool));
+	ofs.write((const char*)&isApproved, sizeof(bool));
+}
+
+void RefundRequest::deserialize(std::ifstream& ifs)
+{
+	ifs.read((char*)&ID, sizeof(unsigned));
+	reason = MyString::readStringFromFile(ifs);
+	ifs.read((char*)&isProcessed, sizeof(bool));
+	ifs.read((char*)isApproved, sizeof(bool));
+	this->client = client;
+	this->order = order;
+}
