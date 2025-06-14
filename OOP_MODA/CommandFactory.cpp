@@ -6,6 +6,7 @@
 #include "InvalidCommand.h"
 #include "LogoutCommand.h"
 #include "SaveCommand.h"
+#include "LoadCommand.h"
 
 //Client
 #include "ListProducts.h"
@@ -21,6 +22,8 @@
 #include "RefundedOrders.h"
 #include "RequestRefund.h"
 #include "ConfirmOrder.h"
+#include "ListOrdersClient.h"
+#include "OrderHistory.h"
 
 //Business
 #include "ListOrders.h"
@@ -75,7 +78,7 @@ Command* CommandFactory::getCommand(const MyString& text)
 	}
 	else if (text == "load")
 	{
-		return new SaveCommand(System::getInstance());
+		return new LoadCommand(System::getInstance());
 	}
 
 	//Client:
@@ -131,7 +134,14 @@ Command* CommandFactory::getCommand(const MyString& text)
 	{
 		return new ConfirmOrder(System::getInstance());
 	}
-
+	else if (text == "list-orders")
+	{
+		return new ListOrdersClient(System::getInstance());
+	}
+	else if (text == "order_history")
+	{
+		return new OrderHistory(System::getInstance());
+	}
 
 	//Business:
 	else if (text == "list_orders")

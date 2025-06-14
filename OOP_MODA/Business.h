@@ -29,6 +29,11 @@ public:
 	void removeItem(const MyString& name);
 	void addItem(const MyString& name, double price, unsigned quantity, const MyString& description);
 
+	void listProducts() const;
+	void viewProduct(unsigned ID) const;
+	bool hasProduct(unsigned ID);
+	const ItemsManager& getItemsManager() const;
+
 	void listRefunds() const;
 	void recieveRefundRequest(RefundRequest* newRequest);
 	void approveRefund(size_t index);

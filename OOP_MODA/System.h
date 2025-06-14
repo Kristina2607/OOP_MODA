@@ -1,8 +1,7 @@
 #pragma once
 #include "MyVector.hpp"
 #include "MyString.h"
-#include "HeterogeneousContainer.hpp"
-#include "Item.h"
+#include "ItemsManager.h"
 #include "User.h"
 #include "Client.h"
 #include "Administrator.h"
@@ -12,12 +11,11 @@ class System
 {
 private:
 	MyVector<Client> clients;
-	MyVector<Item> items;
 	Administrator* admin;
 	Business* business;
 	User* loggedUser = nullptr;
 	
-	System()=default;
+	System();
 	
 public:
 	static System& getInstance();
@@ -37,8 +35,17 @@ public:
 	void help() const;
 	void viewProfile() const;
 
-	void saveSystem(std::ofstream& ofs);
-	void loadSystem(std::ifstream& ifs);
+	void saveSystem();
+	void saveBusiness();
+	void saveClients();
+	void saveAdministrator();
+
+	void loadSystem();
+	void loadAdministrator();
+	void loadBusiness();
+	void attachClientsToCheck();//ot cseki klient vzimam check i go pulnq v admina
+	void attachClientsToOrders();
+	void loadClients();
 
 	Client& findClientByEgn(const MyString& EGN);
 	const Client& findClientByEgn(const MyString& EGN) const;
@@ -57,6 +64,7 @@ public:
 	void viewProduct(unsigned ID) const;
 	void listProducts() const;
 	void refundedOrders() const;
+	void orderHistory() const;
 	void requestRefund(const MyString& reason);
 
 	//Business commands:

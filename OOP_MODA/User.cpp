@@ -47,8 +47,8 @@ Role User::getRole() const
 
 void User::serialize(std::ofstream& ofs) const
 {
-    Role userRole = this->getRole();
-    ofs.write((const char*)(&userRole), sizeof(Role));
+    int userRoleValue = (int)this->getRole();
+    ofs.write((const char*)(&userRoleValue), sizeof(int));
 
     MyString::writeStringToFile(ofs, name);
     MyString::writeStringToFile(ofs, password);
@@ -59,6 +59,10 @@ void User::serialize(std::ofstream& ofs) const
 
 void User::deserialize(std::ifstream& ifs) {
    
+    int userRoleValue = 0;
+    ifs.read((char*)(&userRoleValue), sizeof(int));
+    Role userRole = static_cast<Role>(userRoleValue);
+
     name = MyString::readStringFromFile(ifs);
     password = MyString::readStringFromFile(ifs);
     EGN = MyString::readStringFromFile(ifs);

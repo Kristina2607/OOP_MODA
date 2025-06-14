@@ -5,5 +5,5 @@ SaveCommand::SaveCommand(System& system):Command(system){}
 
 void SaveCommand::execute()
 {
-	//system.saveSystem();
+	system.saveSystem();
 }

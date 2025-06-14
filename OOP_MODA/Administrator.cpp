@@ -1,5 +1,10 @@
 #include "Administrator.h"
 
+Administrator::Administrator(std::ifstream& ifs) : User(ifs) 
+{
+	deserialize(ifs);
+}
+
 Administrator::Administrator(MyString name, MyString password, MyString EGN)
 	: User(name, password, EGN, Role::Admin)
 {}
@@ -24,7 +29,7 @@ User* Administrator::clone() const
 	throw std::logic_error("Cannot clone business");
 }
 
-void Administrator::sendChecks(unsigned sum, const MyString& code, const MyString& clientEGN)
+void Administrator::sendChecks(unsigned sum, const MyString& code, Client& client)
 {
 	if (sum <= 0)
 	{
@@ -34,16 +39,17 @@ void Administrator::sendChecks(unsigned sum, const MyString& code, const MyStrin
 	{
 		throw std::invalid_argument("Code must be 4 characters!");
 	}
-	for (size_t i = 0;i<checks.getSize();i++) 
+	for (size_t i = 0;i< checks.getSize();i++) 
 	{
 		if (checks[i].isValidCode(code) && !checks[i].getIsRedeemed())
 		{
 			throw std::logic_error("Check code must be unique!");
 		}
 	}
-	Check newCheck = Check(code, sum, clientEGN, false);
+	Check newCheck = Check(code, sum, client.getEGN(), false);
 	checks.push_back(newCheck);
-	std::cout << "Check for " << sum << " BGN sent to client with EGN: " << clientEGN << std::endl;
+	client.recieveCheck(newCheck);
+	std::cout << "Check for " << sum << " BGN sent to client with EGN: " << client.getEGN() << std::endl;
 }
 
 void Administrator::customerInsights() const
@@ -56,11 +62,45 @@ void Administrator::customerInsights() const
 	}
 }
 
-void Administrator::viewTransactions() const
+void Administrator::serialize(std::ofstream& ofs) const
 {
-	for (size_t i = 0; i < transactions.getSize(); i++)
+	size_t clientsCount = clients.getSize();
+	ofs.write((const char*)&clientsCount, sizeof(clientsCount));
+	for (size_t i = 0; i < clientsCount; i++)
 	{
-		transactions[i].printTransactions();
+		clients[i].serialize(ofs);
 	}
+
+	size_t checksCount = checks.getSize();
+	ofs.write((const char*)&checksCount, sizeof(checksCount));
+	for (size_t i = 0; i < checksCount; i++)
+	{
+		checks[i].serialize(ofs);
+	}
+	ofs.close();
 }
+
+void Administrator::deserialize(std::ifstream& ifs)
+{
+	size_t clientsCount = 0;
+	ifs.read((char*)&clientsCount, sizeof(clientsCount));
+	for (size_t i = 0; i < clientsCount; i++)
+	{
+		Client client;
+		client.deserialize(ifs);
+		clients.push_back(client);
+	}
+
+	size_t checksCount = 0;
+	ifs.read((char*)&checksCount, sizeof(checksCount));
+	for (size_t i = 0; i < clientsCount; i++)
+	{
+		Check check;
+		check.deserialize(ifs);
+		checks.push_back(check);
+	}
+	ifs.close();
+
+}
+
 

@@ -84,9 +84,6 @@
     <ClCompile Include="HelpCommand.cpp">
       <Filter>Commands</Filter>
     </ClCompile>
-    <ClCompile Include="Transactions.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="ViewProfile.cpp">
       <Filter>Commands</Filter>
     </ClCompile>
@@ -195,8 +192,17 @@
     <ClCompile Include="ApproveOrder.cpp">
       <Filter>Commands\Business Commands</Filter>
     </ClCompile>
-    <ClCompile Include="ListOrdersClient.cpp">
+    <ClCompile Include="OrderHistory.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="StreamUtils.cpp">
+      <Filter>Utilis</Filter>
+    </ClCompile>
+    <ClCompile Include="LoadComamnd.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ListOrdersClient.cpp">
+      <Filter>Commands\ClientCommands</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -256,9 +262,6 @@
     </ClInclude>
     <ClInclude Include="HelpCommand.h">
       <Filter>Commands</Filter>
-    </ClInclude>
-    <ClInclude Include="Transactions.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ViewProfile.h">
       <Filter>Commands</Filter>
@@ -332,9 +335,6 @@
     <ClInclude Include="OrderManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="HeterogeneousContainer.hpp">
-      <Filter>Utilis</Filter>
-    </ClInclude>
     <ClInclude Include="ListBestSellingProducts.h">
       <Filter>Commands\Business Commands</Filter>
     </ClInclude>
@@ -365,8 +365,28 @@
     <ClInclude Include="ApproveOrder.h">
       <Filter>Commands\Business Commands</Filter>
     </ClInclude>
-    <ClInclude Include="ListOrdersClient.h">
+    <ClInclude Include="OrderHistory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="StreamUtils.h">
+      <Filter>Utilis</Filter>
+    </ClInclude>
+    <ClInclude Include="LoadCommand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ListOrdersClient.h">
+      <Filter>Commands\ClientCommands</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="clients.bin">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="business.bin">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="admin.bin">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

@@ -13,22 +13,15 @@ Cart::Cart(const MyVector<MyPair<Item, unsigned>>& items, Client* client, double
 	updateTotalPrice();
 }
 
-void Cart::addToCart(unsigned ID, unsigned quantity)
+void Cart::addToCart(const Item& item, unsigned quantity)
 {
 	if (quantity == 0)
 	{
 		throw std::invalid_argument("Quantity can not be zero.");
 	}
-	for (size_t i = 0; i < items.getSize(); i++)
-	{
-		if (items[i].first.getId() == ID)
-		{
-			items[i].second += quantity;
-			totalPrice += items[i].first.getPrice() * quantity;
-			return;
-		}
-	}
-	throw std::invalid_argument("Item with this ID number is not found in the cart.");
+
+	items.push_back({ item, quantity });
+	totalPrice += item.getPrice() * quantity;
 }
 
 void Cart::removeFromCart(const MyString& name, unsigned quantity)
@@ -155,7 +148,7 @@ void Cart::deserialize(std::ifstream& ifs, Client* client)
 	{
 		Item item;
 		item.deserialize(ifs);
-		unsigned quantity;
+		unsigned quantity = 0;
 		ifs.read((char*)(&quantity), sizeof(quantity));
 
 		items.push_back(MyPair<Item, unsigned>(item, quantity));

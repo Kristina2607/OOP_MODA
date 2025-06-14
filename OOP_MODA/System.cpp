@@ -3,11 +3,12 @@
 #include "Client.h"
 #include "Business.h"
 #include "Administrator.h"
+#include "StreamUtils.h"
 
-//System::System()
-//{
-//	loadSystem(ifs);
-//}
+System::System()
+{
+	loadSystem();
+}
 
 System& System::getInstance()
 {
@@ -47,7 +48,16 @@ void System::sendCheck(unsigned sum, const MyString& code, const MyString& clien
 	Administrator* admin = dynamic_cast<Administrator*>(loggedUser);
 	if (admin)
 	{
-		admin->sendChecks(sum, code, clientEGN);
+		Client* client = nullptr;
+		for (size_t i = 0; i < clients.getSize(); i++)
+		{
+			if (clients[i].getEGN() == clientEGN)
+			{
+				client = &clients[i];
+				break;
+			}
+		}
+		admin->sendChecks(sum, code, *client);
 	}
 }
 
@@ -73,7 +83,6 @@ System::~System()
 {
 	delete business;
 	delete admin;
-	delete loggedUser;
 }
 
 void System::run()
@@ -149,10 +158,12 @@ void System::registerUser(const MyString& name, const MyString& password, const 
 	{
 		throw std::invalid_argument("Admin with this name already exists");
 	}
+	
 	else if (business && name == business->getName())
 	{
 		throw std::invalid_argument("Business with this name already exists");
 	}
+
 	for (size_t i = 0; i < clients.getSize(); i++)
 	{
 		if (clients[i].getName() == name)
@@ -199,7 +210,7 @@ void System::registerUser(const MyString& name, const MyString& password, const 
 void System::logout()
 {
 	loggedUser = nullptr;
-	std::cout << "You are logged out.";
+	std::cout << "You are logged out."<<std::endl;
 }
 
 void System::help() const
@@ -220,7 +231,36 @@ void System::viewProfile() const
 	loggedUser->viewProfile();
 }
 
-void System::saveSystem(std::ofstream& ofs)
+void System::saveSystem()
+{
+	saveClients();
+	saveBusiness();
+	saveAdministrator();
+}
+
+void System::saveBusiness()
+{
+	std::ofstream businessFile("business.bin", std::ios::binary);
+	if (!businessFile.is_open())
+	{
+		throw std::runtime_error("Cannot open file for writing");
+	}
+	business->serialize(businessFile);
+	businessFile.close();
+}
+
+void System::saveAdministrator()
+{
+	std::ofstream adminFile("admin.bin", std::ios::binary);
+	if (!adminFile.is_open())
+	{
+		throw std::runtime_error("Cannot open file for writing");
+	}
+	admin->serialize(adminFile);
+	adminFile.close();
+}
+
+void System::saveClients()
 {
 	std::ofstream clientsFile("clients.bin", std::ios::binary);
 	if (!clientsFile.is_open())
@@ -229,63 +269,48 @@ void System::saveSystem(std::ofstream& ofs)
 	}
 
 	size_t clientsCount = clients.getSize();
-	clientsFile.write((const char*)(&clientsCount), sizeof(clientsCount));
-	for (size_t i = 0; i < clientsCount; i++) 
+	clientsFile.write((const char*)&clientsCount, sizeof(clientsCount));
+	for (size_t i = 0; i < clientsCount; i++)
 	{
 		clients[i].serialize(clientsFile);
 	}
 	clientsFile.close();
-
-	//Administrator
-
-	std::ofstream businessFile("business.bin", std::ios::binary);
-	if (!businessFile.is_open())
-	{
-		throw std::runtime_error("Cannot open file for writing");
-	}
-	business->serialize(businessFile);
-	businessFile.close();
-
-	std::ofstream itemsFile("items.bin", std::ios::binary);
-	if (!itemsFile.is_open())
-	{
-		throw std::runtime_error("Cannot open file for writing");
-	}
-	size_t itemsCount = items.getSize();
-	itemsFile.write((const char*)(&itemsCount), sizeof(itemsCount));
-	for (size_t i = 0; i < itemsCount; i++)
-	{
-		items[i].serialize(itemsFile);
-	}
-	itemsFile.close();
-
-	std::ofstream loggedUserFile("logged_user.bin", std::ios::binary);
-	if (!loggedUserFile.is_open())
-	{
-		throw std::runtime_error("Cannot open file for writing");
-	}
-	MyString loggedUserEGN = loggedUser->getEGN();
-	MyString::writeStringToFile(loggedUserFile, loggedUserEGN);
-	loggedUserFile.close();
 }
 
-void System::loadSystem(std::ifstream& ifs)
+void System::loadSystem()
 {
-	std::ifstream clientsFile("clients.bin", std::ios::binary);
-	if (clientsFile.is_open()) 
+	loadClients();
+	attachClientsToOrders();
+	loadAdministrator();
+	loadBusiness();
+}
+
+void System::loadBusiness()
+{
+	std::ifstream file("business.bin", std::ios::binary);
+	if (file.is_open())
 	{
-		size_t clientsCount;
-		clientsFile.read((char*)(&clientsCount), sizeof(clientsCount));
-		clients.clear();
-		for (size_t i = 0; i < clientsCount; i++)
+		business = new Business(file, clients);
+	}
+	file.close();
+}
+
+void System::attachClientsToCheck()
+{
+	for (size_t i = 0; i < clients.getSize(); ++i)
+	{
+		Client& client = clients[i];
+		MyVector<Check>& checks = client.getChecks();
+
+		for (size_t j = 0; j < checks.getSize(); ++j)
 		{
-			Client client;
-			client.deserialize(clientsFile);
-			clients.push_back(client);
+			Check& check = checks[j];
 		}
 	}
-	clientsFile.close();
+}
 
+void System::attachClientsToOrders()
+{
 	for (size_t i = 0; i < clients.getSize(); ++i)
 	{
 		Client& client = clients[i];
@@ -294,65 +319,40 @@ void System::loadSystem(std::ifstream& ifs)
 		for (size_t j = 0; j < orders.getSize(); ++j)
 		{
 			Order& order = orders.getOrder(j);
-			order.setClient(&client); // connection: order->client
+			order.setClient(&client); 
 		}
 	}
+}
 
-	//Administrator
-
-	std::ifstream businessFile("business.bin", std::ios::binary);
-	if (!businessFile.is_open())
+void System::loadAdministrator()
+{
+	std::ifstream file("admin.bin", std::ios::binary);
+	if (file.is_open())
 	{
-		business = new Business(ifs, clients);
-		business->deserialize(businessFile);
+		admin = new Administrator(file);
 	}
-	businessFile.close();
+	file.close();
+}
 
-	std::ifstream itemsFile("items.bin", std::ios::binary);
-	if (itemsFile.is_open()) 
+void System::loadClients()
+{
+	std::ifstream clientsFile("clients.bin", std::ios::binary);
+	if (!clientsFile.is_open())
 	{
-		size_t itemsCount;
-		itemsFile.read((char*)(&itemsCount), sizeof(itemsCount));
-		items.clear();
-		for (size_t i = 0; i < itemsCount; i++) 
-		{
-			Item item;
-			item.deserialize(itemsFile);
-			items.push_back(item);
-		}
+		return;
 	}
-	itemsFile.close();
-
-	std::ifstream loggedUserFile("logged_user.bin", std::ios::binary);
-	if (loggedUserFile.is_open())
+	
+	clients.clear();
+	
+	size_t clientsCount = 0;
+	clientsFile.read((char*)&clientsCount, sizeof(clientsCount));
+	for (size_t i = 0; i < clientsCount; i++)
 	{
-		bool hasLoggedUser;
-		loggedUserFile.read((char*)(&hasLoggedUser), sizeof(hasLoggedUser));
-		loggedUser = nullptr;
-		if (hasLoggedUser)
-		{
-			MyString loggedUserEGN = MyString::readStringFromFile(loggedUserFile);
-
-			for (size_t i = 0; i < clients.getSize(); i++) 
-			{
-				if (clients[i].getEGN() == loggedUserEGN) 
-				{
-					loggedUser = &clients[i];
-					break;
-				}
-			}
-			if (!loggedUser && admin && admin->getEGN() == loggedUserEGN) 
-			{
-				loggedUser = admin;
-			}
-
-			if (!loggedUser && business && business->getEGN() == loggedUserEGN) 
-			{
-				loggedUser = business;
-			}
-		}
+		Client client;
+		client.deserialize(clientsFile);
+		clients.push_back(client);
 	}
-
+	clientsFile.close();
 }
 
 Client& System::findClientByEgn(const MyString& EGN)
@@ -362,7 +362,7 @@ Client& System::findClientByEgn(const MyString& EGN)
 		if (clients[i].getEGN() == EGN)
 		{
 			return clients[i];
-	    }
+		}
 	}
 }
 
@@ -553,7 +553,15 @@ void System::addToCart(unsigned ID, unsigned quantity)
 	Client* client = dynamic_cast<Client*>(loggedUser);
 	if (client)
 	{
-		client->addToCart(ID, quantity);
+		Item item;
+		for (size_t i = 0; i < business->getItemsManager().getSize(); i++)
+		{
+			if (business->getItemsManager().getItem(i).getId() == ID)
+			{
+				item = business->getItemsManager().getItem(i);
+			}
+		}
+		client->addToCart(item, quantity);
 	}
 }
 
@@ -608,6 +616,23 @@ void System::refundedOrders() const
 	if (client)
 	{
 		client->refundedOrders();
+	}
+}
+
+void System::orderHistory() const
+{
+	if (!loggedUser)
+	{
+		throw std::logic_error("No user logged in.");
+	}
+	if (loggedUser->getRole() != Role::Client)
+	{
+		throw std::logic_error("You cannot do this action");
+	}
+	Client* client = dynamic_cast<Client*>(loggedUser);
+	if (client)
+	{
+		client->orderHistory();
 	}
 }
 

@@ -1,6 +1,5 @@
 #pragma once
 #include "User.h"
-#include "ItemsManager.h"
 #include "RefundRequest.h"
 #include "Check.h"
 #include "Cart.h"
@@ -17,7 +16,6 @@ private:
 	Cart cart;
 	MyVector<Check> recievedChecks;
 	OrderManager orders;
-	ItemsManager catalog;
 
 public:
 	Client();
@@ -26,8 +24,10 @@ public:
 
 	double getWallet() const;
 	unsigned getPoints() const;
-	MyString getEGN() const;
+	const MyString& getEGN() const;
+	const Check& getCheck(size_t index) const;
 
+	MyVector<Check>& getChecks();
 	OrderManager& getOrderManager();
 	const OrderManager& getOrderManager() const;
 
@@ -39,7 +39,7 @@ public:
 
 	virtual User* clone() const override;
 
-	void addToCart(unsigned ID, unsigned quantity);
+	void addToCart(const Item& item, unsigned quantity);
 	void removeFromCart(const MyString& name, unsigned quantity);
 
 	void viewCart() const;

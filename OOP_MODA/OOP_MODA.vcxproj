@@ -153,12 +153,14 @@
     <ClCompile Include="ListPendingOrders.cpp" />
     <ClCompile Include="ListProducts.cpp" />
     <ClCompile Include="ListRefunds.cpp" />
+    <ClCompile Include="LoadComamnd.cpp" />
     <ClCompile Include="LoginCommand.cpp" />
     <ClCompile Include="LogoutCommand.cpp" />
     <ClCompile Include="MyString.cpp" />
     <ClCompile Include="OOP_MODA.cpp" />
     <ClCompile Include="ItemsFilter.cpp" />
     <ClCompile Include="Order.cpp" />
+    <ClCompile Include="OrderHistory.cpp" />
     <ClCompile Include="OrderManager.cpp" />
     <ClCompile Include="Redeem.cpp" />
     <ClCompile Include="RefundedOrders.cpp" />
@@ -172,8 +174,8 @@
     <ClCompile Include="RequestRefund.cpp" />
     <ClCompile Include="SaveCommand.cpp" />
     <ClCompile Include="SendCheck.cpp" />
+    <ClCompile Include="StreamUtils.cpp" />
     <ClCompile Include="System.cpp" />
-    <ClCompile Include="Transactions.cpp" />
     <ClCompile Include="User.cpp" />
     <ClCompile Include="Validations.cpp" />
     <ClCompile Include="ViewCart.cpp" />
@@ -199,7 +201,6 @@
     <ClInclude Include="ConfirmOrder.h" />
     <ClInclude Include="CustomerInsignts.h" />
     <ClInclude Include="HelpCommand.h" />
-    <ClInclude Include="HeterogeneousContainer.hpp" />
     <ClInclude Include="InvalidCommand.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="ItemsManager.h" />
@@ -209,6 +210,7 @@
     <ClInclude Include="ListPendingOrders.h" />
     <ClInclude Include="ListProducts.h" />
     <ClInclude Include="ListRefunds.h" />
+    <ClInclude Include="LoadCommand.h" />
     <ClInclude Include="LoginCommand.h" />
     <ClInclude Include="LogoutCommand.h" />
     <ClInclude Include="MyPair.hpp" />
@@ -216,6 +218,7 @@
     <ClInclude Include="MyVector.hpp" />
     <ClInclude Include="ItemsFilter.h" />
     <ClInclude Include="Order.h" />
+    <ClInclude Include="OrderHistory.h" />
     <ClInclude Include="OrderManager.h" />
     <ClInclude Include="Redeem.h" />
     <ClInclude Include="RefundedOrders.h" />
@@ -229,8 +232,8 @@
     <ClInclude Include="RequestRefund.h" />
     <ClInclude Include="SaveCommand.h" />
     <ClInclude Include="SendCheck.h" />
+    <ClInclude Include="StreamUtils.h" />
     <ClInclude Include="System.h" />
-    <ClInclude Include="Transactions.h" />
     <ClInclude Include="User.h" />
     <ClInclude Include="Role.h" />
     <ClInclude Include="Validations.h" />
@@ -238,6 +241,11 @@
     <ClInclude Include="ViewProduct.h" />
     <ClInclude Include="ViewProfile.h" />
     <ClInclude Include="ViewRevenue.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="admin.bin" />
+    <None Include="business.bin" />
+    <None Include="clients.bin" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

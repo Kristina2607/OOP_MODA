@@ -71,9 +71,29 @@ void Business::addItem(const MyString& name, double price, unsigned quantity, co
     std::cout << name << " is added successffully."<< std::endl;
 }
 
+void Business::listProducts() const
+{
+    items.listProducts();
+}
+
+void Business::viewProduct(unsigned ID) const
+{
+    items.viewProduct(ID);
+}
+
+bool Business::hasProduct(unsigned ID)
+{
+    return items.isAvailable(ID);
+}
+
+const ItemsManager& Business::getItemsManager() const
+{
+    return items;
+}
+
 void Business::viewRevenue() const
 {
-    std::cout << "Total reveneue:" << orders.getTotalSpent();
+    std::cout << "Total reveneue:" << orders.getTotalSpent() << std::endl;
 }
 
 void Business::approveOrder(size_t index)
@@ -99,6 +119,8 @@ void Business::rejectOrder(size_t index, const MyString& description)
 void Business::serialize(std::ofstream& ofs) const
 {
     User::serialize(ofs);
+    int roleValue = (int)role;
+    ofs.write((const char*)&roleValue, sizeof(int));
     items.serialize(ofs);
 
     size_t requestsCount = refundRequests.getSize();
@@ -114,9 +136,12 @@ void Business::serialize(std::ofstream& ofs) const
 
 void Business::deserialize(std::ifstream& ifs)
 {
+    int roleValue = 0;
+    ifs.read((char*)&roleValue, sizeof(int));
+    this->role = (Role)roleValue;
     items.deserialize(ifs);
 
-    size_t checksCount;
+    size_t checksCount = 0;
     ifs.read(reinterpret_cast<char*>(&checksCount), sizeof(checksCount));
     refundRequests.clear();
     for (size_t i = 0; i < checksCount; i++)

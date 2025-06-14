@@ -18,7 +18,7 @@ public:
 	Cart(Client* client);
 	Cart(const MyVector<MyPair<Item, unsigned>>& items, Client* client, double totalPrice);
 
-	void addToCart(unsigned ID, unsigned quantity);
+	void addToCart(const Item& item, unsigned quantity);
 	void removeFromCart(const MyString& name, unsigned quantity);
 
 	void view_cart() const;

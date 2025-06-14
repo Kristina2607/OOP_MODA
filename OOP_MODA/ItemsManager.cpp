@@ -34,6 +34,30 @@ void ItemsManager::erase(size_t index)
 	items.erase(index);
 }
 
+bool ItemsManager::isAvailable(unsigned ID)
+{
+	for (size_t i = 0; i < items.getSize(); i++)
+	{
+		if (items[i].getId() == ID)
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
+const Item* ItemsManager::findByID(unsigned ID)
+{
+	for (size_t i = 0; i < items.getSize(); i++)
+	{
+		if (items[i].getId() == ID)
+		{
+			return &items[i];
+		}
+	}
+	return nullptr;
+}
+
 Item& ItemsManager::getItem(size_t index)
 {
 	return items[index];

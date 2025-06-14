@@ -189,14 +189,14 @@ MyString MyString::substr(unsigned begin, unsigned howMany)
 
 void MyString::writeStringToFile(std::ofstream& ofs, const MyString& str)
 {
-	int len = str.getSize();
-	ofs.write((const char*)&len, sizeof(int));
+	size_t len = str.getSize();
+	ofs.write((const char*)&len, sizeof(len));
 	ofs.write(str.c_str(), sizeof(char) * len);
 }
 
 MyString MyString::readStringFromFile(std::ifstream& ifs)
 {
-	int len = 0;
+	size_t len = 0;
 	ifs.read((char*)&len, sizeof(len));
 
 	char* buff = new char[len + 1];

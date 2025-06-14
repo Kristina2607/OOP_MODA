@@ -139,7 +139,7 @@ void Order::deserialize(std::ifstream& ifs)
     {
         Item item;
         item.deserialize(ifs);
-        unsigned quantity;
+        unsigned quantity = 0;
         ifs.read((char*)(&quantity), sizeof(quantity));
 
         items.push_back(MyPair<Item, unsigned>(item, quantity));
