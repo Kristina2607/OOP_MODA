@@ -43,7 +43,7 @@ public:
 	void loadSystem();
 	void loadAdministrator();
 	void loadBusiness();
-	void attachClientsToCheck();//ot cseki klient vzimam check i go pulnq v admina
+	void attachClientsToCarts();//ot cseki klient vzimam check i go pulnq v admina
 	void attachClientsToOrders();
 	void loadClients();
 
@@ -73,8 +73,8 @@ public:
 	void listPendingOrders() const;
 	void listBestSellingProducts() const;
 	void listOrders() const;
-	void approveOrder(size_t index);
-	void rejectOrder(size_t index, const MyString& reason);
+	void approveOrder(unsigned ID);
+	void rejectOrder(unsigned ID, const MyString& reason);
 	void listRefunds() const;
 	void viewRevenue() const;
 	void approveRefund(size_t index);

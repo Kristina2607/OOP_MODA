@@ -45,8 +45,10 @@ public:
 	void listBestSeliingProducts() const;
 	void viewRevenue() const;
 
-	void approveOrder(size_t index);
-	void rejectOrder(size_t index, const MyString& description);
+	void approveOrder(unsigned ID);
+	void rejectOrder(unsigned ID, const MyString& description);
+
+	OrderManager& getOrderManager();
 
 	virtual void serialize(std::ofstream& ofs) const override;
 	virtual void deserialize(std::ifstream& ifs) override;

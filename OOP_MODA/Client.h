@@ -26,6 +26,7 @@ public:
 	unsigned getPoints() const;
 	const MyString& getEGN() const;
 	const Check& getCheck(size_t index) const;
+	Cart& getCart();
 
 	MyVector<Check>& getChecks();
 	OrderManager& getOrderManager();
@@ -59,7 +60,7 @@ public:
 	void recieveCheck(const Check& check);
 
 	void rateOrder(unsigned ProductID, unsigned rating);
-	void confirmOrder(size_t index);
+	void confirmOrder(unsigned ID);
 
 	void listOrders() const;
 	void orderHistory() const;

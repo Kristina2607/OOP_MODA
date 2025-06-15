@@ -7,10 +7,11 @@
 Client::Client() : User(Role::Client) {}
 
 Client::Client(const MyString& name, const MyString& password, const MyString& EGN)
-	:User(name, password, EGN, Role::Client) {}
+	: User(name, password, EGN, Role::Client), cart() {}
 
 Client::Client(const MyString& name, const MyString& password, const MyString& EGN,
-	double wallet, unsigned points, Cart cart) : User(name, password, EGN, Role::Client), wallet(wallet), points(points), cart(cart) { }
+	double wallet, unsigned points, Cart cart) : User(name, password, EGN, Role::Client), wallet(wallet), points(points), cart(cart)
+{ }
 
 double Client::getWallet() const
 {
@@ -30,6 +31,11 @@ const MyString& Client::getEGN() const
 const Check& Client::getCheck(size_t index) const
 {
 	return recievedChecks[index];
+}
+
+Cart& Client::getCart()
+{
+	return cart;
 }
 
 MyVector<Check>& Client::getChecks()
@@ -104,11 +110,13 @@ User* Client::clone() const
 void Client::addToCart(const Item& item, unsigned quantity)
 {
 	cart.addToCart(item, quantity);
+	std::cout << "You successfully added " << quantity << " x " << item.getName() << " to your cart."<<std::endl;
 }
 
 void Client::removeFromCart(const MyString& name, unsigned quantity)
 {
 	cart.removeFromCart(name, quantity);
+	std::cout << "You successfully removed" << quantity << " x " << name << " from your cart."<<std::endl;
 }
 
 void Client::viewCart() const
@@ -204,16 +212,18 @@ Order& Client::checkout()
 	double totalPrice = cart.getTotalPrice();
 	if (wallet < totalPrice)
 	{
-		throw std::logic_error("Not enougn money in the wallet.");
+		throw std::logic_error("Not enough money in the wallet.");
 	}
+
 	wallet -= totalPrice;
 	Order newOrder = cart.toOrder();
-	orders.addOrder(newOrder);
+
+	orders.addOrder(newOrder); 
 	cart.clear_cart();
 
 	std::cout << "Your order is placed successfully! Now is waiting for confirmation." << std::endl;
 
-	return newOrder;
+	return orders.getLastOrder();
 }
 
 void Client::rateOrder(unsigned ProductID, unsigned rating)
@@ -225,18 +235,21 @@ void Client::rateOrder(unsigned ProductID, unsigned rating)
 	}
 }
 
-void Client::confirmOrder(size_t index)
+void Client::confirmOrder(unsigned ID)
 {
-	if (index >= orders.getSize())
+	Order* order = orders.getOrderById(ID);
+	if (!order)
 	{
 		throw std::invalid_argument("Invalid argument");
 	}
-	else if (orders.getOrder(index).statusToString() != "Shipped")
+	else if (order->statusToString() != "Shipped")
 	{
 		throw std::logic_error("This order is not shipped yet.");
 	}
-	orders.getOrder(index).setStatus(Status::Delivered);
-	unsigned earnedPoints = orders.getOrder(index).getTotalPrice() * 5;
+	order->setStatus(Status::Delivered);
+	System::getInstance().getBusiness()->getOrderManager().getOrderById(ID)->setStatus(Status::Delivered);
+
+	unsigned earnedPoints = order->getTotalPrice() * 5;
 	points += earnedPoints;
 	std::cout << "Order confirmed as received. You earned " << earnedPoints << " points." << std::endl;
 }

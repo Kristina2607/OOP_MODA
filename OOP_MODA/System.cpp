@@ -175,8 +175,9 @@ void System::registerUser(const MyString& name, const MyString& password, const 
 	{
 	case Role::Client:
 	{
-		Client client = Client(name, password, EGN);
-		clients.push_back(client);
+		clients.push_back(Client(name, password, EGN));
+		Client& client = clients[clients.getSize() - 1];
+		client.getCart().setClient(&client);
 		loggedUser = &client;
 		break;
 	}
@@ -293,20 +294,6 @@ void System::loadBusiness()
 		business = new Business(file, clients);
 	}
 	file.close();
-}
-
-void System::attachClientsToCheck()
-{
-	for (size_t i = 0; i < clients.getSize(); ++i)
-	{
-		Client& client = clients[i];
-		MyVector<Check>& checks = client.getChecks();
-
-		for (size_t j = 0; j < checks.getSize(); ++j)
-		{
-			Check& check = checks[j];
-		}
-	}
 }
 
 void System::attachClientsToOrders()
@@ -559,9 +546,11 @@ void System::addToCart(unsigned ID, unsigned quantity)
 			if (business->getItemsManager().getItem(i).getId() == ID)
 			{
 				item = business->getItemsManager().getItem(i);
+				client->addToCart(item, quantity);
+				return;
 			}
 		}
-		client->addToCart(item, quantity);
+		throw std::invalid_argument("Item with this ID is not found in the catalog.");
 	}
 }
 
@@ -727,7 +716,7 @@ void System::listOrders() const
 	}
 }
 
-void System::approveOrder(size_t index)
+void System::approveOrder(unsigned ID)
 {
 	if (!loggedUser)
 	{
@@ -741,11 +730,11 @@ void System::approveOrder(size_t index)
 	Business* business = dynamic_cast<Business*>(loggedUser);
 	if (business)
 	{
-		business->approveOrder(index);
+		business->approveOrder(ID);
 	}
 }
 
-void System::rejectOrder(size_t index, const MyString& reason)
+void System::rejectOrder(unsigned ID, const MyString& reason)
 {
 	if (!loggedUser)
 	{
@@ -759,7 +748,7 @@ void System::rejectOrder(size_t index, const MyString& reason)
 	Business* business = dynamic_cast<Business*>(loggedUser);
 	if (business)
 	{
-		business->rejectOrder(index, reason);
+		business->rejectOrder(ID, reason);
 	}
 }
 

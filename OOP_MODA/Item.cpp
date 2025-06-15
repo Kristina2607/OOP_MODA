@@ -36,6 +36,11 @@ void Item::increaseQuantity(unsigned amount)
 	currentQuantity += amount;
 }
 
+void Item::decreaseQuantity(unsigned amount)
+{
+	currentQuantity -= amount;
+}
+
 unsigned Item::getTotalSales() const
 {
 	return totalSales;
@@ -77,6 +82,7 @@ void Item::serialize(std::ofstream& ofs) const
 
 void Item::deserialize(std::ifstream& ifs)
 {
+	ifs.read((char*)(&ID), sizeof(unsigned));
 	name = MyString::readStringFromFile(ifs);
 	description = MyString::readStringFromFile(ifs);
 

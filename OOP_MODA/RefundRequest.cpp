@@ -72,7 +72,7 @@ void RefundRequest::deserialize(std::ifstream& ifs)
 	ifs.read((char*)&ID, sizeof(unsigned));
 	reason = MyString::readStringFromFile(ifs);
 	ifs.read((char*)&isProcessed, sizeof(bool));
-	ifs.read((char*)isApproved, sizeof(bool));
+	ifs.read((char*)&isApproved, sizeof(bool));
 	this->client = client;
 	this->order = order;
 }

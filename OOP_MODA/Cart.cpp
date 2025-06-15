@@ -4,7 +4,8 @@
 
 Cart::Cart(Client* client) : client(client) {}
 
-Cart::Cart(const MyVector<MyPair<Item, unsigned>>& items, Client* client, double totalPrice) : client(client), totalPrice(totalPrice)
+Cart::Cart(const MyVector<MyPair<Item, unsigned>>& items, Client* client,double totalPrice) 
+	: client(client), totalPrice(totalPrice), clientEGN(client->getEGN())
 {
 	for (size_t i = 0; i < items.getSize(); i++)
 	{
@@ -44,6 +45,11 @@ void Cart::removeFromCart(const MyString& name, unsigned quantity)
 		}
 	}
 	throw std::invalid_argument("Item with this name is not found in the cart.");
+}
+
+void Cart::setClient(Client* client)
+{
+	this->client = client;
 }
 
 void Cart::view_cart() const
@@ -105,6 +111,10 @@ const MyVector<MyPair<Item, unsigned>>& Cart::getItems() const
 
 Order Cart::toOrder()
 {
+	if (!client)
+	{
+		throw std::logic_error("Cart has no associated client!");
+	}
 	return Order(items, client, totalPrice, client->getPoints(), Status::Pending);
 }
 
@@ -125,6 +135,7 @@ void Cart::updateTotalPrice()
 
 void Cart::serialize(std::ofstream& ofs) const
 {
+	MyString::writeStringToFile(ofs, clientEGN);
 	ofs.write((const char*)(&totalPrice), sizeof(totalPrice));
 	size_t itemsCount = items.getSize();
 	ofs.write((const char*)(&itemsCount), sizeof(itemsCount));
@@ -139,6 +150,7 @@ void Cart::serialize(std::ofstream& ofs) const
 
 void Cart::deserialize(std::ifstream& ifs, Client* client)
 {
+	clientEGN = MyString::readStringFromFile(ifs);
 	ifs.read((char*)(&totalPrice), sizeof(totalPrice));
 	size_t itemsCount = 0;
 	ifs.read((char*)(&itemsCount), sizeof(itemsCount));
@@ -153,7 +165,7 @@ void Cart::deserialize(std::ifstream& ifs, Client* client)
 
 		items.push_back(MyPair<Item, unsigned>(item, quantity));
 	}
-	this->client = client;
+	this->client=client;
 }
 
 

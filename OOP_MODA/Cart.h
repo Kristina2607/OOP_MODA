@@ -2,6 +2,7 @@
 #include "Item.h"
 #include "MyVector.hpp"
 #include "MyPair.hpp"
+#include "MyString.h"
 #include <fstream>
 
 class Client;
@@ -11,15 +12,17 @@ class Cart
 {
 	MyVector<MyPair<Item, unsigned>> items;
 	Client* client;  //observer pointer -> no rule of five
+	MyString clientEGN;
 	double totalPrice = 0.0;
 
 public:
 	Cart() = default;
 	Cart(Client* client);
-	Cart(const MyVector<MyPair<Item, unsigned>>& items, Client* client, double totalPrice);
+	Cart(const MyVector<MyPair<Item, unsigned>>& items, Client* client,double totalPrice);
 
 	void addToCart(const Item& item, unsigned quantity);
 	void removeFromCart(const MyString& name, unsigned quantity);
+	void setClient(Client* client);
 
 	void view_cart() const;
 	void clear_cart();

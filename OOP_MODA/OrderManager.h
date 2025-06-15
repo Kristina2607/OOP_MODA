@@ -9,7 +9,7 @@ private:
 	MyVector<Order> orders;
 
 public:
-	void removeID(size_t ID);
+	void removeID(unsigned ID);
 	void addOrder(const Order& newOrder);
 	void removeOrder(size_t index);
 
@@ -18,9 +18,10 @@ public:
 	void refundedOrders() const;
 
 	bool isEmpty();
-	Order& getOrder(size_t index) const;
+	const Order& getOrder(size_t index) const;
 	Order& getOrder(size_t index);
-	const Order& getLastOrder() const;
+	Order* getOrderById(unsigned ID);
+	Order& getLastOrder();
 
 	void serialize(std::ofstream& ofs) const;
 	void deserialize(std::ifstream& ifs);

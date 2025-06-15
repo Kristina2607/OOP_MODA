@@ -1,6 +1,6 @@
 #include "OrderManager.h"
 
-void OrderManager::removeID(size_t ID)
+void OrderManager::removeID(unsigned ID)
 {
         for (size_t i = 0; i < orders.getSize(); i++)
         {
@@ -53,13 +53,19 @@ bool OrderManager::isEmpty()
    return orders.empty();
 }
 
-const Order& OrderManager::getLastOrder() const
+Order& OrderManager::getLastOrder() 
 {
-    return orders.back();
+    if (orders.empty())
+    {
+        throw std::logic_error("There are no orders.");
+    }
+    return orders[orders.getSize() - 1];
 }
 
 void OrderManager::serialize(std::ofstream& ofs) const
 {
+    size_t ordersSize = orders.getSize();
+    ofs.write((const char*)&ordersSize, sizeof(ordersSize));
     for (size_t i = 0; i < orders.getSize(); i++)
     {
         orders[i].serialize(ofs);
@@ -68,19 +74,34 @@ void OrderManager::serialize(std::ofstream& ofs) const
 
 void OrderManager::deserialize(std::ifstream& ifs)
 {
-    for (size_t i = 0; i < orders.getSize(); i++)
+    size_t ordersSize = 0;
+    ifs.read((char*)&ordersSize, sizeof(ordersSize));
+    for (size_t i = 0; i < ordersSize; i++)
     {
-        orders[i].deserialize(ifs);
+        Order order;
+        order.deserialize(ifs);
+        orders.push_back(order);
     }
 }
 
-Order& OrderManager::getOrder(size_t index) const
+const Order& OrderManager::getOrder(size_t index) const
 {
-    return getOrder(index);
+    return orders[index];
 }
 
 Order& OrderManager::getOrder(size_t index)
 {
-    return getOrder(index);
+    return orders[index];
+}
+
+Order* OrderManager::getOrderById(unsigned ID)
+{
+    for (size_t i = 0; i < orders.getSize(); i++)
+    {
+        if (orders[i].getID() == ID) {
+            return &orders[i];
+        }
+    }
+    return nullptr;
 }
 

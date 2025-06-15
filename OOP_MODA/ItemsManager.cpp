@@ -75,6 +75,8 @@ const Item& ItemsManager::getLastItem() const
 
 void ItemsManager::serialize(std::ofstream& ofs) const
 {
+	size_t itemsCount = items.getSize();
+	ofs.write((const char*)&itemsCount, sizeof(itemsCount));
 	for (size_t i = 0; i < items.getSize(); i++)
 	{
 		items[i].serialize(ofs);
@@ -83,8 +85,12 @@ void ItemsManager::serialize(std::ofstream& ofs) const
 
 void ItemsManager::deserialize(std::ifstream& ifs)
 {
-	for (size_t i = 0; i < items.getSize(); i++)
+	size_t itemsCount = 0;
+	ifs.read((char*)&itemsCount, sizeof(itemsCount));
+	for (size_t i = 0; i < itemsCount; i++)
 	{
-		items[i].deserialize(ifs);
+		Item item;
+		item.deserialize(ifs);
+		items.push_back(item);
 	}
 }
