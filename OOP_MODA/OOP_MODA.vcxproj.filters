@@ -195,9 +195,6 @@
     <ClCompile Include="OrderHistory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="StreamUtils.cpp">
-      <Filter>Utilis</Filter>
-    </ClCompile>
     <ClCompile Include="LoadComamnd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -367,9 +364,6 @@
     </ClInclude>
     <ClInclude Include="OrderHistory.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="StreamUtils.h">
-      <Filter>Utilis</Filter>
     </ClInclude>
     <ClInclude Include="LoadCommand.h">
       <Filter>Header Files</Filter>
