@@ -121,6 +121,11 @@ void System::run()
 		{
 			std::cout << ex.what() << std::endl;
 		}
+		
+		if (command)
+		{
+			delete command;
+		}
 	}
 }
 

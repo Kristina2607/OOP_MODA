@@ -43,7 +43,6 @@ public:
 	void loadSystem();
 	void loadAdministrator();
 	void loadBusiness();
-	void attachClientsToCarts();//ot cseki klient vzimam check i go pulnq v admina
 	void attachClientsToOrders();
 	void loadClients();
 
