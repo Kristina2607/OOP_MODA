@@ -105,6 +105,7 @@ void Business::approveOrder(unsigned ID)
 	}
 	order->setStatus(Status::Shipped);
 	order->getClient()->getOrderManager().getOrderById(ID)->setStatus(Status::Shipped);
+	
 	std::cout << "Order #" << ID << " is approved and shipped. " << std::endl;
 }
 

@@ -28,7 +28,6 @@ private:
 	Status status;
 
 	bool isRefunded = false;
-	bool usedDiscount = false;
 
 public:
 	Order() = default;
@@ -50,7 +49,6 @@ public:
 	const char* statusToString() const;
 
 	void markAsRefunded();
-	bool hasUsedDiscount() const;
 	bool getIsRefunded() const;
 
 	void printOrder() const;

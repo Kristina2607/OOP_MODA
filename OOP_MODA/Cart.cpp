@@ -4,8 +4,8 @@
 
 Cart::Cart(Client* client) : client(client) {}
 
-Cart::Cart(const MyVector<MyPair<Item, unsigned>>& items, Client* client,double totalPrice) 
-	: client(client), totalPrice(totalPrice), clientEGN(client->getEGN())
+Cart::Cart(const MyVector<MyPair<Item, unsigned>>& items, Client* client,double totalPrice, bool hasUsedDiscount) 
+	: client(client), totalPrice(totalPrice), clientEGN(client->getEGN()), hasUsedDiscount(false)
 {
 	for (size_t i = 0; i < items.getSize(); i++)
 	{
@@ -74,12 +74,17 @@ void Cart::applyDiscount()
 {
 	double maxAllowedDiscount = totalPrice * 0.5;
 	double currentDiscount = client->getPoints() * 0.01;
+	if (hasUsedDiscount)
+	{
+		throw std::logic_error("You can not use discount twice.");
+	}
 	if (currentDiscount>maxAllowedDiscount)
 	{
 		std::cout << "The total price remains the same." << std::endl;
 		throw std::logic_error("You can not exceed more than 50% of the price.");
 	}
 	totalPrice -= currentDiscount;
+	hasUsedDiscount = true;
 }
 
 void Cart::removeDiscount()

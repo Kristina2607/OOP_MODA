@@ -14,11 +14,12 @@ class Cart
 	Client* client;  //observer pointer -> no rule of five
 	MyString clientEGN;
 	double totalPrice = 0.0;
+	bool hasUsedDiscount = false;
 
 public:
 	Cart() = default;
 	Cart(Client* client);
-	Cart(const MyVector<MyPair<Item, unsigned>>& items, Client* client,double totalPrice);
+	Cart(const MyVector<MyPair<Item, unsigned>>& items, Client* client,double totalPrice, bool hasUsedDiscount);
 
 	void addToCart(const Item& item, unsigned quantity);
 	void removeFromCart(const MyString& name, unsigned quantity);

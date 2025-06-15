@@ -4,17 +4,7 @@
 unsigned Order::NextOrderID = 1;
 
 Order::Order(MyVector<MyPair<Item, unsigned>> items, Client* client, double totalPrice, unsigned points, Status status)
-//: ID(NextOrderID++), items(items), client(client), totalPrice(totalPrice), points(points), status(status), clientEGN(client->getEGN()) 
-{
-	this->ID = NextOrderID++;
-	this->items = items;
-	this->client = client;
-	this->totalPrice = totalPrice;
-	this->points = points;
-	this->status = status;
-	this->clientEGN = client->getEGN();
-
-}
+ :ID(NextOrderID++), items(items), client(client), totalPrice(totalPrice), points(points), status(status), clientEGN(client->getEGN()) {}
 
 double Order::getTotalPrice() const
 {
@@ -87,11 +77,6 @@ void Order::markAsRefunded()
 	isRefunded = true;
 }
 
-bool Order::hasUsedDiscount() const
-{
-	return usedDiscount;
-}
-
 bool Order::getIsRefunded() const
 {
 	return isRefunded;
@@ -119,7 +104,6 @@ void Order::serialize(std::ofstream& ofs) const
 	ofs.write((const char*)(&totalPrice), sizeof(double));
 	ofs.write((const char*)(&status), sizeof(Status));
 	ofs.write((const char*)(&isRefunded), sizeof(bool));
-	ofs.write((const char*)(&usedDiscount), sizeof(bool));
 	MyString::writeStringToFile(ofs, clientEGN);
 
 	size_t itemsCount = items.getSize();
@@ -139,7 +123,6 @@ void Order::deserialize(std::ifstream& ifs)
 	ifs.read((char*)(&totalPrice), sizeof(double));
 	ifs.read((char*)(&status), sizeof(Status));
 	ifs.read((char*)(&isRefunded), sizeof(bool));
-	ifs.read((char*)(&usedDiscount), sizeof(bool));
 	clientEGN = MyString::readStringFromFile(ifs);
 
 	size_t itemsCount = 0;
