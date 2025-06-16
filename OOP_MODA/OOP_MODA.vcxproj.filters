@@ -201,6 +201,9 @@
     <ClCompile Include="ListOrdersClient.cpp">
       <Filter>Commands\ClientCommands</Filter>
     </ClCompile>
+    <ClCompile Include="RateCommand.cpp">
+      <Filter>Commands\ClientCommands</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Item.h">
@@ -369,6 +372,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ListOrdersClient.h">
+      <Filter>Commands\ClientCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="RateCommand.h">
       <Filter>Commands\ClientCommands</Filter>
     </ClInclude>
   </ItemGroup>

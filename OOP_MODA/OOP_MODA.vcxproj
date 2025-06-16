@@ -162,6 +162,7 @@
     <ClCompile Include="Order.cpp" />
     <ClCompile Include="OrderHistory.cpp" />
     <ClCompile Include="OrderManager.cpp" />
+    <ClCompile Include="RateCommand.cpp" />
     <ClCompile Include="Redeem.cpp" />
     <ClCompile Include="RefundedOrders.cpp" />
     <ClCompile Include="RefundRequest.cpp" />
@@ -219,6 +220,7 @@
     <ClInclude Include="Order.h" />
     <ClInclude Include="OrderHistory.h" />
     <ClInclude Include="OrderManager.h" />
+    <ClInclude Include="RateCommand.h" />
     <ClInclude Include="Redeem.h" />
     <ClInclude Include="RefundedOrders.h" />
     <ClInclude Include="RefundRequest.h" />

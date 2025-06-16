@@ -13,17 +13,20 @@ private:
 	MyString description;
 
 	double price = 0;
-	double rating = 0;
-	bool availability = false;
+	unsigned totalRating = 0;
+	unsigned numberOfRatings = 0;
+
+	bool isAvailable = false;
 
 	unsigned initialQuantity = 0;
 	unsigned currentQuantity = 0;
 
 public:
 	Item();
-	Item(const MyString& name, const MyString& description, double price, double rating, unsigned initialQuantity, bool availability);
+	Item(const MyString& name, const MyString& description, double price, unsigned totalRating, 
+		unsigned numberOfRatings, unsigned initialQuantity, bool availability);
 
-	unsigned getId() const;
+	unsigned getID() const;
 	MyString getName() const;
 	double getPrice() const;
 	unsigned getRating() const;
@@ -38,6 +41,10 @@ public:
 	void addSales(unsigned quantity);
 
 	void printItem() const;
+
+	void addRating(unsigned stars);
+	void removeRating(unsigned stars);
+	double getAverageRating() const;
 
 	void serialize(std::ofstream& ofs) const;
 	void deserialize(std::ifstream& ifs);

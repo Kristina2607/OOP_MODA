@@ -24,6 +24,7 @@
 #include "ConfirmOrder.h"
 #include "ListOrdersClient.h"
 #include "OrderHistory.h"
+#include "RateCommand.h"
 
 //Business
 #include "ListOrders.h"
@@ -141,6 +142,10 @@ Command* CommandFactory::getCommand(const MyString& text)
 	else if (text == "order_history")
 	{
 		return new OrderHistory(System::getInstance());
+	}
+	else if (text == "rate")
+	{
+		return new RateCommand(System::getInstance());
 	}
 
 	//Business:

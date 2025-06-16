@@ -56,7 +56,7 @@ void RefundRequest::process()
 
 void RefundRequest::printRefundRequest() const
 {
-	std::cout << ID << "|" << client->getName() << "|" << order->getTotalPrice() << "|" << "Reason: " << reason;
+	std::cout << ID << "|" << client->getName() << "|" << order->getTotalPrice() << "|" << "Reason: " << reason << std::endl;
 }
 
 void RefundRequest::serialize(std::ofstream& ofs) const

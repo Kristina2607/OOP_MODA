@@ -65,6 +65,7 @@ public:
 	void refundedOrders() const;
 	void orderHistory() const;
 	void requestRefund(const MyString& reason);
+	void rateOrder(unsigned productID, unsigned rating);
 
 	//Business commands:
 	void addItem(const MyString& name, double price, unsigned quantity, const MyString& description);

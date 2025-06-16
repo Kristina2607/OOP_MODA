@@ -1,12 +1,12 @@
 #include "Item.h"
 
 unsigned Item::nextID = 1;
-Item::Item(): ID(0), name(""), price(0), rating(0), initialQuantity(0), availability(false) {}
+Item::Item(): ID(0), name(""), price(0), totalRating(0), initialQuantity(0), isAvailable(false) {}
 
-Item::Item(const MyString& name, const MyString& description, double price, double rating, unsigned quantity, bool availability)
-	:ID(nextID++), name(name), description(description), price(price), rating(rating), initialQuantity(quantity), currentQuantity(quantity), availability(availability) {}
+Item::Item(const MyString& name, const MyString& description, double price, unsigned totalRating, unsigned numberOfRatings, unsigned quantity, bool availability)
+	:ID(nextID++), name(name), description(description), price(price), totalRating(totalRating), numberOfRatings(numberOfRatings), initialQuantity(quantity), currentQuantity(quantity), isAvailable(availability) {}
 
-unsigned Item::getId() const
+unsigned Item::getID() const
 {
 	return ID;
 }
@@ -58,12 +58,37 @@ double Item::getPrice() const
 
 unsigned Item::getRating() const
 {
-	return rating;
+	return totalRating;
 }
 
 void Item::printItem() const
 {
-	std::cout << ID << " | "<< name << " | " << price << "BGN | " << rating << " stars |" << currentQuantity << " quantity" << std::endl;
+	std::cout << ID << " | "<< name << " | " << price << "BGN | " << getAverageRating() << " stars |" << currentQuantity << " quantity" << std::endl;
+}
+
+void Item::addRating(unsigned stars)
+{
+	numberOfRatings++;
+	totalRating += stars;
+}
+
+void Item::removeRating(unsigned stars)
+{
+	if (numberOfRatings == 0)
+	{
+		return;
+	}
+	totalRating -= stars;
+	numberOfRatings--;
+}
+
+double Item::getAverageRating() const
+{
+	if (numberOfRatings == 0)
+	{
+		return 0;
+	}
+	return static_cast<double>(totalRating) / numberOfRatings;
 }
 
 void Item::serialize(std::ofstream& ofs) const
@@ -74,8 +99,9 @@ void Item::serialize(std::ofstream& ofs) const
 	
 	ofs.write((const char*)(&totalSales), sizeof(unsigned));
 	ofs.write((const char*)(&price), sizeof(double));
-	ofs.write((const char*)(&rating), sizeof(double));
-	ofs.write((const char*)(&availability), sizeof(bool));
+	ofs.write((const char*)(&totalRating), sizeof(double));
+	ofs.write((const char*)(&numberOfRatings), sizeof(unsigned));
+	ofs.write((const char*)(&isAvailable), sizeof(bool));
 	ofs.write((const char*)(&initialQuantity), sizeof(unsigned));
 	ofs.write((const char*)(&currentQuantity), sizeof(unsigned));
 }
@@ -88,8 +114,9 @@ void Item::deserialize(std::ifstream& ifs)
 
 	ifs.read((char*)(&totalSales), sizeof(unsigned));
 	ifs.read((char*)(&price), sizeof(double));
-	ifs.read((char*)(&rating), sizeof(double));
-	ifs.read((char*)(&availability), sizeof(bool));
+	ifs.read((char*)(&totalRating), sizeof(double));
+	ifs.read((char*)(&numberOfRatings), sizeof(unsigned));
+	ifs.read((char*)(&isAvailable), sizeof(bool));
 	ifs.read((char*)(&initialQuantity), sizeof(unsigned));
 	ifs.read((char*)(&currentQuantity), sizeof(unsigned));
 }

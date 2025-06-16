@@ -59,7 +59,7 @@ public:
 	void redeemCheck(const MyString& check);
 	void recieveCheck(const Check& check);
 
-	void rateOrder(unsigned ProductID, unsigned rating);
+	void rateOrder(unsigned productID, unsigned rating);
 	void confirmOrder(unsigned ID);
 
 	void listOrders() const;

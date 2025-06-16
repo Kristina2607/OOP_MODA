@@ -62,6 +62,11 @@ Order& OrderManager::getLastOrder()
     return orders[orders.getSize() - 1];
 }
 
+const MyVector<Order>& OrderManager::getOrders() const
+{
+    return orders;
+}
+
 void OrderManager::serialize(std::ofstream& ofs) const
 {
     size_t ordersSize = orders.getSize();

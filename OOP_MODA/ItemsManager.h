@@ -19,6 +19,7 @@ public:
 	Item* findByID(unsigned ID);
 
 	Item& getItem(size_t index);
+	Item& getItemByID(unsigned ID);
 	const Item& getItem(size_t index) const;
 	const Item& getLastItem() const;
 

@@ -31,7 +31,7 @@ void Business::help() const
 	std::cout << "You are allowed to:" << std::endl;
 
 	std::cout << "> add_item" << std::endl;
-	std::cout << "> remove_item." << std::endl;
+	std::cout << "> remove_item" << std::endl;
 	std::cout << "> view_revenue" << std::endl;
 	std::cout << "> approve_order" << std::endl;
 	std::cout << "> reject_order" << std::endl;
@@ -41,8 +41,8 @@ void Business::help() const
 	std::cout << "> list_pending_orders" << std::endl;
 
 	std::cout << "> list_refunds" << std::endl;
-	std::cout << "> approve_refunds" << std::endl;
-	std::cout << "> reject_refunds" << std::endl;
+	std::cout << "> approve_refund" << std::endl;
+	std::cout << "> reject_refund" << std::endl;
 }
 
 User* Business::clone() const
@@ -66,7 +66,7 @@ void Business::removeItem(const MyString& name)
 
 void Business::addItem(const MyString& name, double price, unsigned quantity, const MyString& description)
 {
-	Item newItem = Item(name, description, price, 0, quantity, 1);
+	Item newItem = Item(name, description, price,0, 0, quantity, 1);
 	items.addItem(newItem);
 	std::cout << name << " is added successffully." << std::endl;
 }
@@ -86,7 +86,7 @@ bool Business::hasProduct(unsigned ID)
 	return items.isAvailable(ID);
 }
 
-const ItemsManager& Business::getItemsManager() const
+ItemsManager& Business::getItemsManager() 
 {
 	return items;
 }
@@ -110,7 +110,7 @@ void Business::approveOrder(unsigned ID)
 		const Item& orderedItem = orderItems[i].first;
 		unsigned orderedQuantity = orderItems[i].second;
 
-		Item* itemInManager = items.findByID(orderedItem.getId());
+		Item* itemInManager = items.findByID(orderedItem.getID());
 
 		itemInManager->decreaseQuantity(orderedQuantity);
 	}

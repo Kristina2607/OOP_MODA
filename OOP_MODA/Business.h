@@ -32,7 +32,7 @@ public:
 	void listProducts() const;
 	void viewProduct(unsigned ID) const;
 	bool hasProduct(unsigned ID);
-	const ItemsManager& getItemsManager() const;
+	ItemsManager& getItemsManager();
 
 	void listRefunds() const;
 	void recieveRefundRequest(RefundRequest* newRequest);

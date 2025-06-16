@@ -547,7 +547,7 @@ void System::addToCart(unsigned ID, unsigned quantity)
 		Item item;
 		for (size_t i = 0; i < business->getItemsManager().getSize(); i++)
 		{
-			if (business->getItemsManager().getItem(i).getId() == ID)
+			if (business->getItemsManager().getItem(i).getID() == ID)
 			{
 				item = business->getItemsManager().getItem(i);
 				client->addToCart(item, quantity);
@@ -645,6 +645,28 @@ void System::requestRefund(const MyString& reason)
 	{
 		RefundRequest* request = client->requestRefund(reason);
 		business->recieveRefundRequest(request);
+	}
+}
+
+void System::rateOrder(unsigned productID, unsigned rating)
+{
+	if (!loggedUser)
+	{
+		throw std::logic_error("No user logged in.");
+	}
+	if (loggedUser->getRole() != Role::Client)
+	{
+		throw std::logic_error("You cannot do this action");
+	}
+
+	Client* client = dynamic_cast<Client*>(loggedUser);
+	if (client)
+	{
+		client->rateOrder(productID, rating);
+		Item& item = System::getInstance().getBusiness()->getItemsManager().getItem(productID);
+
+		item.addRating(rating);
+		std::cout << "Thank you for rating this item."<<std::endl;
 	}
 }
 

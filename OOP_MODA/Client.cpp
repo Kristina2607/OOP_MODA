@@ -164,8 +164,7 @@ void Client::redeemCheck(const MyString& code)
 	targetCheck->redeem();
 	wallet += targetCheck->getSum();
 
-	std::cout << "Successfully redeemed check for " << targetCheck->getSum()
-		<< " BGN. New balance: " << wallet << " BGN\n";
+	std::cout << "Successfully redeemed check for " << targetCheck->getSum() << " BGN. " << std::endl;
 }
 
 void Client::recieveCheck(const Check& check)
@@ -194,10 +193,6 @@ RefundRequest* Client::requestRefund(const MyString& reason)
 		throw std::logic_error("There are no orders. ");
 	}
 	const Order& lastOrder = orders.getLastOrder();
-	if (lastOrder.statusToString() != "Delivered")
-	{
-		throw std::logic_error("This order is not delivered yet.");
-	}
 
 	RefundRequest* request = new RefundRequest(reason, &lastOrder, const_cast<Client*>(this));
 	this->points = 0;
@@ -226,11 +221,37 @@ Order& Client::checkout()
 	return orders.getLastOrder();
 }
 
-void Client::rateOrder(unsigned ProductID, unsigned rating)
+void Client::rateOrder(unsigned productID, unsigned rating)
 {
 	if (rating < 1 || rating > 5)
 	{
 		std::cout << "Rating must be between 1 and 5." << std::endl;
+		return;
+	}
+	
+	bool hasPurchased = false;
+	for (size_t i = 0; i < orders.getOrders().getSize(); i++)
+	{
+		const Order& order = orders.getOrders()[i];
+
+		const MyVector<MyPair<Item, unsigned>>& items = order.getItems();
+		for (size_t j = 0; j < items.getSize(); j++)
+		{
+			if (items[j].first.getID() == productID)
+			{
+				hasPurchased = true;
+				break;
+			}
+		}
+		if (hasPurchased)
+		{
+			break;
+		}
+	}
+
+	if (!hasPurchased)
+	{
+		throw std::logic_error("You haven't purchased this item yet.");
 		return;
 	}
 }

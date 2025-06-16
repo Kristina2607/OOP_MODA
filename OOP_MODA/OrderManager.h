@@ -22,6 +22,7 @@ public:
 	Order& getOrder(size_t index);
 	Order* getOrderById(unsigned ID);
 	Order& getLastOrder();
+	const MyVector<Order>& getOrders() const;
 
 	void serialize(std::ofstream& ofs) const;
 	void deserialize(std::ifstream& ifs);

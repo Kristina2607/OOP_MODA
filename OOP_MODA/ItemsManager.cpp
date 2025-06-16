@@ -4,7 +4,7 @@ void ItemsManager::viewProduct(unsigned ID) const
 {
 	for (size_t i = 0; i < items.getSize(); i++)
 	{
-		if (items[i].getId() == ID)
+		if (items[i].getID() == ID)
 		{
 			items[i].printItem();
 		}
@@ -38,7 +38,7 @@ bool ItemsManager::isAvailable(unsigned ID)
 {
 	for (size_t i = 0; i < items.getSize(); i++)
 	{
-		if (items[i].getId() == ID)
+		if (items[i].getID() == ID)
 		{
 			return true;
 		}
@@ -50,18 +50,30 @@ Item* ItemsManager::findByID(unsigned ID)
 {
 	for (size_t i = 0; i < items.getSize(); i++)
 	{
-		if (items[i].getId() == ID)
+		if (items[i].getID() == ID)
 		{
 			return &items[i];
 		}
 	}
-	return nullptr;
+	throw std::logic_error("There is no item with this ID");
 }
 
 
 Item& ItemsManager::getItem(size_t index)
 {
 	return items[index];
+}
+
+Item& ItemsManager::getItemByID(unsigned ID)
+{
+	for (size_t i = 0; i < items.getSize(); i++)
+	{
+		if (items[i].getID() == ID)
+		{
+			return items[i];
+		}
+	}
+	throw std::logic_error("There is no item with this ID");
 }
 
 const Item& ItemsManager::getItem(size_t index) const
