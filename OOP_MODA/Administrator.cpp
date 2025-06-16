@@ -20,7 +20,7 @@ void Administrator::help() const
 {
 	std::cout << "You are allowed to:" << std::endl;
 	std::cout << "> send_checks" << std::endl;
-	std::cout << "> customer_insights" << std::endl;
+	std::cout << "> customers_insights" << std::endl;
 	std::cout << "> view_transactions" << std::endl;
 }
 

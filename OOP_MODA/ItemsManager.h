@@ -16,7 +16,7 @@ public:
 	void addItem(const Item& obj);
 	void erase(size_t index);
 	bool isAvailable(unsigned ID);
-	const Item* findByID(unsigned ID);
+	Item* findByID(unsigned ID);
 
 	Item& getItem(size_t index);
 	const Item& getItem(size_t index) const;

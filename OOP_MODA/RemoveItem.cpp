@@ -6,7 +6,6 @@ void RemoveItem::execute()
 {
 	std::cout << "Enter name: ";
 	char bufferName[1024];
-	std::cin.ignore();
 	std::cin.getline(bufferName, sizeof(bufferName));
 	MyString name(bufferName);
 

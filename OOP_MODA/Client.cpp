@@ -116,7 +116,7 @@ void Client::addToCart(const Item& item, unsigned quantity)
 void Client::removeFromCart(const MyString& name, unsigned quantity)
 {
 	cart.removeFromCart(name, quantity);
-	std::cout << "You successfully removed" << quantity << " x " << name << " from your cart."<<std::endl;
+	std::cout << "You successfully removed " << quantity << " x " << name << " from your cart."<<std::endl;
 }
 
 void Client::viewCart() const

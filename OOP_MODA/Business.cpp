@@ -1,4 +1,4 @@
-#include "Business.h"
+﻿#include "Business.h"
 #include "Order.h"
 #include "Client.h"
 #include "Role.h"
@@ -103,6 +103,18 @@ void Business::approveOrder(unsigned ID)
 	{
 		throw std::invalid_argument("No order with such ID exists!");
 	}
+
+	const MyVector<MyPair<Item, unsigned>>& orderItems = order->getItems();
+	for (size_t i = 0; i < orderItems.getSize(); ++i)
+	{
+		const Item& orderedItem = orderItems[i].first;
+		unsigned orderedQuantity = orderItems[i].second;
+
+		Item* itemInManager = items.findByID(orderedItem.getId());
+
+		itemInManager->decreaseQuantity(orderedQuantity);
+	}
+
 	order->setStatus(Status::Shipped);
 	order->getClient()->getOrderManager().getOrderById(ID)->setStatus(Status::Shipped);
 	

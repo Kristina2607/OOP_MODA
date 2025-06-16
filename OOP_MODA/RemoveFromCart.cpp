@@ -4,9 +4,11 @@ RemoveFromCart::RemoveFromCart(System& system) :Command(system) {}
 
 void RemoveFromCart::execute()
 {
-	MyString name;
 	std::cout << "Enter name: ";
-	std::cin >> name;
+	char bufferName[1024];
+	std::cin.ignore();
+	std::cin.getline(bufferName, sizeof(bufferName));
+	MyString name(bufferName);
 
 	unsigned quantity;
 	std::cout << "Enter quantity: ";

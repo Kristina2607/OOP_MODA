@@ -46,7 +46,7 @@ bool ItemsManager::isAvailable(unsigned ID)
 	return false;
 }
 
-const Item* ItemsManager::findByID(unsigned ID)
+Item* ItemsManager::findByID(unsigned ID)
 {
 	for (size_t i = 0; i < items.getSize(); i++)
 	{
@@ -57,6 +57,7 @@ const Item* ItemsManager::findByID(unsigned ID)
 	}
 	return nullptr;
 }
+
 
 Item& ItemsManager::getItem(size_t index)
 {
