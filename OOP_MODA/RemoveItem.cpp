@@ -4,8 +4,11 @@ RemoveItem::RemoveItem(System& system) :Command(system) {}
 
 void RemoveItem::execute()
 {
-	MyString name;
 	std::cout << "Enter name: ";
-	std::cin >> name;
+	char bufferName[1024];
+	std::cin.ignore();
+	std::cin.getline(bufferName, sizeof(bufferName));
+	MyString name(bufferName);
+
 	system.removeItem(name);
 }
