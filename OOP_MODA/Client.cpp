@@ -290,7 +290,7 @@ void Client::orderHistory() const
 {
 	for (size_t i = 0; i < orders.getSize(); i++)
 	{
-		if (orders.getOrder(i).statusToString() == "Delivered")
+		if (System::getInstance().getBusiness()->getOrderManager().getOrder(i).getOrderStatus() == Status::Delivered)
 		{
 			orders.getOrder(i).printOrder();
 		}

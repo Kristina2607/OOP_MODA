@@ -36,6 +36,7 @@ public:
 	double getTotalPrice() const;
 	unsigned getPoints() const;
 	unsigned getID() const;
+	Status getOrderStatus() const;
 
 	Client* getClient() const;
 	const MyString& getClientEgn() const;

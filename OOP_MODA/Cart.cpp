@@ -60,8 +60,7 @@ void Cart::view_cart() const
 		std::cout << (i + 1) << ". " << items[i].second << "x " << items[i].first.getName() << " | " 
 			<< (items[i].first.getPrice() * items[i].second) << " BGN" << std::endl;
 	}
-	std::cout << "Total price without the discount: " << totalPrice << " BGN" << std::endl;
-	std::cout << "Total price with the discount: " << getDiscountedPrice() << " BGN" << std::endl;
+	std::cout << "Total price: " << totalPrice << " BGN" << std::endl;
 }
 
 void Cart::clear_cart()
@@ -80,7 +79,6 @@ void Cart::applyDiscount()
 	}
 	if (currentDiscount>maxAllowedDiscount)
 	{
-		std::cout << "The total price remains the same." << std::endl;
 		throw std::logic_error("You can not exceed more than 50% of the price.");
 	}
 	totalPrice -= currentDiscount;
@@ -104,7 +102,7 @@ double Cart::getDiscountedPrice() const
 	double maxAllowedeDiscount = 0.5 * totalPrice;
 	if (currentDiscount > maxAllowedeDiscount)
 	{
-		return totalPrice;
+		currentDiscount=maxAllowedeDiscount;
 	}
 	return (totalPrice - currentDiscount);
 }

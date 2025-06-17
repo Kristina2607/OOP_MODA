@@ -200,9 +200,13 @@ void Business::approveRefund(size_t index)
 		throw std::invalid_argument("Invalid index.");
 	}
 	RefundRequest& request = refundRequests[index];
-	request.approve();
 
 	const Order* order = request.getOrder();
+	if (!order)
+	{
+		throw std::logic_error("Order not found.");
+	}
+
 	const MyVector<MyPair<Item, unsigned>>& returnedItems = order->getItems();
 	for (size_t i = 0; i < returnedItems.getSize(); i++)
 	{
@@ -221,6 +225,7 @@ void Business::approveRefund(size_t index)
 
 	request.getClient()->recieveRefund(request.getOrder()->getTotalPrice());
 	request.getClient()->getOrderManager().removeOrder(order->getID());
+	request.approve();
 	refundRequests.erase(index);
 	std::cout << "Refund is approved. The sum is returned to " << request.getClient()->getName();
 }

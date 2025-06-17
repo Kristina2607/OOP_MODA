@@ -21,6 +21,11 @@ unsigned Order::getID() const
 	return ID;
 }
 
+Status Order::getOrderStatus() const
+{
+	return status;
+}
+
 Client* Order::getClient() const
 {
 	return client;
