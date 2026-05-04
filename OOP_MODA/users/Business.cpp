@@ -201,7 +201,8 @@ void Business::approveRefund(size_t index)
 	}
 	RefundRequest& request = refundRequests[index];
 
-	const Order* order = request.getOrder();
+	Order* order = orders.getOrderById(request.getOrder()->getID());
+	Client* client = request.getClient();
 	if (!order)
 	{
 		throw std::logic_error("Order not found.");
@@ -210,16 +211,13 @@ void Business::approveRefund(size_t index)
 	const MyVector<MyPair<Item, unsigned>>& returnedItems = order->getItems();
 	for (size_t i = 0; i < returnedItems.getSize(); i++)
 	{
-		const MyString& name = returnedItems[i].first.getName();
+		unsigned itemID = returnedItems[i].first.getID();
 		unsigned quantity = returnedItems[i].second;
 
-		for (size_t j = 0; j < items.getSize(); j++)
+		Item* item = items.findByID(itemID);
+		if (item)
 		{
-			if (items.getItem(j).getName() == name)
-			{
-				items.getItem(j).increaseQuantity(quantity);
-				break;
-			}
+			item->increaseQuantity(quantity);
 		}
 	}
 

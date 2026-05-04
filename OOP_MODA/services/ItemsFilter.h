@@ -13,6 +13,7 @@ class FilterByRating: public ItemsFilter
 {
 public:
 	virtual void filter(MyVector<Item>& items) override;
+
 };
 
 class FilterByPrice : public ItemsFilter

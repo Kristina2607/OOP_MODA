@@ -192,9 +192,6 @@
     <ClCompile Include="ApproveOrder.cpp">
       <Filter>Commands\Business Commands</Filter>
     </ClCompile>
-    <ClCompile Include="OrderHistory.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="LoadComamnd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -202,6 +199,9 @@
       <Filter>Commands\ClientCommands</Filter>
     </ClCompile>
     <ClCompile Include="RateCommand.cpp">
+      <Filter>Commands\ClientCommands</Filter>
+    </ClCompile>
+    <ClCompile Include="OrderHistory.cpp">
       <Filter>Commands\ClientCommands</Filter>
     </ClCompile>
   </ItemGroup>
@@ -365,9 +365,6 @@
     <ClInclude Include="ApproveOrder.h">
       <Filter>Commands\Business Commands</Filter>
     </ClInclude>
-    <ClInclude Include="OrderHistory.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="LoadCommand.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -375,6 +372,9 @@
       <Filter>Commands\ClientCommands</Filter>
     </ClInclude>
     <ClInclude Include="RateCommand.h">
+      <Filter>Commands\ClientCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="OrderHistory.h">
       <Filter>Commands\ClientCommands</Filter>
     </ClInclude>
   </ItemGroup>
