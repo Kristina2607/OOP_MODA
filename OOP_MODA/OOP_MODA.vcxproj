@@ -18,6 +18,124 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="commands\AdministratorCommands\CustomerInsignts.cpp" />
+    <ClCompile Include="commands\AdministratorCommands\SendCheck.cpp" />
+    <ClCompile Include="commands\BusinessCommands\AddItem.cpp" />
+    <ClCompile Include="commands\BusinessCommands\ApproveOrder.cpp" />
+    <ClCompile Include="commands\BusinessCommands\ApproveRefund.cpp" />
+    <ClCompile Include="commands\BusinessCommands\ListBestSellingProducts.cpp" />
+    <ClCompile Include="commands\BusinessCommands\ListOrders.cpp" />
+    <ClCompile Include="commands\BusinessCommands\ListPendingOrders.cpp" />
+    <ClCompile Include="commands\BusinessCommands\ListRefunds.cpp" />
+    <ClCompile Include="commands\BusinessCommands\RefundedOrders.cpp" />
+    <ClCompile Include="commands\BusinessCommands\RejectOrder.cpp" />
+    <ClCompile Include="commands\BusinessCommands\RejectRefund.cpp" />
+    <ClCompile Include="commands\BusinessCommands\RemoveItem.cpp" />
+    <ClCompile Include="commands\BusinessCommands\ViewRevenue.cpp" />
+    <ClCompile Include="commands\ClientCommands\AddToCart.cpp" />
+    <ClCompile Include="commands\ClientCommands\ApplyDiscount.cpp" />
+    <ClCompile Include="commands\ClientCommands\CheckBalance.cpp" />
+    <ClCompile Include="commands\ClientCommands\Checkout.cpp" />
+    <ClCompile Include="commands\ClientCommands\ConfirmOrder.cpp" />
+    <ClCompile Include="commands\ClientCommands\ListOrdersClient.cpp" />
+    <ClCompile Include="commands\ClientCommands\ListProducts.cpp" />
+    <ClCompile Include="commands\ClientCommands\OrderHistory.cpp" />
+    <ClCompile Include="commands\ClientCommands\RateCommand.cpp" />
+    <ClCompile Include="commands\ClientCommands\Redeem.cpp" />
+    <ClCompile Include="commands\ClientCommands\RemoveDiscount.cpp" />
+    <ClCompile Include="commands\ClientCommands\RemoveFromCart.cpp" />
+    <ClCompile Include="commands\ClientCommands\RequestRefund.cpp" />
+    <ClCompile Include="commands\ClientCommands\ViewCart.cpp" />
+    <ClCompile Include="commands\ClientCommands\ViewProduct.cpp" />
+    <ClCompile Include="commands\SystemCommands\HelpCommand.cpp" />
+    <ClCompile Include="commands\SystemCommands\InvalidCommand.cpp" />
+    <ClCompile Include="commands\SystemCommands\LoadComamnd.cpp" />
+    <ClCompile Include="commands\SystemCommands\LoginCommand.cpp" />
+    <ClCompile Include="commands\SystemCommands\LogoutCommand.cpp" />
+    <ClCompile Include="commands\SystemCommands\RegisterCommand.cpp" />
+    <ClCompile Include="commands\SystemCommands\SaveCommand.cpp" />
+    <ClCompile Include="commands\SystemCommands\ViewProfile.cpp" />
+    <ClCompile Include="commands\UserCommands\Command.cpp" />
+    <ClCompile Include="commands\UserCommands\CommandFactory.cpp" />
+    <ClCompile Include="main\OOP_MODA.cpp" />
+    <ClCompile Include="models\Cart.cpp" />
+    <ClCompile Include="models\Check.cpp" />
+    <ClCompile Include="models\Item.cpp" />
+    <ClCompile Include="models\Order.cpp" />
+    <ClCompile Include="models\RefundRequest.cpp" />
+    <ClCompile Include="services\ItemsFilter.cpp" />
+    <ClCompile Include="services\ItemsManager.cpp" />
+    <ClCompile Include="services\OrderManager.cpp" />
+    <ClCompile Include="system\System.cpp" />
+    <ClCompile Include="users\Administrator.cpp" />
+    <ClCompile Include="users\Business.cpp" />
+    <ClCompile Include="users\Client.cpp" />
+    <ClCompile Include="users\LoggedUser.cpp" />
+    <ClCompile Include="users\User.cpp" />
+    <ClCompile Include="utils\MyString.cpp" />
+    <ClCompile Include="utils\Validations.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="commands\AdministratorCommands\CustomerInsignts.h" />
+    <ClInclude Include="commands\AdministratorCommands\SendCheck.h" />
+    <ClInclude Include="commands\BusinessCommands\AddItem.h" />
+    <ClInclude Include="commands\BusinessCommands\ApproveOrder.h" />
+    <ClInclude Include="commands\BusinessCommands\ApproveRefund.h" />
+    <ClInclude Include="commands\BusinessCommands\ListBestSellingProducts.h" />
+    <ClInclude Include="commands\BusinessCommands\ListOrders.h" />
+    <ClInclude Include="commands\BusinessCommands\ListPendingOrders.h" />
+    <ClInclude Include="commands\BusinessCommands\ListRefunds.h" />
+    <ClInclude Include="commands\BusinessCommands\RefundedOrders.h" />
+    <ClInclude Include="commands\BusinessCommands\RejectOrder.h" />
+    <ClInclude Include="commands\BusinessCommands\RejectRefund.h" />
+    <ClInclude Include="commands\BusinessCommands\RemoveItem.h" />
+    <ClInclude Include="commands\BusinessCommands\ViewRevenue.h" />
+    <ClInclude Include="commands\ClientCommands\AddToCart.h" />
+    <ClInclude Include="commands\ClientCommands\ApplyDiscount.h" />
+    <ClInclude Include="commands\ClientCommands\CheckBalance.h" />
+    <ClInclude Include="commands\ClientCommands\Checkout.h" />
+    <ClInclude Include="commands\ClientCommands\ConfirmOrder.h" />
+    <ClInclude Include="commands\ClientCommands\ListOrdersClient.h" />
+    <ClInclude Include="commands\ClientCommands\ListProducts.h" />
+    <ClInclude Include="commands\ClientCommands\OrderHistory.h" />
+    <ClInclude Include="commands\ClientCommands\RateCommand.h" />
+    <ClInclude Include="commands\ClientCommands\Redeem.h" />
+    <ClInclude Include="commands\ClientCommands\RemoveDiscount.h" />
+    <ClInclude Include="commands\ClientCommands\RemoveFromCart.h" />
+    <ClInclude Include="commands\ClientCommands\RequestRefund.h" />
+    <ClInclude Include="commands\ClientCommands\ViewCart.h" />
+    <ClInclude Include="commands\ClientCommands\ViewProduct.h" />
+    <ClInclude Include="commands\SystemCommands\HelpCommand.h" />
+    <ClInclude Include="commands\SystemCommands\InvalidCommand.h" />
+    <ClInclude Include="commands\SystemCommands\LoadCommand.h" />
+    <ClInclude Include="commands\SystemCommands\LoginCommand.h" />
+    <ClInclude Include="commands\SystemCommands\LogoutCommand.h" />
+    <ClInclude Include="commands\SystemCommands\RegisterCommand.h" />
+    <ClInclude Include="commands\SystemCommands\SaveCommand.h" />
+    <ClInclude Include="commands\SystemCommands\ViewProfile.h" />
+    <ClInclude Include="commands\UserCommands\Command.h" />
+    <ClInclude Include="commands\UserCommands\CommandFactory.h" />
+    <ClInclude Include="models\Cart.h" />
+    <ClInclude Include="models\Check.h" />
+    <ClInclude Include="models\Item.h" />
+    <ClInclude Include="models\Order.h" />
+    <ClInclude Include="models\RefundRequest.h" />
+    <ClInclude Include="services\ItemsFilter.h" />
+    <ClInclude Include="services\ItemsManager.h" />
+    <ClInclude Include="services\OrderManager.h" />
+    <ClInclude Include="system\System.h" />
+    <ClInclude Include="users\Administrator.h" />
+    <ClInclude Include="users\Business.h" />
+    <ClInclude Include="users\Client.h" />
+    <ClInclude Include="users\LoggedUser.h" />
+    <ClInclude Include="users\Role.h" />
+    <ClInclude Include="users\User.h" />
+    <ClInclude Include="utils\MyPair.hpp" />
+    <ClInclude Include="utils\MyString.h" />
+    <ClInclude Include="utils\MyVector.hpp" />
+    <ClInclude Include="utils\Validations.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -104,6 +222,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)commands;$(ProjectDir)models;$(ProjectDir)services;$(ProjectDir)system;$(ProjectDir)users;$(ProjectDir)utils</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -118,6 +237,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)commands;$(ProjectDir)models;$(ProjectDir)services;$(ProjectDir)system;$(ProjectDir)users;$(ProjectDir)utils</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -126,127 +246,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="AddItem.cpp" />
-    <ClCompile Include="AddToCart.cpp" />
-    <ClCompile Include="Administrator.cpp" />
-    <ClCompile Include="ApplyDiscount.cpp" />
-    <ClCompile Include="ApproveOrder.cpp" />
-    <ClCompile Include="ApproveRefund.cpp" />
-    <ClCompile Include="Business.cpp" />
-    <ClCompile Include="Cart.cpp" />
-    <ClCompile Include="Check.cpp" />
-    <ClCompile Include="CheckBalance.cpp" />
-    <ClCompile Include="Checkout.cpp" />
-    <ClCompile Include="Client.cpp" />
-    <ClCompile Include="Command.cpp" />
-    <ClCompile Include="CommandFactory.cpp" />
-    <ClCompile Include="ConfirmOrder.cpp" />
-    <ClCompile Include="CustomerInsignts.cpp" />
-    <ClCompile Include="HelpCommand.cpp" />
-    <ClCompile Include="InvalidCommand.cpp" />
-    <ClCompile Include="Item.cpp" />
-    <ClCompile Include="ItemsManager.cpp" />
-    <ClCompile Include="ListBestSellingProducts.cpp" />
-    <ClCompile Include="ListOrders.cpp" />
-    <ClCompile Include="ListOrdersClient.cpp" />
-    <ClCompile Include="ListPendingOrders.cpp" />
-    <ClCompile Include="ListProducts.cpp" />
-    <ClCompile Include="ListRefunds.cpp" />
-    <ClCompile Include="LoadComamnd.cpp" />
-    <ClCompile Include="LoginCommand.cpp" />
-    <ClCompile Include="LogoutCommand.cpp" />
-    <ClCompile Include="MyString.cpp" />
-    <ClCompile Include="OOP_MODA.cpp" />
-    <ClCompile Include="ItemsFilter.cpp" />
-    <ClCompile Include="Order.cpp" />
-    <ClCompile Include="OrderHistory.cpp" />
-    <ClCompile Include="OrderManager.cpp" />
-    <ClCompile Include="RateCommand.cpp" />
-    <ClCompile Include="Redeem.cpp" />
-    <ClCompile Include="RefundedOrders.cpp" />
-    <ClCompile Include="RefundRequest.cpp" />
-    <ClCompile Include="RegisterCommand.cpp" />
-    <ClCompile Include="RejectOrder.cpp" />
-    <ClCompile Include="RejectRefund.cpp" />
-    <ClCompile Include="RemoveDiscount.cpp" />
-    <ClCompile Include="RemoveFromCart.cpp" />
-    <ClCompile Include="RemoveItem.cpp" />
-    <ClCompile Include="RequestRefund.cpp" />
-    <ClCompile Include="SaveCommand.cpp" />
-    <ClCompile Include="SendCheck.cpp" />
-    <ClCompile Include="System.cpp" />
-    <ClCompile Include="User.cpp" />
-    <ClCompile Include="Validations.cpp" />
-    <ClCompile Include="ViewCart.cpp" />
-    <ClCompile Include="ViewProduct.cpp" />
-    <ClCompile Include="ViewProfile.cpp" />
-    <ClCompile Include="ViewRevenue.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="AddItem.h" />
-    <ClInclude Include="AddToCart.h" />
-    <ClInclude Include="Administrator.h" />
-    <ClInclude Include="ApplyDiscount.h" />
-    <ClInclude Include="ApproveOrder.h" />
-    <ClInclude Include="ApproveRefund.h" />
-    <ClInclude Include="Business.h" />
-    <ClInclude Include="Cart.h" />
-    <ClInclude Include="Check.h" />
-    <ClInclude Include="CheckBalance.h" />
-    <ClInclude Include="Checkout.h" />
-    <ClInclude Include="Client.h" />
-    <ClInclude Include="Command.h" />
-    <ClInclude Include="CommandFactory.h" />
-    <ClInclude Include="ConfirmOrder.h" />
-    <ClInclude Include="CustomerInsignts.h" />
-    <ClInclude Include="HelpCommand.h" />
-    <ClInclude Include="InvalidCommand.h" />
-    <ClInclude Include="Item.h" />
-    <ClInclude Include="ItemsManager.h" />
-    <ClInclude Include="ListBestSellingProducts.h" />
-    <ClInclude Include="ListOrders.h" />
-    <ClInclude Include="ListOrdersClient.h" />
-    <ClInclude Include="ListPendingOrders.h" />
-    <ClInclude Include="ListProducts.h" />
-    <ClInclude Include="ListRefunds.h" />
-    <ClInclude Include="LoadCommand.h" />
-    <ClInclude Include="LoginCommand.h" />
-    <ClInclude Include="LogoutCommand.h" />
-    <ClInclude Include="MyPair.hpp" />
-    <ClInclude Include="MyString.h" />
-    <ClInclude Include="MyVector.hpp" />
-    <ClInclude Include="ItemsFilter.h" />
-    <ClInclude Include="Order.h" />
-    <ClInclude Include="OrderHistory.h" />
-    <ClInclude Include="OrderManager.h" />
-    <ClInclude Include="RateCommand.h" />
-    <ClInclude Include="Redeem.h" />
-    <ClInclude Include="RefundedOrders.h" />
-    <ClInclude Include="RefundRequest.h" />
-    <ClInclude Include="RegisterCommand.h" />
-    <ClInclude Include="RejectOrder.h" />
-    <ClInclude Include="RejectRefund.h" />
-    <ClInclude Include="RemoveDiscount.h" />
-    <ClInclude Include="RemoveFromCart.h" />
-    <ClInclude Include="RemoveItem.h" />
-    <ClInclude Include="RequestRefund.h" />
-    <ClInclude Include="SaveCommand.h" />
-    <ClInclude Include="SendCheck.h" />
-    <ClInclude Include="System.h" />
-    <ClInclude Include="User.h" />
-    <ClInclude Include="Role.h" />
-    <ClInclude Include="Validations.h" />
-    <ClInclude Include="ViewCart.h" />
-    <ClInclude Include="ViewProduct.h" />
-    <ClInclude Include="ViewProfile.h" />
-    <ClInclude Include="ViewRevenue.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="admin.bin" />
-    <None Include="business.bin" />
-    <None Include="clients.bin" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
